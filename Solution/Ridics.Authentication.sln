@@ -1,0 +1,39 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29009.5
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ridics.Authentication.Database.Migrator", "Ridics.Authentication.Database.Migrator\Ridics.Authentication.Database.Migrator.csproj", "{8EBA05EE-21BE-4973-A0A7-A32808E89A8E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ridics.Authentication.Database.Migrations", "Ridics.Authentication.Database.Migrations\Ridics.Authentication.Database.Migrations.csproj", "{E09629FB-1467-49EC-91CD-2D9C87249210}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Database", "Database", "{56460696-7E3E-4A42-817D-834CEB5163B3}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Authentication", "Authentication", "{84FA9F10-BBFB-49B4-89C5-8B806582BC17}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{8EBA05EE-21BE-4973-A0A7-A32808E89A8E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8EBA05EE-21BE-4973-A0A7-A32808E89A8E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8EBA05EE-21BE-4973-A0A7-A32808E89A8E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8EBA05EE-21BE-4973-A0A7-A32808E89A8E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E09629FB-1467-49EC-91CD-2D9C87249210}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E09629FB-1467-49EC-91CD-2D9C87249210}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E09629FB-1467-49EC-91CD-2D9C87249210}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E09629FB-1467-49EC-91CD-2D9C87249210}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{8EBA05EE-21BE-4973-A0A7-A32808E89A8E} = {56460696-7E3E-4A42-817D-834CEB5163B3}
+		{E09629FB-1467-49EC-91CD-2D9C87249210} = {56460696-7E3E-4A42-817D-834CEB5163B3}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {548D87B6-BEA1-4515-A887-C4E89B7CE947}
+	EndGlobalSection
+EndGlobal
