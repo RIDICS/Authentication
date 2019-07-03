@@ -16,6 +16,7 @@
 
   <ItemGroup>
     <PackageReference Include="FluentMigrator" Version="3.2.1" />
+    <PackageReference Include="libphonenumber-csharp" Version="8.10.14" />
     <PackageReference Include="Ridics.DatabaseMigrator.QueryBuilder" Version="1.0.0" />
   </ItemGroup>
 
