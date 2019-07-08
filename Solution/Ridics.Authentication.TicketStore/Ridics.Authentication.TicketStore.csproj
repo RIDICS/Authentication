@@ -2,6 +2,14 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp2.2</TargetFramework>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <PackageOutputPath>..\..\build\</PackageOutputPath>
+    <PackageLicenseExpression>BSD-3-Clause</PackageLicenseExpression>
+    <Authors>RIDICS</Authors>
+    <Company>RIDICS</Company>
+    <Description>MemoryCacheTicketStore implementation of ITicketStore.</Description>
+    <RepositoryUrl>https://github.com/RIDICS/Authentication</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
   </PropertyGroup>
 
   <ItemGroup>
