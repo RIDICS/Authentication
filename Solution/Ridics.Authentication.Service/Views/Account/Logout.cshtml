@@ -1,0 +1,32 @@
+﻿@using Scalesoft.Localization.AspNetCore
+@model Ridics.Authentication.Service.Models.ViewModel.Account.LoggedOutViewModel
+@inject ILocalizationService Localizer
+
+
+@{
+    ViewData["Title"] = Localizer.Translate("logout-title");
+    Layout = "_EmptyLayout";
+}
+
+@section Styles {
+    <link rel="stylesheet" href="~/css/ridics.login.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/node_modules/@("@")fortawesome/fontawesome-free/css/all.css" asp-append-version="true">
+}
+
+@section Scripts {
+    <script src="~/js/ridics.logout.js" asp-append-version="true" id="logout-script" data-signout-url="@Model.SignOutIframeUrl" data-redirect-url="@Model.PostLogoutRedirectUri" data-redirect-seconds="5"></script>
+}
+
+<div class="card shadow" id="logoutRedirectCountdown">
+    <div class="card-header">
+        <h2>@Localizer.Translate("logout-heading")</h2>
+    </div>
+    <div class="card-body login-card-body row">
+        <div class="col-12">
+            <p>@Localizer.Translate("redirect-countdown") <span id="redirect-countdown"></span></p>
+            <a href="@Model.PostLogoutRedirectUri" class="btn btn-primary hidden float-right" id="redirect-button">@Localizer.Translate("redirect-now")</a>
+        </div>
+    </div>
+</div>
+
+<div class="hidden" id="logoutFrame"></div>

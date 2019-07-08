@@ -1,0 +1,9 @@
+﻿{
+  "culture": "en",
+  "scope": "CreateDynamicModuleViewModel",
+  "dictionary": {
+    "name": "Name",
+    "module-type": "Module type",
+    "version": "Version"
+  }
+}

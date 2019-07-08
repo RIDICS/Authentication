@@ -1,0 +1,50 @@
+﻿@using Microsoft.AspNetCore.Http.Features
+@using Scalesoft.Localization.AspNetCore
+@inject ILocalizationService Localizer
+@model Ridics.Authentication.Service.Models.ViewModel.CookieConsentViewModel
+
+@{
+    var consentFeature = Context.Features.Get<ITrackingConsentFeature>();
+    var showBanner = !consentFeature?.CanTrack ?? false;
+    var cookieString = consentFeature?.CreateConsentCookie();
+}
+
+@if (showBanner)
+{
+    <div class="consent d-none"></div>
+    <div class="card cookie-consent-wrapper">
+        <div id="cookieConsent" class="card-header cookie-consent-container d-flex justify-content-between alert fade show mb-0" role="alert" aria-live="assertive" data-autohide="false" aria-atomic="true">
+            <div class="consent-text-wrapper col-sm-12 col-lg pb-2">
+                @Localizer.Translate("cookie-info-short", "CookieConsentViewModel")
+
+            </div>
+
+            <div class="consent-buttons-wrapper">
+                <button type="button" class="cookie-more-btn align-self-end btn btn-sm btn-muted" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">@Localizer.Translate("learn-more", "CookieConsentViewModel")</button>
+
+                <button type="button" class="accept-policy align-self-end btn btn-sm btn-warning" aria-label="Close" data-cookie-string="@cookieString">
+                    <span aria-hidden="true">@Localizer.Translate("accept-all", "CookieConsentViewModel") </span>
+                </button>
+            </div>
+
+        </div>
+        <div class="card-body cookie-informations-collapse collapse" id="collapseExample">
+            <div class="px-3 py-3">
+                <form>
+                    <div class="custom-control custom-checkbox ">
+                        <input asp-for="EssentialCookies" type="checkbox" class="custom-control-input" checked="checked" id="cookieEssentials" disabled="disabled" />
+                        <label asp-for="EssentialCookies" class="custom-control-label" for="cookieEssentials"></label>
+                        <div class="cookies-description">@Localizer.Translate("essential-cookies-description", "CookieConsentViewModel")</div>
+                    </div>
+                    @*optionally add more cookies types (optionals)*@
+                    <div class="form-group float-right">
+                        <button type="submit" class="accept-policy align-self-end btn btn-sm btn-warning" data-dismiss="alert" aria-label="Close" data-cookie-string="@cookieString">
+                            <span aria-hidden="true">@Localizer.Translate("accept", "CookieConsentViewModel") </span>
+                        </button>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+    </div>
+}

@@ -1,0 +1,14 @@
+﻿{
+  "culture": "cs",
+  "scope": "ApiAccessKeyHashViewModel",
+  "scopeAlias": [
+    "EditableApiAccessKeyHashViewModel"
+  ],
+  "dictionary": {
+    "name": "Jméno",
+    "algorithm": "Algoritmus",
+    "algorithm-required": "Algoritmus požadován",
+    "value": "Hodnota",
+    "value-required": "Hodnota požadována"
+  }
+}

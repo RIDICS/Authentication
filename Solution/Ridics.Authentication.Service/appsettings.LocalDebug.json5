@@ -1,0 +1,39 @@
+{
+  "Logging": {
+    "LogLevel": {
+      "Default": "Debug",
+      "System": "Information",
+      "Microsoft": "Information"
+    }
+  },
+  "Localization": {
+    "TranslateFallbackMode": "Exception"
+  },
+  "IdentityServer": {
+    "SigningCredential": "SigningCertificate-Development.pfx",
+    "SigningCredentialPassword": "Development"
+  },
+  "DatabaseServer": "SqlServer",
+  "ConnectionStrings": {
+    "MainDatabase": "Server=localhost;Database=VokabularAuthDB;Trusted_Connection=True;"
+  },
+  "JwtAuthentication": {
+    "Authority": "https://localhost:44395"
+  },
+  "GoogleReCaptcha": {
+    "publicKey": "TODO",
+    "secretKey": "TODO"
+  },
+  "ReturnUrlConfig": {
+    "DefaultRedirectUrl": "https://localhost:44368",
+    "DefaultFailedExternalLoginUrl": "https://localhost:44368/Home/FAQ",
+    "LoginUrlForClient": "https://localhost:44368/Account/Login",
+    "RegisterUrlForClient": "https://localhost:44368/Account/Register"
+  },
+  "FeatureFlags": {
+    "EnabledFeatures": {
+      // "AllowRegistrationThroughExternalIdentityProvider": true,
+      "AllowAutoPairWithExternalIdentityProviderThroughAdditionalLogin": true
+    }
+  }
+}

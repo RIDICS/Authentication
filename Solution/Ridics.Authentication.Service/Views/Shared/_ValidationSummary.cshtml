@@ -1,0 +1,10 @@
+﻿@using Scalesoft.Localization.AspNetCore
+@inject ILocalizationService Localizer
+
+@if (ViewContext.ModelState.IsValid == false)
+{
+    <div class="alert alert-danger">
+        <strong>@Localizer.Translate("errors"):</strong>
+        <div asp-validation-summary="All" class="danger"></div>
+    </div>
+}

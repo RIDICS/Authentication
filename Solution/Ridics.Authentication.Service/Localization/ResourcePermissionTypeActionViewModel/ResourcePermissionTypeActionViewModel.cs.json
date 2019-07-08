@@ -1,0 +1,14 @@
+﻿{
+  "culture": "cs",
+  "scope": "ResourcePermissionTypeActionViewModel",
+  "dictionary": {
+    "name-required": "Jméno je povinné",
+    "name": "Jméno",
+    "description": "Popis",
+    "description-required": "Popis je povinný",
+    "resource-permission-type": "Typ zdroje",
+    "resource-permission-type-required": "Typ zdroje je povinný",
+    "roles": "Role",
+    "users": "Uživatelé"
+  }
+}

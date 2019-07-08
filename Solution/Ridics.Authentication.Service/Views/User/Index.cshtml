@@ -1,0 +1,52 @@
+﻿@using Scalesoft.Localization.AspNetCore
+@model Ridics.Authentication.Service.Models.ViewModel.ListViewModel<Ridics.Authentication.Service.Models.ViewModel.Users.UserViewModel>
+@inject ILocalizationService Localizer
+
+@{
+    ViewData["Title"] = Localizer.Translate("users-title");
+}
+
+
+@section Scripts {
+    <script asp-append-version="true" src="~/js/ridics.search-pagination.js"></script>
+}
+
+<h2>@Localizer.Translate("users-heading")</h2>
+
+<partial name="_ValidationSummary" />
+
+<div class="row page-control justify-content-end mt-1 mb-1">
+    <div class="col-12 col-sm-6 col-lg-4 text-right">
+        <form asp-action="Index" asp-controller="User" method="get" id="search-form">
+            <div class="input-group">
+                <input class="form-control" name="searchByName" value="@ViewData["search"]" />
+                <input type="hidden" id="search-count" name="count" />
+                <div class="input-group-append">
+                    <button class="btn btn-secondary" type="submit">@Localizer.Translate("search")</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+@if (!string.IsNullOrEmpty((string)ViewData["search"]))
+{
+    <div class="row reset-search justify-content-end mt-1 mb-2">
+        <div class="col-auto row">
+            <div class="col align-self-center pull-right"><span class="text-nowrap">@Localizer.Translate("search-query"): <span class="searched-query">@ViewData["search"]</span></span></div>
+            <form class="col pull-right" asp-action="Index" asp-controller="User" method="get" id="reset-form">
+                <input type="hidden" id="reset-search-count" name="count" />
+                <button type="submit" class="btn btn-sm btn-outline-danger">@Localizer.Translate("reset-search")</button>
+            </form>
+        </div>
+    </div>
+}
+
+<div class="notification-selector"></div>
+
+<div id="list">
+    <partial name="_UserList" />
+</div>
+<a asp-action="Create">@Localizer.Translate("create-new-user")</a>
+<partial name="_Pagination" model="@Model.Pagination" />
+<partial name="_ConfirmDialog" model="@Model.DeleteConfirmDialog" />

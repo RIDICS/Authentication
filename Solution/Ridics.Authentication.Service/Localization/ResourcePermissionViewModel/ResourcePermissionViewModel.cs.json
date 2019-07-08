@@ -1,0 +1,12 @@
+﻿{
+  "culture": "cs",
+  "scope": "ResourcePermissionViewModel",
+  "dictionary": {
+    "resource-id-required": "Identifikátor zdroje je povinný",
+    "resource-id": "Identifikátor zdroje",
+    "resource-permission-type-action": "Akce pro typ zdroje",
+    "resource-permission-type-action-required": "Akce pro typ zdroje je povinná",
+    "roles": "Role",
+    "users": "Uživatelé"
+  }
+}

@@ -1,0 +1,8 @@
+﻿{
+  "culture": "en",
+  "scope": "LoginViewModel",
+  "dictionary": {
+    "input-required": "User credentials required",
+    "return-url-required": "Return url required"
+  }
+}

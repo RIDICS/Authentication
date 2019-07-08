@@ -1,0 +1,58 @@
+﻿@using Scalesoft.Localization.AspNetCore
+@model Ridics.Authentication.Service.Models.ViewModel.DynamicModule.DynamicModuleListViewModel
+@inject ILocalizationService Localizer
+
+@if (Model == null)
+{
+    return;
+}
+
+@if (Model.ListViewModel.Items != null && Model.ListViewModel.Items.Count != 0)
+{
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.ListViewModel.Items[0].Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ListViewModel.Items[0].ModuleGuid)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ListViewModel.Items[0].ConfigurationVersion)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var dynamicModule in Model.ListViewModel.Items)
+            {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => dynamicModule.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => dynamicModule.ModuleGuid)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => dynamicModule.ConfigurationVersion)
+            </td>
+            <td>
+                @{
+                    var deleteFormId = $"delete_{dynamicModule.Id}";
+                }
+                <a asp-action="Edit" asp-route-id="@dynamicModule.Id">@Localizer.Translate("edit")</a>
+                <form asp-action="Delete" asp-route-id="@dynamicModule.Id" id="@deleteFormId" hidden>
+                    <input type="hidden" name="id" value="@dynamicModule.Id" />
+                </form>
+                <a href="#" data-formid="@deleteFormId" data-info="@dynamicModule.Name" data-toggle="modal" data-target="#@Model.ListViewModel.DeleteConfirmDialog.Id">@Localizer.Translate("delete")</a>
+            </td>
+        </tr>
+            }
+    </tbody>
+</table>
+}
+else
+{
+<h2>@Localizer.Translate("no-dynamic-modules")</h2>
+}

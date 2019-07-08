@@ -1,0 +1,46 @@
+﻿@using Scalesoft.Localization.AspNetCore;
+@model List<Ridics.Authentication.Service.Models.ViewModel.SelectableViewModel<Ridics.Authentication.Service.Models.ViewModel.Permission.ResourcePermissionTypeActionViewModel>>
+@inject ILocalizationService Localizer
+
+@{
+    ViewData["Title"] = Localizer.Translate("user-permissions-title");
+}
+
+<h2>@Localizer.Translate("user-permissions-heading")</h2>
+<partial name="_ValidationSummary"/>
+
+<hr/>
+
+@if (Model != null)
+{
+    <div class="row">
+        <div class="col-md-4">
+            <form asp-action="ResourcePermissionTypeActions">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="form-group">
+                    <label>@Localizer.Translate("all-permissions")</label><br/> @*TODO change translation*@
+
+                    @for (var i = 0; i < Model.Count; i++)
+                    {
+                        <input asp-for="@Model[i].Item.Id" value="@Model[i].Item.Id" type="hidden"/>
+                        <input asp-for="@Model[i].IsSelected" type="checkbox"/>
+                        <label asp-for="@Model[i].IsSelected">@Model[i].Item.ResourcePermissionString</label>
+                        <br/>
+                    }
+
+                </div>
+                <div class="form-group">
+                    <input type="submit" value="@Localizer.Translate("confirm")" class="btn btn-primary"/>
+                </div>
+            </form>
+        </div>
+    </div>
+}
+else
+{
+    <div class="no-items">@Localizer.Translate("no-actions")</div>
+}
+
+<a asp-action="Create" asp-controller="ResourcePermissionTypeAction">@Localizer.Translate("create-new-resource-permission-type-action")</a>
+
+<partial name="_BackButton" />

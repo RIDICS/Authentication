@@ -1,0 +1,8 @@
+﻿@using Scalesoft.Localization.AspNetCore
+@inject ILocalizationService Localizer
+
+@{
+    ViewData["Title"] = Localizer.Translate("home-page-title");
+}
+
+<h2>@Localizer.Translate("home-page-title")</h2>

@@ -1,0 +1,20 @@
+﻿{
+  "culture": "en",
+  "scope": "ClientViewModel",
+  "dictionary": {
+    "name": "Client ID",
+    "name-required": "Client ID is required",
+    "description": "Description",
+    "secrets": "Secrets",
+    "grant-types": "Grant types",
+    "uris": "URLs",
+    "display-url": "Display URL",
+    "logo-url": "Logo URL",
+    "require-consent": "Consent required",
+    "api-resources": "API resources",
+    "identity-resources": "Identity resources",
+	  "not-valid-uri": "URL address is not valid",
+    "allow-access-tokens-via-browser": "Allow sending access tokens via browser",
+    "scopes": "Scopes"
+  }
+}

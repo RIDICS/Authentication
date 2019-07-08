@@ -1,0 +1,89 @@
+﻿@using Scalesoft.Localization.AspNetCore
+@model Ridics.Authentication.Service.Models.ViewModel.Account.LoginViewModel
+@inject ILocalizationService Localizer
+
+@section Styles {
+    <link rel="stylesheet" href="~/css/ridics.login.css" asp-append-version="true"/>
+    <link rel="stylesheet" href="~/node_modules/@("@")fortawesome/fontawesome-free/css/all.css" asp-append-version="true">
+}
+
+@section Scripts {
+    <script src="~/js/external-login-provider.js" asp-append-version="true"></script>
+}
+
+@{
+    ViewData["Title"] = Localizer.Translate("login-title");
+    Layout = "_EmptyLayout";
+}
+<div class="card shadow @(Model.ExternalProviders != null && Model.ExternalProviders.Any() ? "" : "no-externals")">
+    <div class="card-header">
+        <h2>@Localizer.Translate("login-heading")</h2>
+    </div>
+    <div class="card-body login-card-body row align-items-stretch">
+        <div class="@(Model.ExternalProviders != null && Model.ExternalProviders.Any() ? "col-sm-12 col-md-6" : "col-12")">
+
+            @if (!ViewData.ModelState.IsValid)
+            {
+                <partial name="_ValidationSummary"/>
+            }
+            
+            <partial name="_LoginInfoText" for="@Model.ExternalProviderInfoLabelType"/>
+
+            <form asp-action="@Model.Action">
+                <input type="hidden" asp-for="ReturnUrl"/>
+                <input type="hidden" asp-for="LinkExternalIdentity"/>
+                <fieldset>
+                    <div class="form-group">
+                        <label asp-for="Input.Username"></label>
+                        <input type="text" asp-for="Input.Username" class="form-control" autofocus autocapitalize="none" autocorrect="false" spellcheck="false"/>
+                        <span asp-validation-for="Input.Username" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label asp-for="Input.Password"></label>
+                        <input type="password" asp-for="Input.Password" class="form-control" autocomplete="off">
+                        <span asp-validation-for="Input.Password" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <button class="btn btn-primary float-right" name="buttonClicked" value="login" id="verify-button">@Localizer.Translate("login", "LoginFormModel")</button>
+                        <a asp-action="CancelLogin" asp-controller="Account" asp-route-returnUrl="@Model.ReturnUrl" class="btn btn-light">
+                            @Localizer.Translate("cancel", "LoginFormModel")
+                        </a>
+                    </div>
+
+                    <div class="form-group">
+                        <a asp-action="RequestResetPassword" asp-controller="Account" asp-route-returnUrl="@Model.ReturnUrl" class="btn btn-link btn-sm">
+                            @Localizer.Translate("reset-password", "LoginFormModel")
+                        </a>
+                    </div>
+                </fieldset>
+            </form>
+        </div>
+
+        @if (Model.ExternalProviders != null && Model.ExternalProviders.Any())
+        {
+            <div class="col-sm-12 col-md-6 external-providers-wrapper">
+                <h4>@Localizer.Translate("login-methods-header")</h4>
+                <form id="external-account" method="post" class="form-horizontal">
+                    @foreach (var provider in Model.ExternalProviders)
+                    {
+                        <div class="col-12 form-group">
+                            <button
+                                type="submit"
+                                title="@provider.DisplayName"
+                                class="btn btn-muted external-identity-btn external-identity-provider-@provider.AuthenticationScheme"
+                                asp-action="ExternalLogin"
+                                name="externalProvider"
+                                value="@provider.AuthenticationScheme"
+                                asp-route-returnUrl="@Model.ReturnUrl">
+                                <img class="external-provider-logo" src="~/@provider.LogoFileName"
+                                     alt="Logo @provider.DisplayName">
+                            </button>
+                        </div>
+                    }
+                </form>
+            </div>
+        }
+    </div>
+</div>

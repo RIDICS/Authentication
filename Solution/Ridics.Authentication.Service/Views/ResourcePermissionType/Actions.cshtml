@@ -1,0 +1,71 @@
+﻿@using Scalesoft.Localization.AspNetCore;
+@model Ridics.Authentication.Service.Models.ViewModel.Permission.ResourcePermissionTypeActionsViewModel
+@inject ILocalizationService Localizer
+
+@{
+    ViewData["Title"] = Localizer.Translate("permission-actions-title");
+}
+
+<h2>@Localizer.Translate("permission-actions-heading")</h2>
+<partial name="_ValidationSummary" />
+
+@if (Model == null)
+{
+    return;
+}
+
+@if (Model.Items != null && Model.Items.Count != 0)
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Items[0].Name)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Items[0].Description)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Items[0].ResourcePermissionType)
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var action in Model.Items)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => action.Name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => action.Description)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => action.ResourcePermissionType.Name)
+                    </td>
+                    <td>
+                        @{
+                            var deleteFormId = $"delete_{action.Id}";
+                        }
+                        <form asp-action="DeleteAction" asp-route-id="@Model.ResourcePermissionTypeId" asp-route-actionId="@action.Id" id="@deleteFormId" hidden>
+                            <input type="hidden" name="id" value="@Model.ResourcePermissionTypeId" />
+                            <input type="hidden" name="scopeId" value="@action.Id" />
+                        </form>
+                        <a href="#" data-formid="@deleteFormId" data-info="@action.Name" data-toggle="modal" data-target="#confirmModal">@Localizer.Translate("delete")</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else
+{
+    <div class="no-items">@Localizer.Translate("no-actions")</div>
+}
+
+<a asp-action="Create" asp-controller="ResourcePermissionTypeAction">@Localizer.Translate("create-new-resource-permission-type-action")</a>
+
+<partial name="_ConfirmDialog" model="@Model.DeleteConfirmDialog" />
+
+<partial name="_BackButton" />

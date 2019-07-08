@@ -1,0 +1,27 @@
+{
+  "DatabaseServer": "SqlServer",
+  "ConnectionStrings": {
+    "MainDatabase": "Server=localhost;Database=VokabularAuthDB;User Id=admin;Password=admin"
+  },
+  "IdentityServer": {
+    "SigningCredential": "C:\\inetpub\\certs\\SigningCertificate-Production.pfx",
+    "SigningCredentialPassword": "TODO"
+  },
+  "ReverseProxy": {
+    "IsDefault": true,
+    "ForwardLimit": 1
+  },
+  "JwtAuthentication": {
+    "Authority": "https://localhost/Auth/"
+  },
+  "GoogleReCaptcha": {
+    "publicKey": "TODO",
+    "secretKey": "TODO"
+  },
+  "ReturnUrlConfig": {
+    "DefaultRedirectUrl": "https://localhost/WebHub/",
+    "DefaultFailedExternalLoginUrl": "https://localhost/WebHub/Home/FAQ",
+    "LoginUrlForClient": "https://localhost/WebHub/Account/Login",
+    "RegisterUrlForClient": "https://localhost/WebHub/Account/Register"
+  }
+}

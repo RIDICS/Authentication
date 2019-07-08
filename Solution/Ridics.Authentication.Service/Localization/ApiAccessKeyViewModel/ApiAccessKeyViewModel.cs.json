@@ -1,0 +1,13 @@
+﻿{
+  "culture": "cs",
+  "scope": "ApiAccessKeyViewModel",
+  "scopeAlias": [
+    "EditableApiAccessKeyViewModel"
+  ],
+  "dictionary": {
+    "name-required": "Jméno požadováno",
+    "name": "Jméno",
+    "permissions": "Oprávnění",
+    "key": "Klíč"
+  }
+}

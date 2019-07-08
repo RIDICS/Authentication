@@ -1,0 +1,95 @@
+﻿@using IdentityServer4.Extensions
+@using Scalesoft.Localization.AspNetCore
+@using Microsoft.AspNetCore.Authorization
+@using Ridics.Authentication.Service.Authorization
+@inject ILocalizationService Localizer
+@inject IAuthorizationService Authorization
+
+@{
+    var controller = ViewContext.RouteData.Values["Controller"].ToString();
+    var action = ViewContext.RouteData.Values["Action"].ToString();
+}
+
+<nav class="navbar navbar-custom navbar-container navbar-expand-md navbar-expand-lg navbar-light bg-light sticky-top mb-3">
+    <a asp-area="" asp-controller="Home" asp-action="Index" class="navbar-brand">RIDICS Authentication Service</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse justify-content-between" id="navbarSupportedContent">
+        <ul class="navbar-nav">
+            @if (User.Identity.IsAuthenticated)
+            {
+                var authorized = await Authorization.AuthorizeAsync(User, PolicyNames.ViewAuthServiceAdministrationPolicy);
+                if (authorized.Succeeded)
+                {
+                    <li class="nav-item">
+                        <a class="nav-link @(controller == "User" ? "active" : "")" asp-controller="User" asp-action="Index">@Localizer.Translate("nav-users")</a>
+                    </li>
+
+                    <li class="nav-item dropdown">
+                        <a class="nav-link @(controller == "IdentityResource" ? "active" : "")@(controller == "ApiResource" ? "active" : "") dropdown-toggle"
+                           id="nav-resources-dropdown"
+                           data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
+                           href="#">
+                            @Localizer.Translate("nav-resources")
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="nav-resources-dropdown">
+                            <a class="dropdown-item" asp-controller="IdentityResource" asp-action="Index">@Localizer.Translate("nav-identity-resources")</a>
+                            <a class="dropdown-item" asp-controller="ApiResource" asp-action="Index">@Localizer.Translate("nav-api-resources")</a>
+                        </div>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link @(controller == "ClaimType" ? "active" : "")" asp-controller="ClaimType" asp-action="Index">@Localizer.Translate("nav-claims")</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link @(controller == "Client" ? "active" : "")" asp-controller="Client" asp-action="Index">@Localizer.Translate("nav-clients")</a>
+                    </li>
+
+                    <li class="nav-item dropdown">
+                        <a class="nav-link @(controller == "Role" ? "active" : "")@(controller == "Permission" ? "active" : "")@(controller == "ResourcePermission" ? "active" : "")@(controller == "ResourcePermissionType" ? "active" : "") dropdown-toggle"
+                           id="nav-authorization-dropdown"
+                           data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
+                           href="#">
+                            @Localizer.Translate("nav-authorization")
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="nav-authorization-dropdown">
+                            <a class="dropdown-item" asp-controller="Role" asp-action="Index">@Localizer.Translate("nav-roles")</a>
+                            <a class="dropdown-item" asp-controller="Permission" asp-action="Index">@Localizer.Translate("nav-permissions")</a>
+                            <a class="dropdown-item" asp-controller="ResourcePermission" asp-action="Index">@Localizer.Translate("nav-resource-permissions")</a>
+                            <a class="dropdown-item" asp-controller="ResourcePermissionType" asp-action="Index">@Localizer.Translate("nav-resource-permission-types")</a>
+                            <a class="dropdown-item" asp-controller="ResourcePermissionTypeAction" asp-action="Index">@Localizer.Translate("nav-resource-permission-type-actions")</a>
+                        </div>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" asp-controller="DynamicModule" asp-action="Index">@Localizer.Translate("nav-dynamic-modules")</a>
+                    </li>
+                    
+                    <li class="nav-item">
+                        <a class="nav-link" asp-controller="ApiAccessKey" asp-action="Index">@Localizer.Translate("nav-api-access-keys")</a>
+                    </li>
+                }
+            }
+        </ul>
+        <ul class="navbar-nav navbar-right">
+            <partial name="_SelectLocalization" />
+            @if (User.Identity.IsAuthenticated)
+            {
+                <li class="nav-item">
+                    <a class="nav-link" asp-controller="User" asp-action="Edit" asp-route-id="@User.Identity.GetSubjectId()">@User.Identity.Name </a>
+                </li>
+                <li class="nav-item">
+                    @*asp-all-route-data is set to pass current culture to logout view, where it is handled by filter attribute*@
+                    <a class="nav-link" asp-controller="Account" asp-action="Logout" asp-all-route-data="@{ new Dictionary<string, string> {{"culture", Localizer.GetRequestCulture().Name}}; }">@Localizer.Translate("nav-logout")</a>
+                </li>
+            }
+            else
+            {
+                <li class="nav-item">
+                    <a class="nav-link" asp-controller="Account" asp-action="Login" asp-route-returnUrl="@Url.Content("~/")">@Localizer.Translate("nav-login")</a>
+                </li>
+            }
+        </ul>
+    </div>
+</nav>

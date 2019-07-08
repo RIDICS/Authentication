@@ -1,0 +1,34 @@
+﻿@using Scalesoft.Localization.AspNetCore
+@model Ridics.Authentication.Service.Models.ViewModel.DynamicModule.DynamicModuleListViewModel
+@inject ILocalizationService Localizer
+
+@{
+    ViewData["Title"] = Localizer.Translate("dynamic-module-title");
+}
+
+<h2>@Localizer.Translate("dynamic-module-heading")</h2>
+
+<div class="notification-selector"></div>
+
+<partial name="_ValidationSummary"/>
+
+<div id="list">
+    <partial name="_DynamicModuleList"/>
+</div>
+
+<form asp-action="ApplyChanges" id="dynamic-module-ApplyChanges" hidden></form>
+@if (Model?.ApplyChangesConfirmDialog != null)
+{
+    <a href="#" data-formid="dynamic-module-ApplyChanges" data-toggle="modal" data-target="#@Model.ApplyChangesConfirmDialog.Id">@Localizer.Translate("apply-changes")</a>
+    @Html.Raw("| ")
+}
+<a asp-action="Create">@Localizer.Translate("create-new-dynamic-module")</a>
+
+@if (Model != null)
+{
+    <br>
+    <div class="font-weight-light mt-4">@Localizer.Translate("dynamic-module-last-configuration-reload"): @Model.LastConfigurationReload</div>
+    <partial name="_Pagination" model="@Model.ListViewModel.Pagination"/>
+    <partial name="_ConfirmDialog" model="@Model.ListViewModel.DeleteConfirmDialog"/>
+    <partial name="_ConfirmDialog" model="@Model.ApplyChangesConfirmDialog"/>
+}

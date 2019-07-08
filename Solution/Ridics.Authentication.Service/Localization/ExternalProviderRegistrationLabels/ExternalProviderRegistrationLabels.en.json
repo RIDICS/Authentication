@@ -1,0 +1,12 @@
+﻿{
+  "culture": "en",
+  "scope": "external-provider-registration-labels",
+  "dictionary": {
+    "user-with-email-found": "User with an e-mail address obtained from external account is already registered but does not have a local account linked with an external identity account. Please sign in with the provided e-mail address for the account linking.",
+    "user-could-not-be-created": "User could not be created via an external account. For the account linking, please sign in with a local profile or {0}.",
+    "missing-email-from-external-provider": "The external account did not provide any e-mail address. For the account linking, please sign in with a local profile or {0}.",
+    "faq": "Frequently asked questions",
+    "more-info": "For more information visit:",
+    "register-locally": "register locally"
+  }
+}

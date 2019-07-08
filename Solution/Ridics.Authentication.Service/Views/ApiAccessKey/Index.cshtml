@@ -1,0 +1,24 @@
+﻿@using Scalesoft.Localization.AspNetCore
+@model Ridics.Authentication.Service.Models.ViewModel.ListViewModel<Ridics.Authentication.Service.Models.ViewModel.Keys.ApiAccessKeyViewModel>
+@inject ILocalizationService Localizer
+
+@{
+    ViewData["Title"] = Localizer.Translate("api-access-key-title");
+}
+
+@section Scripts {
+    <script asp-append-version="true" src="~/js/ridics.search-pagination.js"></script>
+}
+
+<h2>@Localizer.Translate("api-access-key-heading")</h2>
+
+<partial name="_ValidationSummary" />
+
+<div class="notification-selector"></div>
+
+<div id="list">
+    <partial name="_ApiAccessKeyList" />
+</div>
+<a asp-action="Create">@Localizer.Translate("create-new-api-access-key")</a>
+<partial name="_Pagination" model="@Model.Pagination" />
+<partial name="_ConfirmDialog" model="@Model.DeleteConfirmDialog" />

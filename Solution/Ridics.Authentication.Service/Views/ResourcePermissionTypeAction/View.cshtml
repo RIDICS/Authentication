@@ -1,0 +1,73 @@
+﻿@using Scalesoft.Localization.AspNetCore;
+@using Ridics.Authentication.Service.Models.ViewModel;
+@model ViewModel<Ridics.Authentication.Service.Models.ViewModel.Permission.ResourcePermissionTypeActionViewModel>
+@inject ILocalizationService Localizer
+
+@{
+    ViewData["Title"] = Localizer.Translate("resource-permission-type-action-title");
+    var deleteFormId = $"delete_{Model.Item.Id}";
+}
+
+<form asp-action="Delete" asp-route-id="@Model.Item.Id" id="@deleteFormId" hidden>
+    <input type="hidden" name="id" value="@Model.Item.Id"/>
+</form>
+<a class="float-right" href="#" data-formid="@deleteFormId" data-info="@Model.Item.Name" data-toggle="modal" data-target="#confirmModal">@Localizer.Translate("delete")</a>
+
+<h2>@Localizer.Translate("resource-permission-type-action-heading")</h2>
+<hr/>
+
+<div class="card mb-3">
+    <div class="card-header">
+        @Localizer.Translate("basic-info")
+        <a class="float-right" asp-action="Edit" asp-route-id="@Model.Item.Id">@Localizer.Translate("edit")</a>
+    </div>
+    <div class="card-body">
+        <div class="card-text">
+            <div>@Html.DisplayNameFor(model => model.Item.Id): @Html.DisplayFor(model => model.Item.Id)</div>
+            <div>@Html.DisplayNameFor(model => model.Item.Name): @Html.DisplayFor(model => model.Item.Name)</div>
+            <div>@Html.DisplayNameFor(model => model.Item.Description): @Html.DisplayFor(model => model.Item.Description)</div>
+            <div>@Html.DisplayNameFor(model => model.Item.ResourcePermissionType): @Html.DisplayFor(model => model.Item.ResourcePermissionType.Name)</div>
+        </div>
+    </div>
+</div>
+
+<div class="card mb-3">
+    <div class="card-header">
+        @Html.DisplayNameFor(model => model.Item.Roles)
+        <a class="float-right" asp-action="Roles" asp-route-id="@Model.Item.Id">@Localizer.Translate("edit")</a>
+    </div>
+    <div class="card-body">
+        <div class="card-text">
+            @if (Model.Item.Roles != null)
+            {
+                foreach (var role in Model.Item.Roles)
+                {
+                    <a asp-action="View" asp-controller="Role" asp-route-id="@role.Id">@Html.DisplayFor(modelItem => role.Name)</a>
+                    <br/>
+                }
+            }
+        </div>
+    </div>
+</div>
+
+<div class="card mb-3">
+    <div class="card-header">
+        @Html.DisplayNameFor(model => model.Item.Users)
+    </div>
+    <div class="card-body">
+        <div class="card-text">
+            @if (Model.Item.Users != null)
+            {
+                foreach (var user in Model.Item.Users)
+                {
+                    <a asp-action="View" asp-controller="User" asp-route-id="@user.Id">@Html.DisplayFor(modelItem => user.Username)</a>
+                    <br/>
+                }
+            }
+        </div>
+    </div>
+</div>
+
+<partial name="_ConfirmDialog" model="@Model.DeleteConfirmDialog"/>
+
+<partial name="_BackButton" />

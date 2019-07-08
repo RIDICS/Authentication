@@ -1,0 +1,37 @@
+﻿@using Ridics.Authentication.Core.Configuration
+@using Ridics.Authentication.Service.Controllers
+@using Scalesoft.Localization.AspNetCore
+
+@inject ILocalizationService Localizer
+@inject ReturnUrlConfiguration ReturnUrlConfiguration
+
+@model ExternalProviderInfoLabelType?
+
+@switch (Model)
+{
+    case ExternalProviderInfoLabelType.UserWithEmailFound:
+        <div class="alert alert-info info m-2 p-1">
+            @Localizer.Translate("user-with-email-found", "external-provider-registration-labels")
+        </div>
+        break;
+
+    case ExternalProviderInfoLabelType.UserCouldNotBeCreated:
+        <div class="alert alert-danger danger m-2 p-1">
+            @Html.Raw(Localizer.TranslateFormat("user-could-not-be-created", new object[] {$"<a href=\"{ReturnUrlConfiguration.RegisterUrlForClient}\">{@Localizer.Translate("register-locally", "external-provider-registration-labels")}</a>"}, "external-provider-registration-labels"))
+            
+            @Localizer.Translate("more-info", "external-provider-registration-labels") <a href="@ReturnUrlConfiguration.DefaultFailedExternalLoginUrl">@Localizer.Translate("faq", "external-provider-registration-labels")</a>
+        </div>
+        break;
+
+    case ExternalProviderInfoLabelType.MissingEmailFromExternalProvider:
+        <div class="alert alert-danger danger m-2 p-1">
+            @Html.Raw(Localizer.TranslateFormat("missing-email-from-external-provider", new object[] {$"<a href=\"{ReturnUrlConfiguration.RegisterUrlForClient}\">{@Localizer.Translate("register-locally", "external-provider-registration-labels")}</a>"}, "external-provider-registration-labels"))
+            @Localizer.Translate("more-info", "external-provider-registration-labels") <a href="@ReturnUrlConfiguration.DefaultFailedExternalLoginUrl">@Localizer.Translate("faq", "external-provider-registration-labels")</a>
+        </div>
+        break;
+
+    case null:
+        break;
+    default:
+        throw new ArgumentOutOfRangeException();
+}

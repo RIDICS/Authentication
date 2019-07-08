@@ -1,0 +1,67 @@
+﻿@using Scalesoft.Localization.AspNetCore;
+@using Ridics.Authentication.Service.Models.ViewModel;
+@model ViewModel<Ridics.Authentication.Service.Models.ViewModel.Keys.ApiAccessKeyViewModel>
+@inject ILocalizationService Localizer
+
+@{
+    ViewData["Title"] = Localizer.Translate("api-access-key-title");
+    var deleteFormId = $"delete_{Model.Item.Id}";
+}
+
+<form asp-action="Delete" asp-route-id="@Model.Item.Id" id="@deleteFormId" hidden>
+    <input type="hidden" name="id" value="@Model.Item.Id" />
+</form>
+<a class="float-right" href="#" data-formid="@deleteFormId" data-info="@Model.Item.Name" data-toggle="modal" data-target="#confirmModal">@Localizer.Translate("delete")</a>
+
+<h2>@Localizer.Translate("api-access-key-heading")</h2>
+<hr />
+
+<div class="card mb-3">
+    <div class="card-header">
+        @Localizer.Translate("basic-info")
+        <a class="float-right" asp-action="Edit" asp-route-id="@Model.Item.Id">@Localizer.Translate("edit")</a>
+    </div>
+    <div class="card-body">
+        <div class="card-text">
+            <div>@Html.DisplayNameFor(model => Model.Item.Id): @Html.DisplayFor(model => Model.Item.Id)</div>
+            <div>@Html.DisplayNameFor(model => Model.Item.Name): @Html.DisplayFor(model => Model.Item.Name)</div>
+        </div>
+    </div>
+</div>
+
+<div class="card mb-3">
+    <div class="card-header">
+        @Html.DisplayNameFor(model => Model.Item.Permissions)
+        <a class="float-right" asp-action="Edit" asp-route-id="@Model.Item.Id">@Localizer.Translate("edit")</a>
+    </div>
+    <div class="card-body">
+        <div class="card-text">
+            @if (Model.Item.Permissions != null)
+            {
+                foreach (var permission in Model.Item.Permissions)
+                {
+                    @Html.DisplayFor(modelItem => permission)
+                    <br />
+                }
+            }
+        </div>
+    </div>
+</div>
+
+<div class="card mb-3">
+    <div class="card-header">
+        @Localizer.Translate("key", "ApiAccessKeyViewModel")
+        <a class="float-right" asp-action="EditKeyHash" asp-route-id="@Model.Item.Id">@Localizer.Translate("edit")</a>
+    </div>
+    <div class="card-body">
+        <div class="card-text">
+            <div>@Localizer.Translate("key", "ApiAccessKeyViewModel"): XXX</div>
+            <div>@Html.DisplayNameFor(model => Model.Item.ApiAccessKeyHashViewModel.Algorithm): @Html.DisplayFor(model => Model.Item.ApiAccessKeyHashViewModel.Algorithm)</div>
+        </div>
+    </div>
+</div>
+
+
+<partial name="_ConfirmDialog" model="@Model.DeleteConfirmDialog" />
+
+<partial name="_BackButton" />

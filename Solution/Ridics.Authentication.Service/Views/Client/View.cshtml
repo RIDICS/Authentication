@@ -1,0 +1,137 @@
+﻿@using Scalesoft.Localization.AspNetCore;
+@using Ridics.Authentication.Service.Models.ViewModel;
+@model ViewModel<Ridics.Authentication.Service.Models.ViewModel.Clients.ClientViewModel>
+@inject ILocalizationService Localizer
+
+@{
+    ViewData["Title"] = Localizer.Translate("client-title");
+    var deleteFormId = $"delete_{Model.Item.Id}";
+}
+
+<form asp-action="Delete" asp-route-id="@Model.Item.Id" id="@deleteFormId" hidden>
+    <input type="hidden" name="id" value="@Model.Item.Id" />
+</form>
+<a class="float-right" href="#" data-formid="@deleteFormId" data-info="@Model.Item.Name" data-toggle="modal" data-target="#confirmModal">@Localizer.Translate("delete")</a>
+
+<h2>@Localizer.Translate("client-heading")</h2>
+<hr />
+
+<div class="card mb-3">
+    <div class="card-header">
+        @Localizer.Translate("basic-info")
+        <a class="float-right" asp-action="Edit" asp-route-id="@Model.Item.Id">@Localizer.Translate("edit")</a>
+    </div>
+    <div class="card-body">
+        <div class="card-text">
+            <div>@Html.DisplayNameFor(model => Model.Item.Id): @Html.DisplayFor(model => Model.Item.Id)</div>
+            <div>@Html.DisplayNameFor(model => Model.Item.Name): @Html.DisplayFor(model => Model.Item.Name)</div>
+            <div>@Html.DisplayNameFor(model => Model.Item.Description): @Html.DisplayFor(model => Model.Item.Description)</div>
+            <div>@Html.DisplayNameFor(model => Model.Item.DisplayUrl): @Html.DisplayFor(model => Model.Item.DisplayUrl)</div>
+            <div>@Html.DisplayNameFor(model => Model.Item.LogoUrl): @Html.DisplayFor(model => Model.Item.LogoUrl)</div>
+            <div>@Html.DisplayNameFor(model => Model.Item.RequireConsent): @Html.DisplayFor(model => Model.Item.RequireConsent)</div>
+            <div>@Html.DisplayNameFor(model => Model.Item.AllowAccessTokensViaBrowser): @Html.DisplayFor(model => Model.Item.AllowAccessTokensViaBrowser)</div>
+        </div>
+    </div>
+</div>
+
+<div class="card mb-3">
+    <div class="card-header">
+        @Html.DisplayNameFor(model => Model.Item.AllowedScopes)
+        <span class="btn-sm btn-muted small tooltip-help" title="<h4>@Localizer.Translate("scopes-tooltip-heading")</h4><span>@Localizer.Translate("scopes-tooltip-text")</span>">
+            ?
+        </span>
+        <a class="float-right" asp-action="Edit" asp-route-id="@Model.Item.Id">@Localizer.Translate("edit")</a>
+    </div>
+    <div class="card-body">
+        <div class="card-text">
+            @if (Model.Item.AllowedScopes != null)
+            {
+                foreach (var scope in Model.Item.AllowedScopes)
+                {
+                    @Html.DisplayFor(modelItem => scope.Name)
+                    <br />
+                }
+            }
+        </div>
+    </div>
+</div>
+
+<div class="card mb-3">
+    <div class="card-header">
+        @Html.DisplayNameFor(model => Model.Item.AllowedGrantTypes)
+        <a class="float-right" asp-action="Edit" asp-route-id="@Model.Item.Id">@Localizer.Translate("edit")</a>
+    </div>
+    <div class="card-body">
+        <div class="card-text">
+            @if (Model.Item.AllowedGrantTypes != null)
+            {
+                foreach (var grantType in Model.Item.AllowedGrantTypes)
+                {
+                    @Html.DisplayFor(modelItem => grantType.DisplayName)
+                    <br />
+                }
+            }
+        </div>
+    </div>
+</div>
+
+<div class="card mb-3">
+    <div class="card-header">
+        @Html.DisplayNameFor(model => Model.Item.AllowedIdentityResources)
+        <a class="float-right" asp-action="Edit" asp-route-id="@Model.Item.Id">@Localizer.Translate("edit")</a>
+    </div>
+    <div class="card-body">
+        <div class="card-text">
+            @if (Model.Item.AllowedIdentityResources != null)
+            {
+                foreach (var identityResource in Model.Item.AllowedIdentityResources)
+                {
+                    @Html.DisplayFor(modelItem => identityResource.Name)
+                    <br />
+                }
+            }
+        </div>
+    </div>
+</div>
+
+<div class="card mb-3">
+    <div class="card-header">
+        @Html.DisplayNameFor(model => Model.Item.Secrets)
+        <a class="float-right" asp-action="Secrets" asp-route-clientId="@Model.Item.Id">@Localizer.Translate("edit")</a>
+    </div>
+    <div class="card-body">
+        <div class="card-text">
+            @if (Model.Item.Secrets != null)
+            {
+                foreach (var secret in Model.Item.Secrets)
+                {
+                    @Html.DisplayFor(modelItem => secret.Value)
+                    <br />
+                }
+            }
+        </div>
+    </div>
+</div>
+
+<div class="card mb-3">
+    <div class="card-header">
+        @Html.DisplayNameFor(model => Model.Item.UriList)
+        <a class="float-right" asp-action="Uris" asp-route-clientId="@Model.Item.Id">@Localizer.Translate("edit")</a>
+    </div>
+    <div class="card-body">
+        <div class="card-text">
+            @if (Model.Item.UriList != null)
+            {
+                foreach (var uri in Model.Item.UriList)
+                {
+                    @Html.DisplayFor(modelItem => uri.Value)
+                    <br />
+                }
+            }
+        </div>
+    </div>
+</div>
+
+<partial name="_ConfirmDialog" model="@Model.DeleteConfirmDialog" />
+
+<partial name="_BackButton" />

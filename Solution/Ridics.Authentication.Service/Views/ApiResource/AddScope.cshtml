@@ -1,0 +1,61 @@
+﻿@using Scalesoft.Localization.AspNetCore
+@model Ridics.Authentication.Service.Models.ViewModel.Resources.ApiResources.EditableScopeViewModel
+@inject ILocalizationService Localizer
+
+@{
+    ViewData["Title"] = Localizer.Translate("add-scope-title");
+}
+
+<h2>@Localizer.Translate("add-scope-heading")</h2>
+
+<hr />
+
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="AddScope">
+            <input asp-for="ApiResourceId" type="hidden" />
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Name" class="control-label"></label>
+                <input asp-for="Name" class="form-control" />
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Description" class="control-label"></label>
+                <input asp-for="Description" class="form-control" />
+                <span asp-validation-for="Description" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label>@Localizer.Translate("select-claims")</label><br />
+                @for (int i = 0; i < Model.SelectableClaimTypes.Count(); i++)
+                {
+
+                    <input asp-for="SelectableClaimTypes[i].Item.Name" value="@Model.SelectableClaimTypes[i].Item.Name" type="hidden" />
+                    <input asp-for="SelectableClaimTypes[i].Item.Id" value="@Model.SelectableClaimTypes[i].Item.Id" type="hidden" />
+                    <input asp-for="SelectableClaimTypes[i].IsSelected" type="checkbox" />
+                    <label asp-for="SelectableClaimTypes[i].IsSelected">@Model.SelectableClaimTypes[i].Item.Name</label>
+                    <br />
+                }
+            </div>
+            <div class="form-group">
+                <div class="checkbox">
+                    <label>
+                        <input asp-for="Required" /> @Html.DisplayNameFor(model => model.Required)
+                    </label>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="checkbox">
+                    <label>
+                        <input asp-for="ShowInDiscoveryDocument" /> @Html.DisplayNameFor(model => model.ShowInDiscoveryDocument)
+                    </label>
+                </div>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="@Localizer.Translate("add-scope")" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<partial name="_BackButton" />

@@ -1,0 +1,12 @@
+﻿{
+  "culture": "cs",
+  "scope": "external-provider-registration-labels",
+  "dictionary": {
+    "user-with-email-found": "Uživatel s e-mailovou adresou poskytnutou z externího účtu je již zaregistrovaný, ale nemá lokální účet spárovaný s účtem externí identity. Pro spárování účtů se přihlaste s uvedenou e-mailovou adresou.",
+    "user-could-not-be-created": "Uživatel nemohl být přes externí účet vytvořen. Pro spárování účtů se přihlaste pod lokálním účtem nebo se {0}.",
+    "missing-email-from-external-provider": "Externí účet neposkytl žádný e-mail. Pro spárování účtů se přihlaste pod lokálním účtem nebo se {0}.",
+    "faq": "Často kladené otázky",
+    "more-info": "Pro více informací navštivte:",
+    "register-locally": "zaregistrujte"
+  }
+}

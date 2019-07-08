@@ -1,0 +1,9 @@
+﻿{
+  "culture": "cs",
+  "scope": "CreateDynamicModuleViewModel",
+  "dictionary": {
+    "name": "Název",
+    "module-type": "Modul",
+    "version": "Verze"
+  }
+}

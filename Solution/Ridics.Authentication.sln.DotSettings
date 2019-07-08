@@ -1,0 +1,17 @@
+﻿<wpf:ResourceDictionary xml:space="preserve" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:s="clr-namespace:System;assembly=mscorlib" xmlns:ss="urn:shemas-jetbrains-com:settings-storage-xaml" xmlns:wpf="http://schemas.microsoft.com/winfx/2006/xaml/presentation">
+	<s:String x:Key="/Default/CodeInspection/ExcludedFiles/GeneratedFilesAndFolders/=E306BFF0_002DBF7A_002D4976_002D86E1_002D9B2F11924F54_002Fd_003Awwwroot_002Fd_003Acss/@EntryIndexedValue">E306BFF0-BF7A-4976-86E1-9B2F11924F54/d:wwwroot/d:css</s:String>
+	<s:String x:Key="/Default/CodeInspection/ExcludedFiles/GeneratedFilesAndFolders/=E306BFF0_002DBF7A_002D4976_002D86E1_002D9B2F11924F54_002Fd_003Awwwroot_002Fd_003Ajs/@EntryIndexedValue">E306BFF0-BF7A-4976-86E1-9B2F11924F54/d:wwwroot/d:js</s:String>
+	<s:String x:Key="/Default/CodeInspection/JsInspections/LanguageLevel/@EntryValue">ECMAScript 2015</s:String>
+	<s:Boolean x:Key="/Default/PatternsAndTemplates/Todo/TodoPatterns/=39A8F2C05BD92E498EDDAD0F7A30EEE0/@KeyIndexDefined">True</s:Boolean>
+	<s:String x:Key="/Default/PatternsAndTemplates/Todo/TodoPatterns/=39A8F2C05BD92E498EDDAD0F7A30EEE0/Color/@EntryValue">207, 157, 50</s:String>
+	<s:Boolean x:Key="/Default/PatternsAndTemplates/Todo/TodoPatterns/=39A8F2C05BD92E498EDDAD0F7A30EEE0/MatchComments/@EntryValue">True</s:Boolean>
+	<s:String x:Key="/Default/PatternsAndTemplates/Todo/TodoPatterns/=39A8F2C05BD92E498EDDAD0F7A30EEE0/Name/@EntryValue">HACK</s:String>
+	<s:String x:Key="/Default/PatternsAndTemplates/Todo/TodoPatterns/=39A8F2C05BD92E498EDDAD0F7A30EEE0/Pattern/@EntryValue">(?&lt;=\W|^)(?&lt;TAG&gt;HACK)(\W|$)(.*)</s:String>
+	<s:String x:Key="/Default/PatternsAndTemplates/Todo/TodoPatterns/=39A8F2C05BD92E498EDDAD0F7A30EEE0/TodoIconStyle/@EntryValue">Warning</s:String>
+	<s:Boolean x:Key="/Default/PatternsAndTemplates/Todo/TodoPatterns/=7E956A7EB156044385ED39E3EB6CC99C/@KeyIndexDefined">True</s:Boolean>
+	<s:String x:Key="/Default/PatternsAndTemplates/Todo/TodoPatterns/=7E956A7EB156044385ED39E3EB6CC99C/Color/@EntryValue">207, 157, 50</s:String>
+	<s:Boolean x:Key="/Default/PatternsAndTemplates/Todo/TodoPatterns/=7E956A7EB156044385ED39E3EB6CC99C/MatchComments/@EntryValue">True</s:Boolean>
+	<s:String x:Key="/Default/PatternsAndTemplates/Todo/TodoPatterns/=7E956A7EB156044385ED39E3EB6CC99C/Name/@EntryValue">WORKAROUND</s:String>
+	<s:String x:Key="/Default/PatternsAndTemplates/Todo/TodoPatterns/=7E956A7EB156044385ED39E3EB6CC99C/Pattern/@EntryValue">(?&lt;=\W|^)(?&lt;TAG&gt;WORKAROUND)(\W|$)(.*)</s:String>
+	<s:String x:Key="/Default/PatternsAndTemplates/Todo/TodoPatterns/=7E956A7EB156044385ED39E3EB6CC99C/TodoIconStyle/@EntryValue">Warning</s:String>
+</wpf:ResourceDictionary>

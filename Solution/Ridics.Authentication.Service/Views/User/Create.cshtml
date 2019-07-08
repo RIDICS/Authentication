@@ -1,0 +1,92 @@
+﻿@using Scalesoft.Localization.AspNetCore
+@model Ridics.Authentication.Service.Models.ViewModel.Users.EditableUserViewModel<Ridics.Authentication.Service.Models.ViewModel.Users.UserWithPasswordViewModel>
+@inject ILocalizationService Localizer
+
+@{
+    ViewData["Title"] = Localizer.Translate("create-user-title");
+}
+
+<h2>@Localizer.Translate("create-user-heading")</h2>
+<hr/>
+
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="UserViewModel.Username" class="control-label"></label>
+                <input asp-for="UserViewModel.Username" class="form-control" />
+                <span asp-validation-for="UserViewModel.Username" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="UserViewModel.Password" class="control-label"></label>
+                <input asp-for="UserViewModel.Password" class="form-control" />
+                <span asp-validation-for="UserViewModel.Password" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="UserViewModel.ConfirmPassword" class="control-label"></label>
+                <input asp-for="UserViewModel.ConfirmPassword" class="form-control" />
+                <span asp-validation-for="UserViewModel.ConfirmPassword" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="UserViewModel.Title" class="control-label"></label>
+                <input asp-for="UserViewModel.Title" class="form-control" />
+                <span asp-validation-for="UserViewModel.Title" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="UserViewModel.Prefix" class="control-label"></label>
+                <input asp-for="UserViewModel.Prefix" class="form-control" />
+                <span asp-validation-for="UserViewModel.Prefix" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="UserViewModel.FirstName" class="control-label"></label>
+                <input asp-for="UserViewModel.FirstName" class="form-control" />
+                <span asp-validation-for="UserViewModel.FirstName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="UserViewModel.SecondName" class="control-label"></label>
+                <input asp-for="UserViewModel.SecondName" class="form-control" />
+                <span asp-validation-for="UserViewModel.SecondName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="UserViewModel.LastName" class="control-label"></label>
+                <input asp-for="UserViewModel.LastName" class="form-control" />
+                <span asp-validation-for="UserViewModel.LastName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="UserViewModel.Suffix" class="control-label"></label>
+                <input asp-for="UserViewModel.Suffix" class="form-control" />
+                <span asp-validation-for="UserViewModel.Suffix" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="UserViewModel.Email" class="control-label"></label>
+                <input asp-for="UserViewModel.Email" class="form-control" />
+                <span asp-validation-for="UserViewModel.Email" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="UserViewModel.PhoneNumber" class="control-label"></label>
+                <input asp-for="UserViewModel.PhoneNumber" class="form-control" />
+                <span asp-validation-for="UserViewModel.PhoneNumber" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label>@Localizer.Translate("all-roles")</label><br />
+
+                @foreach (var selectableUser in Model.SelectableRoles)
+                {
+                    <input asp-for="@selectableUser.Item.Name" value="@selectableUser.Item.Name" type="hidden" />
+                    <input asp-for="@selectableUser.Item.Id" value="@selectableUser.Item.Id" type="hidden" />
+                    <input asp-for="@selectableUser.IsSelected" type="checkbox" />
+                    <label asp-for="@selectableUser.IsSelected">@selectableUser.Item.Name</label>
+                    <br />
+                }
+
+            </div>
+
+            <div class="form-group">
+                <input type="submit" value="@Localizer.Translate("create")" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<partial name="_BackButton" />

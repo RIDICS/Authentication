@@ -1,0 +1,79 @@
+﻿@using Scalesoft.Localization.AspNetCore
+@model Ridics.Authentication.Service.Models.ViewModel.Account.LoginWith2FaViewModel
+@inject ILocalizationService Localizer
+
+@{
+    ViewData["Title"] = Localizer.Translate("auth-title");
+    Layout = "_EmptyLayout";
+}
+
+@section Styles
+{
+    <link rel="stylesheet" href="~/css/ridics.login.css" asp-append-version="true"/>
+    <link rel="stylesheet" href="~/node_modules/@("@")fortawesome/fontawesome-free/css/all.css" asp-append-version="true">
+}
+
+<hr/>
+<div class="card shadow">
+    <div class="card-header">
+        <h2>@ViewData["Title"]</h2>
+    </div>
+    <div class="card-body">
+        <form id="login-form" method="post" asp-action="LoginWith2fa" asp-route-returnUrl="@Model.ReturnUrl">
+            <input asp-for="RememberMe" type="hidden"/>
+
+            @if (!ViewData.ModelState.IsValid)
+            {
+                <div asp-validation-summary="All" class="alert alert-danger"></div>
+            }
+
+            <div class="form-group">
+                <label for="username">@Localizer.Translate("username", "LoginWith2FaViewModel")</label>
+                <input id="username" type="text" name="username" readonly="readonly" value="@Model.Username" class="form-control" autocapitalize="none" autocorrect="false" spellcheck="false"/>
+            </div>
+
+            <div class="form-group">
+                <label for="password">@Localizer.Translate("pswd", "LoginWith2FaViewModel")</label>
+                <input id="password" type="password" name="password" value="password" readonly="readonly" class="form-control" autocomplete="off"/>
+            </div>
+
+            <div class="form-group">
+                <label class="code-verification" asp-for="TwoFactorCode"></label>
+                <div class="input-group two-factor-resend">
+                    <input asp-for="TwoFactorCode" class="form-control two-factor-code" autocomplete="off"/>
+                    <div class="input-group-append">
+                        <button type="button" class="btn btn-secondary" value="resend-code" id="resend-code-button" data-username="@Model.Username" data-button-action="@Url.Action("ResendAuthorizationCode")">@Localizer.Translate("resend-code")</button>
+                    </div>
+                </div>
+                <span asp-validation-for="TwoFactorCode" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <div class="checkbox">
+                    <label asp-for="RememberMachine">
+                        <input asp-for="RememberMachine"/>
+                        @Html.DisplayNameFor(m => m.RememberMachine)
+                    </label>
+                </div>
+            </div>
+            <div class="form-group">
+                <button type="submit" class="btn btn-primary float-right ml-3" name="buttonClicked" id="verify-button">@Localizer.Translate("login")</button>
+                <a asp-action="Login" asp-controller="Account" asp-route-returnUrl="@Model.ReturnUrl" class="btn btn-light">
+                    @Localizer.Translate("cancel", "LoginWith2FaViewModel")
+                </a>
+            </div>
+        </form>
+        <div class="alert alert-success @(Model.ShowResendMessage == false ? "hidden" : "")" id="resend-message">
+            @Localizer.Translate("resend-code-success")
+        </div>
+        <div class="alert alert-danger hidden" id="resend-message-error">
+            @Localizer.Translate("resend-code-error")
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script src="~/js/ridics.login-2fa-auth.js" asp-append-version="true"></script>
+    <script src="~/node_modules/jquery-validation/dist/jquery.validate.min.js" asp-append-version="true"></script>
+    <script src="~/node_modules/jquery-validation-unobtrusive/dist/jquery.validate.unobtrusive.min.js" asp-append-version="true"></script>
+}

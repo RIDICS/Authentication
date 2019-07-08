@@ -1,0 +1,97 @@
+﻿@using Scalesoft.Localization.AspNetCore;
+@using Ridics.Authentication.Service.Models.ViewModel;
+@model ViewModel<Ridics.Authentication.Service.Models.ViewModel.Resources.ApiResources.ApiResourceViewModel>
+@inject ILocalizationService Localizer
+
+@{
+    ViewData["Title"] = Localizer.Translate("api-resource-title");
+    var deleteFormId = $"delete_{Model.Item.Id}";
+}
+
+<form asp-action="Delete" asp-route-id="@Model.Item.Id" id="@deleteFormId" hidden>
+    <input type="hidden" name="id" value="@Model.Item.Id" />
+</form>
+<a class="float-right" href="#" data-formid="@deleteFormId" data-info="@Model.Item.Name" data-toggle="modal" data-target="#confirmModal">@Localizer.Translate("delete")</a>
+
+<h2>@Localizer.Translate("api-resource-heading")</h2>
+<hr />
+
+<div class="card mb-3">
+    <div class="card-header">
+        @Localizer.Translate("basic-info")
+        <a class="float-right" asp-action="Edit" asp-route-id="@Model.Item.Id">@Localizer.Translate("edit")</a>
+    </div>
+    <div class="card-body">
+        <div class="card-text">
+            <div>@Html.DisplayNameFor(model => Model.Item.Id): @Html.DisplayFor(model => Model.Item.Id)</div>
+            <div>@Html.DisplayNameFor(model => Model.Item.Name): @Html.DisplayFor(model => Model.Item.Name)</div>
+            <div>@Html.DisplayNameFor(model => Model.Item.Description): @Html.DisplayFor(model => Model.Item.Description)</div>
+            <div>@Html.DisplayNameFor(model => Model.Item.Required): @Html.DisplayFor(model => Model.Item.Required)</div>
+            <div>@Html.DisplayNameFor(model => Model.Item.ShowInDiscoveryDocument): @Html.DisplayFor(model => Model.Item.ShowInDiscoveryDocument)</div>
+        </div>
+    </div>
+</div>
+
+<div class="card mb-3">
+    <div class="card-header">
+        @Html.DisplayNameFor(model => Model.Item.Claims)
+        <a class="float-right" asp-action="Edit" asp-route-id="@Model.Item.Id">@Localizer.Translate("edit")</a>
+    </div>
+    <div class="card-body">
+        <div class="card-text">
+            @if (Model.Item.Claims != null)
+            {
+                foreach (var claim in Model.Item.Claims)
+                {
+                    <a asp-action="View" asp-controller="ClaimType" asp-route-id="@claim.Id">@Html.DisplayFor(modelItem => claim.Name)</a>
+                    <br />
+                }
+            }
+        </div>
+    </div>
+</div>
+
+<div class="card mb-3">
+    <div class="card-header">
+        @Html.DisplayNameFor(model => Model.Item.ApiSecrets)
+        <a class="float-right" asp-action="Secrets" asp-route-apiResourceId="@Model.Item.Id">@Localizer.Translate("edit")</a>
+    </div>
+    <div class="card-body">
+        <div class="card-text">
+            @if (Model.Item.ApiSecrets != null)
+            {
+                foreach (var secret in Model.Item.ApiSecrets)
+                {
+                    @Html.DisplayFor(modelItem => secret.Value)
+                    <br />
+                }
+            }
+        </div>
+    </div>
+</div>
+
+<div class="card mb-3">
+    <div class="card-header">
+        @Html.DisplayNameFor(model => Model.Item.Scopes)
+        <span class="btn-sm btn-muted small tooltip-help" title="<h4>@Localizer.Translate("scopes-tooltip-heading")</h4><span>@Localizer.Translate("scopes-tooltip-text")</span>">
+            ?
+        </span>
+        <a class="float-right" asp-action="Scopes" asp-route-apiResourceId="@Model.Item.Id">@Localizer.Translate("edit")</a>
+    </div>
+    <div class="card-body">
+        <div class="card-text">
+            @if (Model.Item.Scopes != null)
+            {
+                foreach (var scope in Model.Item.Scopes)
+                {
+                    @Html.DisplayFor(modelItem => scope.Name)
+                    <br />
+                }
+            }
+        </div>
+    </div>
+</div>
+
+<partial name="_ConfirmDialog" model="@Model.DeleteConfirmDialog" />
+
+<partial name="_BackButton" />

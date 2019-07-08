@@ -1,0 +1,15 @@
+﻿{
+  "culture": "en",
+  "scope": "UriViewModel",
+  "dictionary": {
+    "uri": "URL",
+    "uri-required": "URL required",
+    "not-valid-uri": "URL address is not valid",
+    "is-redirect": "Post login redirect",
+    "is-post-logout-redirect": "Post logout redirect",
+    "is-cors-origin": "CORS origin",
+    "is-front-channel-logout": "Logout on client",
+    "cors-origin-tooltip-heading": "CORS",
+    "cors-origin-tooltip-text": "Many endpoints in AuthorizationService will be accessed via Ajax calls from JavaScript-based clients. Given that AuthorizationService will most likely be hosted on a different origin than these clients, this implies that Cross-Origin Resource Sharing (CORS) will need to be configured."
+  }
+}

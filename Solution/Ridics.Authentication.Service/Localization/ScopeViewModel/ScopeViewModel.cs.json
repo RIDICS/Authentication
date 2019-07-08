@@ -1,0 +1,12 @@
+﻿{
+  "culture": "cs",
+  "scope": "ScopeViewModel",
+  "dictionary": {
+    "name-required": "Jméno požadováno",
+    "name": "Jméno",
+    "description": "Popis",
+    "claims": "Atributy uživatele",
+    "required": "Požadováno",
+    "show-in-discovery-document": "Zobrazit v discovery dokumentu"
+  }
+}

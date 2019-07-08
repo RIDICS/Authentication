@@ -1,0 +1,8 @@
+﻿{
+  "culture": "cs",
+  "scope": "LoginViewModel",
+  "dictionary": {
+    "input-required": "Uživatelské údaje jsou povinné",
+    "return-url-required": "Návratová adresa je povinný údaj"
+  }
+}

@@ -1,0 +1,18 @@
+@import "color-definition";
+
+body {
+    padding: 1em;
+}
+
+.empty-layout-background {
+    background-color: $empty-layout-body-color;
+    padding-top: 5em;
+}
+
+.card {
+    margin: auto;
+
+    .card-header {
+        text-align: center;
+    }
+}

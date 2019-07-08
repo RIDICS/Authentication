@@ -1,0 +1,31 @@
+﻿{
+  "culture": "en",
+  "scope": "UserViewModel",
+  "dictionary": {
+    "username-required": "Username required",
+    "username": "Username",
+    "first-name": "First name",
+    "last-name": "Family name",
+    "full-name": "Full name",
+    "email": "E-mail",
+    "email-required": "E-mail required",
+    "wrong-email": "Wrong e-mail format",
+    "assigned-roles": "Assigned roles",
+    "resource-permissions": "Resource permissions",
+    "resource-permission-types": "Resource type permissions",
+    "last-change": "Last change",
+    "claims": "Claims",
+    "email-loa": "E-mail level of assurance",
+    "enabled-twofactor": "Enable 2-factor authentication",
+    "phone-number": "Phone number",
+    "phone-loa": "Phone number level of assurance",
+    "twofactor-provider": "2-factor provider",
+    "twofactor-providers": "2-factor providers",
+    "remove-login-by-external-provider": "Remove",
+    "external-logins": "External logins",
+    "verification-code": "Verification code",
+    "verification-code-created": "Verification code generated",
+    "email-confirm-code": "E-mail confirm code",
+    "phone-confirm-code": "Phone number confirm code"
+  }
+}

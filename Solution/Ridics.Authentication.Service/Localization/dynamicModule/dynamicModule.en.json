@@ -1,0 +1,14 @@
+﻿{
+  "culture": "en",
+  "scope": "DynamicModuleViewModel",
+  "scopeAlias": [
+    "DynamicModuleViewModel`1"
+  ],
+  "dictionary": {
+    "name": "Name",
+    "module-identifier": "Module identifier",
+    "module-type": "Module type",
+    "guid": "GUID",
+    "version": "Version"
+  }
+}

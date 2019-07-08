@@ -1,0 +1,12 @@
+﻿{
+  "culture": "cs",
+  "scope": "CookieConsentViewModel",
+  "dictionary": {
+    "cookie-info-short": "Tento web využívá cookies, které umožňují fungování portálu a pomáhají tak zlepšit Váš zážitek při používání portálu.",
+    "learn-more": "Zjistit více",
+    "accept-all": "Souhlasím s používáním všech cookies",
+    "accept": "Souhlasím s používáním vybraných cookies",
+    "essential-cookies-label": "Základní cookies",
+    "essential-cookies-description": "Základní cookies umožňují portálu správné fungování zprovozněním základních funkcí. Bez odsouhlasení těchto cookies by portál nemohl správně fungovat."
+  }
+}

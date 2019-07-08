@@ -1,0 +1,166 @@
+﻿@using Scalesoft.Localization.AspNetCore
+@model Ridics.Authentication.Service.Models.ViewModel.Users.EditableUserViewModel<Ridics.Authentication.Service.Models.ViewModel.Users.UserViewModel>
+@inject ILocalizationService Localizer
+
+@section Styles {
+    <link rel="stylesheet" href="~/css/ridics.user.edit.css" asp-append-version="true"/>
+}
+
+@section Scripts {
+    <script src="~/js/ridics.edit.user.js" asp-append-version="true"></script>
+    <script src="~/js/external-login-provider.js" asp-append-version="true"></script>
+}
+
+@{
+    ViewData["Title"] = Localizer.Translate("update-user-title");
+}
+
+<h2>@Localizer.Translate("update-user-heading")</h2>
+<div class="lead">@Model.UserViewModel.Username</div>
+<hr>
+
+<div class="row">
+    <div class="col-12 col-sm-6 col-md-4">
+        <form asp-action="Edit" asp-route-id="@Model.UserViewModel.Id">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="UserViewModel.Username" class="control-label"></label>
+                <input asp-for="UserViewModel.Username" class="form-control" readonly="readonly"/>
+                <span asp-validation-for="UserViewModel.Username" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="UserViewModel.Title" class="control-label"></label>
+                <input asp-for="UserViewModel.Title" class="form-control"/>
+                <span asp-validation-for="UserViewModel.Title" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="UserViewModel.Prefix" class="control-label"></label>
+                <input asp-for="UserViewModel.Prefix" class="form-control"/>
+                <span asp-validation-for="UserViewModel.Prefix" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="UserViewModel.FirstName" class="control-label"></label>
+                <input asp-for="UserViewModel.FirstName" class="form-control"/>
+                <span asp-validation-for="UserViewModel.FirstName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="UserViewModel.SecondName" class="control-label"></label>
+                <input asp-for="UserViewModel.SecondName" class="form-control"/>
+                <span asp-validation-for="UserViewModel.SecondName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="UserViewModel.LastName" class="control-label"></label>
+                <input asp-for="UserViewModel.LastName" class="form-control"/>
+                <span asp-validation-for="UserViewModel.LastName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="UserViewModel.Suffix" class="control-label"></label>
+                <input asp-for="UserViewModel.Suffix" class="form-control"/>
+                <span asp-validation-for="UserViewModel.Suffix" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="UserViewModel.FullName" class="control-label"></label>
+                <input asp-for="UserViewModel.FullName" class="form-control"/>
+                <span asp-validation-for="UserViewModel.FullName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="UserViewModel.Email" class="control-label"></label>
+                <input asp-for="UserViewModel.Email" class="form-control"/>
+                <span asp-validation-for="UserViewModel.Email" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="UserViewModel.PhoneNumber" class="control-label"></label>
+                <input asp-for="UserViewModel.PhoneNumber" class="form-control"/>
+                <span asp-validation-for="UserViewModel.PhoneNumber" class="text-danger"></span>
+            </div>
+            <div class="form-check">
+                <input asp-for="UserViewModel.TwoFactorEnabled" type="checkbox" value="true" class="form-check-input" id="twoFactorEnabled"/>
+                <label asp-for="UserViewModel.TwoFactorEnabled" class="form-check-label" for="twoFactorEnabled"></label>
+                <span asp-validation-for="UserViewModel.TwoFactorEnabled" class="text-danger"></span>
+            </div>
+            <div class="form-group" id="twoFactorProvidersSelect">
+                <label asp-for="UserViewModel.TwoFactorProvider" class="control-label"></label>
+                <select asp-for="UserViewModel.TwoFactorProvider" asp-items="Model.UserViewModel.TwoFactorProviders?.Select(x => new SelectListItem(x, x))" class="form-control"></select>
+                <span asp-validation-for="UserViewModel.TwoFactorProvider" class="text-danger"></span>
+            </div>
+
+            <div class="form-group mt-4 mb-4">
+                <input type="submit" value="@Localizer.Translate("save")" class="btn btn-primary float-right" />
+            </div>
+        </form>
+    </div>
+    <div class="col-12 col-sm-6 col-md-8">
+        @if (Model.UserViewModel.ExternalUserLogins != null && Model.UserViewModel.ExternalUserLogins.Any())
+        {
+            <div class="card external-identity-card mb-4">
+                <div class="card-header external-identity-card-header">
+                    <span>@Localizer.Translate("used-login-methods-header")</span>
+                    <button class="card-header-button external-identity-card-header-button">
+                        <i class="fa fa-angle-double-up fa-lg"></i>
+                    </button>
+                </div>
+                <div class="card-body external-identity-card-body">
+                    <form id="used-external-login-provider" method="post" class="container" asp-action="DisconnectExternalLogin">
+                        <div class="row justify-content-center">
+                            @foreach (var externalLogin in Model.UserViewModel.ExternalUserLogins)
+                            {
+                                var provider = externalLogin.LoginProvider;
+
+                                <div class="col-6">
+                                    <div class="external-identity-card-logo external-identity-provider-@provider.AuthenticationScheme">
+                                        <img class="external-provider-logo" src="~/@provider.LogoFileName" alt="Logo @provider.DisplayName">
+                                    </div>
+                                    <button
+                                        @if (provider.DisableManagingByUser)
+                                        {
+                                            @: disabled
+                                        }
+                                        type="submit"
+                                        class="btn btn-danger"
+                                        name="externalLoginId"
+                                        value="@externalLogin.Id"
+                                        title="@provider.DisplayName"
+                                        asp-action="DisconnectExternalLogin"
+                                        asp-route-returnUrl="@Model.ReturnUrl">
+                                        <i class="fa fa-trash" aria-hidden="true"></i>
+                                        @Localizer.Translate("remove-login-by-external-provider", "UserViewModel")
+                                    </button>
+                                </div>
+                            }
+                        </div>
+                    </form>
+                </div>
+            </div>
+        }
+        @if (Model.AvailableExternalLoginProviders != null && Model.AvailableExternalLoginProviders.Any())
+        {
+            <div class="card external-identity-card mb-4">
+                <div class="card-header external-identity-card-header">
+                    <span>@Localizer.Translate("available-login-methods-header")</span>
+                    <button class="card-header-button external-identity-card-header-button">
+                        <i class="fa fa-angle-double-up fa-lg"></i>
+                    </button>
+                </div>
+                <div class="card-body external-identity-card-body">
+                    <form id="available-external-login-provider" method="post" class="form-horizontal">
+                        @foreach (var provider in Model.AvailableExternalLoginProviders)
+                        {
+                            <button
+                                type="submit"
+                                class="btn external-identity-provider-@provider.AuthenticationScheme"
+                                name="externalProvider"
+                                value="@provider.AuthenticationScheme"
+                                title="@provider.DisplayName"
+                                asp-action="AddExternalLogin"
+                                asp-route-returnUrl="@Model.ReturnUrl">
+                                <img class="external-provider-logo" src="~/@provider.LogoFileName" alt="Logo @provider.DisplayName">
+                            </button>
+                        }
+                    </form>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+
+<partial name="_BackButton" />

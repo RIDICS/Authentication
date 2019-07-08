@@ -1,0 +1,39 @@
+﻿@using Scalesoft.Localization.AspNetCore
+@model Ridics.Authentication.Service.Models.ViewModel.Keys.EditableApiAccessKeyViewModel
+@inject ILocalizationService Localizer
+
+@{
+    ViewData["Title"] = Localizer.Translate("update-api-access-key-title");
+}
+
+<h2>@Localizer.Translate("update-api-access-key-heading")</h2>
+<div class="lead">@Model.Name</div>
+<hr />
+
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Name" class="control-label"></label>
+                <input asp-for="Name" class="form-control" />
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+           <div class="form-group">
+                <label>@Localizer.Translate("select-api-permissions")</label><br />
+                @for (int i = 0; i < Model.SelectableApiPermissions.Count(); i++)
+                {
+                    <input asp-for="SelectableApiPermissions[i].Item" value="@Model.SelectableApiPermissions[i].Item" type="hidden" />
+                    <input asp-for="SelectableApiPermissions[i].IsSelected" type="checkbox" />
+                    <label asp-for="SelectableApiPermissions[i].IsSelected">@Model.SelectableApiPermissions[i].Item</label>
+                    <br />
+                }
+            </div>
+            <div class="form-group">
+                <input type="submit" value="@Localizer.Translate("save")" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<partial name="_BackButton" />

@@ -1,0 +1,20 @@
+﻿@using Scalesoft.Localization.AspNetCore
+@model Ridics.Authentication.Service.Models.ViewModel.ListViewModel<Ridics.Authentication.Service.Models.ViewModel.Permission.ResourcePermissionViewModel>
+@inject ILocalizationService Localizer
+
+@{
+    ViewData["Title"] = Localizer.Translate("resource-permissions-title");
+}
+
+<h2>@Localizer.Translate("resource-permissions-heading")</h2>
+
+<div class="notification-selector"></div>
+
+<partial name="_ValidationSummary" />
+
+<div id="list">
+    <partial name="_PermissionList" />
+</div>
+<a asp-action="Create">@Localizer.Translate("create-new-resource-permission")</a>
+<partial name="_Pagination" model="@Model.Pagination" />
+<partial name="_ConfirmDialog" model="@Model.DeleteConfirmDialog" />

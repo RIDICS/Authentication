@@ -1,0 +1,86 @@
+﻿@using Scalesoft.Localization.AspNetCore
+@model Ridics.Authentication.Service.Models.ViewModel.Resources.ApiResources.ApiResourceScopesViewModel
+@inject ILocalizationService Localizer
+
+@{
+    ViewData["Title"] = Localizer.Translate("scopes-title");
+}
+
+<h2>@Localizer.Translate("scopes-heading")</h2>
+<partial name="_ValidationSummary"/>
+
+@if (Model == null)
+{
+    return;
+}
+
+@if (Model.Items != null && Model.Items.Count != 0)
+{
+    <table class="table">
+        <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Items[0].Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Items[0].Description)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Items[0].Claims)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Items[0].Required)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Items[0].ShowInDiscoveryDocument)
+            </th>
+            <th></th>
+        </tr>
+        </thead>
+        <tbody>
+        @foreach (var scope in Model.Items)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => scope.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => scope.Description)
+                </td>
+                <td>
+                    @if (scope.Claims != null)
+                    {
+                        foreach (var claim in scope.Claims)
+                        {
+                            @Html.DisplayFor(modelItem => claim.Name)<br/>
+                        }
+                    }
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => scope.Required)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => scope.ShowInDiscoveryDocument)
+                </td>
+                <td>
+                    @{
+                        var deleteFormId = $"delete_{scope.Id}";
+                    }
+                    <form asp-action="DeleteScope" asp-route-apiResourceId="@Model.ApiResourceId" asp-route-scopeId="@scope.Id" id="@deleteFormId" hidden>
+                        <input type="hidden" name="id" value="@Model.ApiResourceId"/>
+                        <input type="hidden" name="scopeId" value="@scope.Id"/>
+                    </form>
+                    <a href="#" data-formid="@deleteFormId" data-info="@scope.Name" data-toggle="modal" data-target="#@Model.DeleteConfirmDialog.Id">@Localizer.Translate("delete")</a>
+                </td>
+            </tr>
+        }
+        </tbody>
+    </table>
+}
+else
+{
+    <div class="no-items">@Localizer.Translate("no-scopes")</div>
+}
+<a asp-action="AddScope" asp-route-apiResourceId="@Model.ApiResourceId">@Localizer.Translate("add-scope")</a>
+<partial name="_ConfirmDialog" model="@Model.DeleteConfirmDialog"/>
+<partial name="_BackButton" />

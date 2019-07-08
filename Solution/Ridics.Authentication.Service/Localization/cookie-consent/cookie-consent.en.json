@@ -1,0 +1,12 @@
+﻿{
+  "culture": "en",
+  "scope": "CookieConsentViewModel",
+  "dictionary": {
+    "cookie-info-short": "This website uses cookies to ensure that you will get the best possible experience while using this portal",
+    "learn-more": "Learn more",
+    "accept-all": "Accept using all cookies",
+    "accept": "Accept using selected cookies",
+    "essential-cookies-label": "Essential cookies",
+    "essential-cookies-description": "Essential cookies allows proper portal usability by enabling important basic functions. Without accepting these cookies, portal cannot fulfill its functionality."
+  }
+}

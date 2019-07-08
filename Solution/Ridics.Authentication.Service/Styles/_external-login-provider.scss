@@ -1,0 +1,76 @@
+@import "color-definition";
+
+.external-identity-card {
+    border: 1px solid $card-background-color;
+    border-radius: 0.2em;
+
+    .external-identity-card-header {
+        background: $card-background-color;
+        color: $card-color;
+        padding: 0.5em;
+        border-top-left-radius: 0.2em;
+        border-top-right-radius: 0.2em;
+        position: relative;
+
+        > span {
+            display: inline-block;
+            width: calc(100% - 2em);
+        }
+
+        .external-identity-card-header-button {
+            background: none;
+            border: none;
+            outline: none;
+            position: absolute;
+            right: 0.5em;
+        }
+    }
+
+    .external-identity-card-body {
+        display: flex;
+        flex-flow: row wrap;
+        padding: 1.5rem;
+        justify-content: center;
+        align-items: center;
+
+        .external-identity-card-logo {
+            display: inline-block;
+            padding: 0.375rem 0.75rem;
+            border-radius: 0.25rem;
+        }
+
+        button {
+            flex-basis: calc(50% - 2em);
+            margin: 0.5em 1em;
+            font-weight: bold;
+            color: $text-color;
+
+            @media (min-width: 425px) {
+                flex-basis: calc((100% / 3) - 2em);
+            }
+
+            @media (min-width: 700px) {
+                flex-basis: auto;
+            }
+        }
+    }
+}
+
+.external-providers-wrapper {
+    border-top: 2px solid $gray;
+    padding-top: 15px;
+
+    @media (min-width: 768px) {
+        border-left: 2px solid $gray;
+        border-top: none;
+        padding-top: 0;
+    }
+
+    .external-identity-btn {
+        width: 100%;
+    }
+}
+
+.external-provider-logo {
+    max-height: 1.5em;
+}

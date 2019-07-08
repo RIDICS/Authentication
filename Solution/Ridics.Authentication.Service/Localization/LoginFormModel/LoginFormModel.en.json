@@ -1,0 +1,11 @@
+﻿{
+  "culture": "en",
+  "scope": "LoginFormModel",
+  "dictionary": {
+    "username-required": "Username required",
+    "username-or-email": "Username or e-mail",
+    "pswd-required": "Password required",
+    "pswd": "Password",
+    "remember-me": "Remember me?"
+  }
+}

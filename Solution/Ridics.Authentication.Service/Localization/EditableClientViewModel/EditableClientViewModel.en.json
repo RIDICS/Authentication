@@ -1,0 +1,18 @@
+﻿{
+  "culture": "en",
+  "scope": "EditableClientViewModel",
+  "dictionary": {
+    "name": "Client ID",
+    "name-required": "Client ID is required",
+    "description": "Description",
+    "secrets": "Secrets",
+    "grant-types": "Grant types",
+    "uris": "URLs",
+    "display-url": "Display URL",
+    "logo-url": "Logo URL",
+    "require-consent": "Require consent",
+    "api-resources": "API resources",
+    "identity-resources": "Identity resources",
+    "allow-access-tokens-via-browser": "Allow sending access tokens via browser"
+  }
+}

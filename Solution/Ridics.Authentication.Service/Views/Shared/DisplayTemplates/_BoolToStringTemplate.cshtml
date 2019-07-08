@@ -1,0 +1,12 @@
+﻿@using Scalesoft.Localization.AspNetCore
+@model bool
+@inject ILocalizationService Localizer
+
+@if (Model)
+{
+    @Localizer.Translate("yes")
+}
+@if (Model == false)
+{
+    @Localizer.Translate("no")
+}

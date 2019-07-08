@@ -1,0 +1,11 @@
+﻿{
+  "culture": "cs",
+  "scope": "LoginFormModel",
+  "dictionary": {
+    "username-required": "Uživatelské jméno je povinné",
+    "username-or-email": "Uživatelské jméno nebo e-mail",
+    "pswd-required": "Heslo je povinné",
+    "pswd": "Heslo",
+    "remember-me": "Zapamatovat si mě?"
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "compilerOptions": {
+    "removeComments": false,
+    "sourceMap": true,
+    "target": "es5",
+    "typeRoots": [
+      "./node_modules/@types"
+    ],
+
+    "incremental": true,
+    "tsBuildInfoFile": "./tsc-info",
+    "pretty": true,
+    "listEmittedFiles": true
+  }
+}

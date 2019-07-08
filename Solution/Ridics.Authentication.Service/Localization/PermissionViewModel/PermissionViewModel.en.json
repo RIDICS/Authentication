@@ -1,0 +1,10 @@
+﻿{
+  "culture": "en",
+  "scope": "PermissionViewModel",
+  "dictionary": {
+    "name-required": "Name required",
+    "name": "Name",
+    "description": "Description",
+    "roles": "Roles"
+  }
+}

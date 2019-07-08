@@ -1,0 +1,63 @@
+﻿@using Scalesoft.Localization.AspNetCore
+@model Ridics.Authentication.Service.Models.ViewModel.Users.Claims.UserClaimsViewModel
+@inject ILocalizationService Localizer
+
+@{
+    ViewData["Title"] = Localizer.Translate("claims-title");
+}
+
+<h2>@Localizer.Translate("claims-heading")</h2>
+<partial name="_ValidationSummary" />
+
+@if (Model == null)
+{
+    return;
+}
+
+@if (Model.Items != null && Model.Items.Count != 0)
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Items[0].Type)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Items[0].Value)
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var claim in Model.Items)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => claim.Type.Name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => claim.Value)
+                    </td>
+                    <td>
+                        @{
+                            var deleteFormId = $"delete_{claim.Type.Name}";
+                        }
+                        <form asp-action="RemoveClaim" asp-route-userId="@Model.UserId" asp-route-typeId="@claim.Type.Id" id="@deleteFormId" hidden>
+                            <input type="hidden" name="id" value="@Model.UserId" />
+                            <input type="hidden" name="type" value="@claim.Type" />
+                        </form>
+                        <a href="#" data-formid="@deleteFormId" data-info="@claim.Type.Name" data-toggle="modal" data-target="#confirmModal">@Localizer.Translate("delete")</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else
+{
+    <div class="no-items">@Localizer.Translate("no-claims")</div>
+}
+<a asp-action="AddClaim" asp-route-id="@Model.UserId">@Localizer.Translate("add-claim")</a>
+<partial name="_ConfirmDialog" model="@Model.DeleteConfirmDialog" />
+
+<partial name="_BackButton" />

@@ -1,0 +1,14 @@
+﻿{
+  "culture": "cs",
+  "scope": "DynamicModuleViewModel",
+  "scopeAlias": [
+    "DynamicModuleViewModel`1"
+  ],
+  "dictionary": {
+    "name": "Název",
+    "module-identifier": "Identifikátor modulu",
+    "module-type": "Modul",
+    "guid": " GUID",
+    "version": "Verze"
+  }
+}

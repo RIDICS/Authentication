@@ -1,0 +1,12 @@
+﻿{
+  "culture": "cs",
+  "scope": "RoleViewModel",
+  "dictionary": {
+    "name": "Jméno",
+    "name-required": "Jméno je povinné",
+    "description": "Popis",
+    "permissions": "Oprávnění",
+    "resource-permissions": "Oprávnění na zdroj",
+    "resource-permission-types": "Oprávnění na typ zdroje"
+  }
+}

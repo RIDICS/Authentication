@@ -1,0 +1,1 @@
+Logo of external identity providers can be putted here to this folder.

@@ -1,0 +1,78 @@
+﻿@using Scalesoft.Localization.AspNetCore
+@model Ridics.Authentication.Service.Models.ViewModel.Account.ConsentViewModel
+@inject ILocalizationService Localizer
+
+@{
+    ViewData["Title"] = Localizer.Translate("consent-title");
+}
+
+@if (Model == null)
+{
+    return;
+}
+
+<h2>@Localizer.Translate("consent-heading")</h2>
+<hr/>
+<div class="row">
+    @if (Model.Client.LogoUrl != null)
+    {
+        <img src="@Model.Client.LogoUrl">
+    }
+    <h3>
+        @Model.Client.Name
+    </h3>
+
+</div>
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Index">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="ReturnUrl"/>
+            @if (Model.IdentityResources.Any())
+            {
+                <div class="form-group">
+                    <label>@Localizer.Translate("confirm-identity-resources")</label><br/>
+                    @for (int i = 0; i < Model.IdentityResources.Count(); i++)
+                    {
+                        <input asp-for="IdentityResources[i].Item.Id" value="@Model.IdentityResources[i].Item.Id" type="hidden"/>
+                        <input asp-for="IdentityResources[i].Item.Name" value="@Model.IdentityResources[i].Item.Name" type="hidden"/>
+                        <input asp-for="IdentityResources[i].IsSelected" type="checkbox" disabled="@Model.IdentityResources[i].Item.Required"/>
+                        <label asp-for="IdentityResources[i].IsSelected">@Model.IdentityResources[i].Item.Name</label>
+                        <br/>
+                        if (Model.IdentityResources[i].Item.Required)
+                        {
+                            <input asp-for="IdentityResources[i].IsSelected" value="true" type="hidden"/>
+                        }
+                    }
+                </div>
+            }
+            @if (Model.Scopes.Any())
+            {
+                <div class="form-group">
+                    <label>@Localizer.Translate("confirm-api-resources")</label><br/>
+                    @for (int i = 0; i < Model.Scopes.Count(); i++)
+                    {
+                        <input asp-for="Scopes[i].Item.Id" value="@Model.Scopes[i].Item.Id" type="hidden"/>
+                        <input asp-for="Scopes[i].Item.Name" value="@Model.Scopes[i].Item.Name" type="hidden"/>
+                        <input asp-for="Scopes[i].IsSelected" type="checkbox" disabled="@Model.Scopes[i].Item.Required"/>
+                        <label asp-for="Scopes[i].IsSelected">@Model.Scopes[i].Item.Name</label>
+                        <br/>
+                    }
+                </div>
+            }
+            <div class="form-group">
+                <div class="checkbox">
+                    <label>
+                        <input asp-for="RememberConsent"/> @Html.DisplayNameFor(model => model.RememberConsent)
+                    </label>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <input type="submit" value="@Localizer.Translate("confirm")" class="btn btn-primary"/>
+            </div>
+        </form>
+    </div>
+</div>
+
+<partial name="_BackButton" />

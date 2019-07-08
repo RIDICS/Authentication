@@ -1,0 +1,10 @@
+﻿{
+  "culture": "cs",
+  "scope": "TypeOfClaim",
+  "dictionary": {
+    "string": "Textový řetězec",
+    "integer": "Číslo",
+    "date-time": "Datum/čas",
+    "boolean": "Pravdivostní hodnota"
+  }
+}

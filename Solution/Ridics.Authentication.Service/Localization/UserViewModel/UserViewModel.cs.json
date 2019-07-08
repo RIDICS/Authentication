@@ -1,0 +1,31 @@
+﻿{
+  "culture": "cs",
+  "scope": "UserViewModel",
+  "dictionary": {
+    "username-required": "Uživatelské jméno je povinné",
+    "username": "Uživatelské jméno",
+    "first-name": "Křestní jméno",
+    "last-name": "Příjmení",
+    "full-name": "Celé jméno",
+    "email": "E-mail",
+    "email-required": "E-mail je povinný",
+    "wrong-email": "E-mail není platný",
+    "assigned-roles": "Přiřazené role",
+    "resource-permissions": "Oprávnění na zdroj",
+    "resource-permission-types": "Oprávnění na typ zdroje",
+    "last-change": "Naposledy upraven",
+    "claims": "Atributy uživatele",
+    "email-loa": "Úroveň jistoty u e-mailu",
+    "enabled-twofactor": "Povolit 2-faktorové přihlášení",
+    "phone-number": "Telefonní číslo",
+    "phone-loa": "Úroveň jistoty u telefonního čísla",
+    "twofactor-provider": "Způsob 2-faktorového ověření",
+    "twofactor-providers": "Způsoby 2-faktorového ověření",
+    "remove-login-by-external-provider": "Odebrat",
+    "external-logins": "Způsoby externího přihlášení",
+    "verification-code": "Ověřovací kód",
+    "verification-code-created": "Ověřovací kód vytvořen",
+    "email-confirm-code": "Potvrzovací kód e-mailu",
+    "phone-confirm-code": "Potvrzovací kód telefonního čísla"
+  }
+}

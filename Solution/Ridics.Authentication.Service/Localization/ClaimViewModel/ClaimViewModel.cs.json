@@ -1,0 +1,11 @@
+﻿{
+  "culture": "cs",
+  "scope": "ClaimViewModel",
+  "dictionary": {
+    "type": "Typ",
+    "value": "Hodnota",
+    "value-type": "Typ hodnoty",
+    "type-required": "Typ je povinný",
+    "value-required": "Hodnota je povinná"
+  }
+}

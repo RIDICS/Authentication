@@ -1,0 +1,26 @@
+{
+  "version": "1.0.0",
+  "name": "ridics.authentication.service",
+  "private": true,
+  "scripts": {
+    "preinstall": "npx use-yarn",
+    "gulp": "../node_modules/.bin/gulp"
+  },
+  "dependencies": {
+    "@fortawesome/fontawesome-free": "*",
+    "@fortawesome/free-brands-svg-icons": "*",
+    "@fortawesome/free-regular-svg-icons": "*",
+    "@fortawesome/free-solid-svg-icons": "*",
+    "bootstrap": "*",
+    "fontawesome-iconpicker": "*",
+    "jquery": "*",
+    "jquery-ui-dist": "*",
+    "jquery-validation": "*",
+    "jquery-validation-unobtrusive": "*",
+    "jquery.easing": "*",
+    "urijs": "*",
+    "s-pagination": "*",
+    "scalesoft-localization-web": "*",
+    "popper.js": "*"
+  }
+}

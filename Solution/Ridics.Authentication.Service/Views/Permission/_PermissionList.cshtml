@@ -1,0 +1,67 @@
+﻿@using Scalesoft.Localization.AspNetCore;
+@using Ridics.Authentication.Service.Models.ViewModel
+@using Ridics.Authentication.Service.Models.ViewModel.Permission
+@model ListViewModel<PermissionViewModel>
+@inject ILocalizationService Localizer
+
+@if (Model == null)
+{
+    return;
+}
+
+@if (Model.Items != null && Model.Items.Count != 0)
+{
+    <table class="table">
+        <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Items[0].Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Items[0].Description)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Items[0].Roles)
+            </th>
+            <th></th>
+        </tr>
+        </thead>
+        <tbody>
+        @foreach (var permission in Model.Items)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => permission.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => permission.Description)
+                </td>
+                <td>
+                    @if (permission.Roles != null)
+                    {
+                        foreach (var role in permission.Roles)
+                        {
+                            @Html.DisplayFor(modelItem => role.Name)<br/>
+                        }
+                    }
+                </td>
+                <td>
+                    @{
+                        var deleteFormId = $"delete_{permission.Id}";
+                    }
+                    <a asp-action="View" asp-route-id="@permission.Id">@Localizer.Translate("detail")</a>
+                    <a asp-action="Edit" asp-route-id="@permission.Id">@Localizer.Translate("edit")</a>
+                    <form asp-action="Delete" asp-route-id="@permission.Id" id="@deleteFormId" hidden>
+                        <input type="hidden" name="id" value="@permission.Id"/>
+                    </form>
+                    <a href="#" data-formid="@deleteFormId" data-info="@permission.Name" data-toggle="modal" data-target="#confirmModal">@Localizer.Translate("delete")</a>
+                </td>
+            </tr>
+        }
+        </tbody>
+    </table>
+}
+else
+{
+    <div class="no-items">@Localizer.Translate("no-permissions")</div>
+}

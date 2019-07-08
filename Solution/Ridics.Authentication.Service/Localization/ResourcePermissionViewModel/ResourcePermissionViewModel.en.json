@@ -1,0 +1,12 @@
+﻿{
+  "culture": "en",
+  "scope": "ResourcePermissionViewModel",
+  "dictionary": {
+    "resource-id-required": "Resource identifier required",
+    "resource-id": "Resource identifier",
+    "resource-permission-type-action": "Resource permission type action",
+    "resource-permission-type-action-required": "Resource permission type action required",
+    "roles": "Roles",
+    "users": "Users"
+  }
+}

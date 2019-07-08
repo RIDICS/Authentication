@@ -1,0 +1,10 @@
+﻿{
+  "culture": "cs",
+  "scope": "ClaimTypeViewModel",
+  "dictionary": {
+    "name": "Jméno",
+    "name-required": "Jméno je povinné",
+    "type": "Typ",
+    "description": "Popis"
+  }
+}

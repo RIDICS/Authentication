@@ -1,0 +1,12 @@
+﻿{
+  "culture": "en",
+  "scope": "IdentityResourceViewModel",
+  "dictionary": {
+    "name-required": "Name required",
+    "name": "Name",
+    "description": "Description",
+    "claims": "Claims",
+    "required": "Required",
+    "show-in-discovery-document": "Show in discovery document"
+  }
+}

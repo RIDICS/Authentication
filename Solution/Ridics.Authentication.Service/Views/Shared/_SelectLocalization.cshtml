@@ -1,0 +1,15 @@
+﻿@using Ridics.Authentication.Core.Managers
+@using Ridics.Authentication.Service.Managers
+@using Scalesoft.Localization.AspNetCore
+
+@inject LocalizationManager LocalizationManager
+@inject ILocalizationService Localizer
+
+<div title="@Localizer.Translate("language-provider-title")">
+    <form id="request-culture-form" class="form-inline" asp-controller="Localization" asp-action="SetLanguage" asp-area="" asp-route-returnUrl="@(Context.Request.Path+Context.Request.QueryString.Value)" method="post" role="form">
+        <div class="form-group center-align-language-selector">
+            <label class="language-selector-label" for="language-select">@Localizer.Translate("language"): </label>
+            <select class="form-control ml-2 mr-2" id="language-select" name="culture" asp-items="@LocalizationManager.GetLanguageListForSelect()"></select>
+        </div>
+    </form>
+</div>

@@ -1,0 +1,52 @@
+﻿<!DOCTYPE html>
+<html lang="cs">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"]</title>
+    @RenderSection("Styles", false)
+    <link rel="stylesheet" href="~/css/ridics.bootstrap-themed.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/node_modules/s-pagination/dist/pagination.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/ridics.authorization.main.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/node_modules/@("@")fortawesome/fontawesome-free/css/all.min.css" asp-append-version="true">
+</head>
+<body>
+    <div class="page-header">
+        @*<partial name="_CookieConsent" model="new CookieConsentViewModel()" />*@
+
+        <partial name="_Navbar" />
+    </div>
+
+    <div class="container body-content">
+        @RenderBody()
+        <hr />
+        <footer>
+            <p>&copy; 2019 - RIDICS</p>
+        </footer>
+    </div>
+
+    <div id="base-url" data-path="@Url.Content("~/")" class="hidden"></div>
+    <script src="~/node_modules/jquery/dist/jquery.min.js" asp-append-version="true"></script>
+    <script src="~/node_modules/jquery-ui-dist/jquery-ui.min.js" asp-append-version="true"></script>
+    <script src="~/node_modules/jquery-validation/dist/jquery.validate.min.js" asp-append-version="true"></script>
+    <script src="~/node_modules/jquery-validation-unobtrusive/dist/jquery.validate.unobtrusive.min.js" asp-append-version="true"></script>
+    <script src="~/node_modules/popper.js/dist/umd/popper.min.js" asp-append-version="true"></script>
+    <script src="~/js/ridics.custom-uri-validator.js" asp-append-version="true"></script>
+    <script src="~/node_modules/bootstrap/dist/js/bootstrap.min.js" asp-append-version="true"></script>
+    <script src="~/node_modules/@("@")fortawesome/free-brands-svg-icons/index.js" asp-append-version="true"></script>
+    <script src="~/node_modules/@("@")fortawesome/free-regular-svg-icons/index.js" asp-append-version="true"></script>
+    <script src="~/node_modules/@("@")fortawesome/free-solid-svg-icons/index.js" asp-append-version="true"></script>
+    <script src="~/node_modules/s-pagination/dist/pagination.min.js" asp-append-version="true"></script>
+    <script src="~/node_modules/urijs/src/URI.min.js" asp-append-version="true"></script>
+    <script src="~/js/ridics.authorization.main.js" asp-append-version="true"></script>
+    <script src="~/js/ridics.utils.js" asp-append-version="true"></script>
+    <script src="~/js/ridics.show.list.js" asp-append-version="true"></script>
+    <script src="~/js/ridics.gui-common.js" asp-append-version="true"></script>
+    <script src="~/js/ridics.cookie.consent.js" asp-append-version="true"></script>
+    <script src="~/js/ridics.localization.js" asp-append-version="true"></script>
+    <script asp-append-version="true" src="~/js/ridics.tooltips.js"></script>
+
+
+    @RenderSection("Scripts", false)
+</body>
+</html>

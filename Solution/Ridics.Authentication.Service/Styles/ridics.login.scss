@@ -1,0 +1,96 @@
+@import "color-definition";
+
+body {
+    padding: 1em;
+}
+
+.validation-summary-valid {
+    display: none;
+}
+
+.form-group {
+    padding: 0 1.5em;
+
+    input:focus {
+        border-color: $input-border-active;
+    }
+}
+
+.code-verification {
+    display: block;
+}
+
+.code-input-wrapper {
+    display: inline-block;
+    white-space: nowrap;
+
+    .verification-code {
+        display: inline-block;
+        width: auto;
+        padding: 6px 0;
+        text-align: center;
+        -moz-appearance: textfield;
+        min-width: 1.5em;
+        max-width: 1.5em;
+
+        @media (min-width: 325px) {
+            max-width: 3em;
+        }
+
+        &::-webkit-inner-spin-button,
+        &::-webkit-outer-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+    }
+}
+
+.loading {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    padding-top: 5em;
+    background: rgba(0, 0, 0, 0.11);
+    top: 0;
+    text-align: center;
+    color: $text-color;
+    z-index: 1;
+}
+
+.login-card-body {
+    align-items: center;
+}
+
+.two-factor-resend {
+    .two-factor-code {
+        max-width: 15em;
+    }
+}
+
+.empty-layout-background {
+    background-color: $empty-layout-body-color;
+    padding-top: 5em;
+}
+
+.card {
+    margin: auto;
+
+    &.no-externals {
+        max-width: 725px;
+    }
+
+    .card-header {
+        text-align: center;
+        background-color: #ffffff;
+    }
+}
+
+.resend-button {
+    padding: 0;
+}
+
+.hidden {
+    display: none;
+}
+
+@import "external-login-provider";

@@ -1,0 +1,18 @@
+﻿{
+  "culture": "cs",
+  "scope": "EditableClientViewModel",
+  "dictionary": {
+    "name": "ID klienta",
+    "name-required": "Klientské ID je povinné",
+    "description": "Popis",
+    "secrets": "Tajné klíče",
+    "grant-types": "Povolené typy přihlášení",
+    "uris": "Webové adresy",
+    "display-url": "Adresa pro zobrazení",
+    "logo-url": "Adresa loga",
+    "require-consent": "Potřebuje potvrzení",
+    "api-resources": "API",
+    "identity-resources": "Identity",
+    "allow-access-tokens-via-browser": "Povolit zasílání access tokenů přes prohížeč"
+  }
+}

@@ -1,0 +1,10 @@
+{
+  "profiles": {
+    "Ridics.Authentication.Database.Migrator": {
+      "commandName": "Project",
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "LocalDebug"
+      }
+    }
+  }
+}

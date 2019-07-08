@@ -1,0 +1,29 @@
+﻿@using Scalesoft.Localization.AspNetCore
+@model Ridics.Authentication.Service.Models.ViewModel.PaginationViewModel
+@inject ILocalizationService Localizer
+
+@{
+    var numberItemsOptions = new List<int> { 5, 20, 30, 50 };
+}
+
+<div class="container pagination-container">
+    <div class="pagination" data-items-count="@Model.ItemsCount"></div>
+    <div class="items-on-page-container">
+        <label for="number-of-items">@Localizer.Translate("items-on-page"):</label>
+        <select id="number-of-items" name="number" class="form-control number-of-items-control">
+            @{
+                foreach (var numberItemsOption in numberItemsOptions)
+                {
+                    if (numberItemsOption == Model.ItemsOnPage)
+                    {
+                        <option value="@numberItemsOption" selected="selected">@numberItemsOption</option>
+                    }
+                    else
+                    {
+                        <option value="@numberItemsOption">@numberItemsOption</option>
+                    }
+                }
+            }
+        </select>
+    </div>
+</div>

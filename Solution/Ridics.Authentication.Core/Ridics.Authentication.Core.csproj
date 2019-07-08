@@ -1,0 +1,24 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <LangVersion>7.1</LangVersion>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="8.0.0" />
+    <PackageReference Include="libphonenumber-csharp" Version="8.10.13" />
+    <PackageReference Include="Microsoft.Extensions.Caching.Abstractions" Version="2.2.0" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="2.2.0" />
+    <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="2.2.0" />
+    <PackageReference Include="Microsoft.Extensions.Options.ConfigurationExtensions" Version="2.2.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Ridics.Authentication.DataContracts\Ridics.Authentication.DataContracts.csproj" />
+    <ProjectReference Include="..\Ridics.Authentication.DataEntities\Ridics.Authentication.DataEntities.csproj" />
+    <ProjectReference Include="..\Ridics.Authentication.Modules.Shared\Ridics.Authentication.Modules.Shared.csproj" />
+    <ProjectReference Include="..\Ridics.Authentication.Shared\Ridics.Authentication.Shared.csproj" />
+    <ProjectReference Include="..\Ridics.Core.Shared\Ridics.Core.Shared.csproj" />
+  </ItemGroup>
+</Project>

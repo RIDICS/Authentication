@@ -1,0 +1,13 @@
+﻿{
+  "culture": "en",
+  "scope": "ApiAccessKeyViewModel",
+  "scopeAlias": [
+    "EditableApiAccessKeyViewModel"
+  ],
+  "dictionary": {
+    "name-required": "Name required",
+    "name": "Name",
+    "permissions": "Permissions",
+    "key": "Key"
+  }
+}

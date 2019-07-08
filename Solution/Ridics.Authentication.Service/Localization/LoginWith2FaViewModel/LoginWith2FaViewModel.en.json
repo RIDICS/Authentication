@@ -1,0 +1,15 @@
+﻿{
+  "culture": "en",
+  "scope": "LoginWith2FaViewModel",
+  "dictionary": {
+    "remember-me": "Remember me?",
+    "authenticator-code": "Authentication code",
+    "remember-this-machine": "Remember this device",
+    "return-url": "Return address",
+    "username": "Username",
+    "pswd": "Password",
+    "code-required": "Authentication code field is required",
+    "cancel": "Back to login",
+    "no-valid-2f-session": "No valid session for two factor authentication was found. Please try to sign in again."
+  }
+}

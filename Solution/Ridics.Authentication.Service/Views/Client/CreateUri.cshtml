@@ -1,0 +1,60 @@
+﻿@using Scalesoft.Localization.AspNetCore
+@model Ridics.Authentication.Service.Models.ViewModel.Clients.UriViewModel
+@inject ILocalizationService Localizer
+
+@{
+    ViewData["Title"] = Localizer.Translate("create-uri-title");
+}
+
+<h2>@Localizer.Translate("create-uri-heading")</h2>
+<hr />
+
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="CreateUri">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Value" class="control-label"></label>
+                <input asp-for="Value" class="form-control" />
+                <span asp-validation-for="Value" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <div class="checkbox">
+                    <label>
+                        <input asp-for="IsRedirect" /> @Html.DisplayNameFor(model => model.IsRedirect)
+                    </label>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="checkbox">
+                    <label>
+                        <input asp-for="IsPostLogoutRedirect" /> @Html.DisplayNameFor(model => model.IsPostLogoutRedirect)
+                    </label>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="checkbox">
+                    <label>
+                        <input asp-for="IsCorsOrigin" /> @Html.DisplayNameFor(model => model.IsCorsOrigin) 
+                        <span class="btn-sm btn-muted small tooltip-help" title="<h4>@Localizer.Translate("cors-origin-tooltip-heading", "UriViewModel")</h4><span>@Localizer.Translate("cors-origin-tooltip-text", "UriViewModel")</span>">
+                            ?
+                        </span>
+                    </label>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="checkbox">
+                    <label>
+                        <input asp-for="IsFrontChannelLogout" /> @Html.DisplayNameFor(model => model.IsFrontChannelLogout)
+                    </label>
+                </div>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="@Localizer.Translate("create")" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<partial name="_BackButton" />
+

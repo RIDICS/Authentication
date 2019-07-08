@@ -1,0 +1,43 @@
+﻿@using Scalesoft.Localization.AspNetCore
+@model Ridics.Authentication.Service.Models.ViewModel.ListViewModel<Ridics.Authentication.Service.Models.ViewModel.Permission.ResourcePermissionTypeActionViewModel>
+@inject ILocalizationService Localizer
+
+@{
+    ViewData["Title"] = Localizer.Translate("resource-permission-type-actions-title");
+}
+
+<h2>@Localizer.Translate("resource-permission-type-actions-heading")</h2>
+
+<partial name="_ValidationSummary" />
+
+<div class="row page-control justify-content-end mt-1 mb-1">
+    <div class="col-12 col-sm-6 col-lg-4 text-right">
+        <form asp-action="Index" asp-controller="ResourcePermissionTypeAction" method="get">
+            <div class="input-group">
+                <input class="form-control" name="searchByName" value="@ViewData["search"]" />
+                <div class="input-group-append">
+                    <button class="btn btn-secondary" type="submit">@Localizer.Translate("search")</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+@if (!string.IsNullOrEmpty((string)ViewData["search"]))
+{
+    <div class="row reset-search justify-content-end mt-1 mb-2">
+        <div class="col-auto row">
+            <div class="col align-self-center pull-right"><span class="text-nowrap">@Localizer.Translate("search-query"): <span class="searched-query">@ViewData["search"]</span></span></div>
+            <div class="col pull-right"><a asp-action="Index" asp-controller="ResourcePermissionTypeAction" class="btn btn-sm btn-outline-danger">@Localizer.Translate("reset-search")</a></div>
+        </div>
+    </div>
+}
+
+<div class="notification-selector"></div>
+
+<div id="list">
+    <partial name="_PermissionList" />
+</div>
+<a asp-action="Create">@Localizer.Translate("create-new-resource-permission-type-action")</a>
+<partial name="_Pagination" model="@Model.Pagination" />
+<partial name="_ConfirmDialog" model="@Model.DeleteConfirmDialog" />

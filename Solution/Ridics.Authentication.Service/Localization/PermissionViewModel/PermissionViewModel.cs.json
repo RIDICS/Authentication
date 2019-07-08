@@ -1,0 +1,10 @@
+﻿{
+  "culture": "cs",
+  "scope": "PermissionViewModel",
+  "dictionary": {
+    "name-required": "Jméno je povinné",
+    "name": "Jméno",
+    "description": "Popis",
+    "roles": "Role"
+  }
+}

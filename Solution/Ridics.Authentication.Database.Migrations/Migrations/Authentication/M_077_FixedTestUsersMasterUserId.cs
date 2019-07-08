@@ -10,7 +10,7 @@ using Ridics.DatabaseMigrator.Shared.TagsAttributes;
 namespace Ridics.Authentication.Database.Migrations.Migrations.Authentication
 {
     /// <summary>
-    /// Fixed GUIDs are required for testing, because mandate service has also stored mandates in database
+    /// Fixed GUIDs are required for testing
     /// </summary>
     [DatabaseTags(DatabaseTagTypes.VokabularAuthDB)]
     [MigrationTypeTags(MigrationTypeTagTypes.Data, MigrationTypeTagTypes.All)]

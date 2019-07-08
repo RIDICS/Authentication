@@ -1,0 +1,73 @@
+﻿@using Scalesoft.Localization.AspNetCore
+@using Ridics.Authentication.Service.Models.ViewModel
+@using Ridics.Authentication.Service.Models.ViewModel.Resources.ApiResources
+@model ListViewModel<ApiResourceViewModel>
+@inject ILocalizationService Localizer
+
+@if (Model == null)
+{
+    return;
+}
+
+@if (Model.Items != null && Model.Items.Count != 0)
+{
+    <table class="table">
+        <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Items[0].Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Items[0].Claims)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Items[0].Required)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Items[0].ShowInDiscoveryDocument)
+            </th>
+            <th></th>
+        </tr>
+        </thead>
+        <tbody>
+        @foreach (var apiResource in Model.Items)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => apiResource.Name)
+                </td>
+                <td>
+                    @if (apiResource.Claims != null)
+                    {
+                        foreach (var claim in apiResource.Claims)
+                        {
+                            <a asp-action="Edit" asp-controller="ClaimType" asp-route-id="@claim.Id">@Html.DisplayFor(modelItem => claim.Name)</a>
+                        }
+                    }
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => apiResource.Required)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => apiResource.ShowInDiscoveryDocument)
+                </td>
+                <td>
+                    @{
+                        var deleteFormId = $"delete_{apiResource.Id}";
+                    }
+                    <a asp-action="View" asp-route-id="@apiResource.Id">@Localizer.Translate("detail")</a>
+                    <a asp-action="Edit" asp-route-id="@apiResource.Id">@Localizer.Translate("edit")</a>
+                    <form asp-action="Delete" asp-route-id="@apiResource.Id" id="@deleteFormId" hidden>
+                        <input type="hidden" name="id" value="@apiResource.Id" />
+                    </form>
+                    <a href="#" data-formid="@deleteFormId" data-info="@apiResource.Name" data-toggle="modal" data-target="#confirmModal">@Localizer.Translate("delete")</a>
+                </td>
+            </tr>
+        }
+        </tbody>
+    </table>
+}
+else
+{
+    <div class="no-items">@Localizer.Translate("no-api-resources")</div>
+}

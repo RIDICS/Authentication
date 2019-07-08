@@ -1,0 +1,144 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.2</TargetFramework>
+    <TypeScriptToolsVersion>Latest</TypeScriptToolsVersion>
+    <TypeScriptCompileBlocked>true</TypeScriptCompileBlocked>
+    <LangVersion>7.1</LangVersion>
+    <GenerateEmbeddedFilesManifest>true</GenerateEmbeddedFilesManifest>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)'=='Release'">
+    <NoWarn>1701;1702;1591</NoWarn>
+    <WarningLevel>1</WarningLevel>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <DocumentationFile />
+    <NoWarn>1701;1702;1591</NoWarn>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <UserSecretsId>b7f069ad-84b8-4370-a73f-b4118c3d6691</UserSecretsId>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Content Update="web.*.config" CopyToPublishDirectory="Never" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Remove="ExternalLogin\EIdentity\certs\NIA.SAML2.staging.pfx" />
+    <Content Remove="Scripts\tslint.json" />
+    <Content Remove="Scripts\tsconfig.json" />
+    <Content Remove="wwwroot\yarn-error.log" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="8.0.0" />
+    <PackageReference Include="DryIoc.dll" Version="3.0.2" />
+    <PackageReference Include="DryIoc.Facilities.NHibernate" Version="0.2.2" />
+    <PackageReference Include="DryIoc.Microsoft.DependencyInjection" Version="2.1.0" />
+    <PackageReference Include="IdentityServer4" Version="2.4.0" />
+    <PackageReference Include="IdentityServer4.AspNetIdentity" Version="2.4.0" />
+    <PackageReference Include="Microsoft.AspNetCore.App" />
+    <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="2.2.0" />
+    <PackageReference Include="Microsoft.Extensions.Logging.AzureAppServices" Version="2.2.5" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.2.3" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.Versioning" Version="3.1.2" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.Versioning.ApiExplorer" Version="3.2.0" />
+    <PackageReference Include="NHibernate" Version="5.2.5" />
+    <PackageReference Include="NLog" Version="4.6.4" />
+    <PackageReference Include="NLog.Extensions.Logging" Version="1.5.1" />
+    <PackageReference Include="NLog.Web.AspNetCore" Version="4.8.3" />
+    <PackageReference Include="Npgsql" Version="4.0.7" />
+    <PackageReference Include="Scalesoft.Localization.AspNetCore.Service" Version="2.2.1" />
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="4.0.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="Properties\Resources.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="wwwroot\node_modules\**" CopyToPublishDirectory="PreserveNewest" /><!--Workaround because node_modules are ignored for publish by default-->
+    <Content Update="Localization\**.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Update="NLog.config">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Update="Properties\Resources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Ridics.Authentication.Core\Ridics.Authentication.Core.csproj" />
+    <ProjectReference Include="..\Ridics.Authentication.DataContracts\Ridics.Authentication.DataContracts.csproj" />
+    <ProjectReference Include="..\Ridics.Authentication.Modules.Shared\Ridics.Authentication.Modules.Shared.csproj" />
+    <ProjectReference Include="..\Ridics.Authentication.Shared\Ridics.Authentication.Shared.csproj" />
+    <ProjectReference Include="..\Ridics.Authentication.TicketStore\Ridics.Authentication.TicketStore.csproj" />
+    <ProjectReference Include="..\Ridics.Core.ReCaptcha\Ridics.Core.ReCaptcha.csproj" />
+    <ProjectReference Include="..\Ridics.Core.Service.Shared\Ridics.Core.Service.Shared.csproj" />
+    <ProjectReference Include="..\Ridics.Core.Structures.Shared\Ridics.Core.Structures.Shared.csproj" />
+    <ProjectReference Include="..\Ridics.Core.Utils\Ridics.Core.Utils.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="tempkey.rsa">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="appsettings.json5">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+	<Content Include="appsettings.*.json5">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
+  <ItemGroup Condition=" '$(ASPNETCORE_ENVIRONMENT)' != '' ">
+    <Content Remove="appsettings.*.json*" />
+    <Content Include="appsettings.$(ASPNETCORE_ENVIRONMENT).json*">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Remove="modules.*.json*" />
+    <Content Include="modules.$(ASPNETCORE_ENVIRONMENT).json*">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  
+
+  <ItemGroup>
+    <TsFiles Include="$(ProjectDir)Scripts\**\*.ts" />
+    <SassFiles Include="$(ProjectDir)Styles\**\*.scss" />
+    <ViewsFiles Include="$(ProjectDir)Views\**\*.cshtml" />
+    <LocalizationFiles Include="$(ProjectDir)Localization\**\*.json" />
+    <BundleConfigFile Include="$(ProjectDir)bundleconfig.json" />
+
+    <FrontEndSourceFiles Include="@(TsFiles);@(SassFiles);@(BundleConfigFile)" />
+
+    <FrontEndConcatedFile Include="$(ProjectDir)obj\front-end-cache" />
+
+    <CustomAdditionalCompileInputs Include="@(FrontEndSourceFiles);@(ViewsFiles);@(LocalizationFiles)" />
+  </ItemGroup>
+
+  <Target Name="Gulp" Inputs="@(FrontEndSourceFiles)" Outputs="@(FrontEndConcatedFile)">
+    <Exec Command="yarn gulp -b $(ProjectDir) --gulpfile $(ProjectDir)gulpfile.js default --configuration=$(Configuration)" />
+  </Target>
+
+  <Target Name="GenerateEmbeddedFileList" BeforeTargets="BeforeBuild" DependsOnTargets="Gulp">
+  </Target>
+
+</Project>

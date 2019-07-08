@@ -1,0 +1,52 @@
+﻿@using Scalesoft.Localization.AspNetCore
+@using Ridics.Authentication.Service.Helpers.DynamicModule
+@model Ridics.Authentication.Service.Models.ViewModel.DynamicModule.DynamicModuleViewModel
+@inject ILocalizationService Localizer
+
+@{
+    ViewData["Title"] = Localizer.Translate("update-dynamic-module-title");
+}
+
+<h2>@Localizer.Translate("update-dynamic-module-heading")</h2>
+<div class="lead">@Model.Name</div>
+<hr/>
+
+<div class="row">
+    <div class="col-md-4">
+        <form asp-controller="@DynamicModuleControllerNameDecorator.GetControllerName(Model.CustomConfigurationViewModel)"
+              asp-action="Edit"
+              enctype="multipart/form-data">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Name" class="control-label"></label>
+                <input asp-for="Name" class="form-control" readonly="readonly"/>
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ModuleGuid" class="control-label"></label>
+                <input asp-for="ModuleGuid" class="form-control" readonly="readonly"/>
+                <span asp-validation-for="ModuleGuid" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ModuleName" class="control-label"></label>
+                <input asp-for="ModuleName" class="form-control" readonly="readonly"/>
+                <span asp-validation-for="ModuleName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ConfigurationVersion" class="control-label"></label>
+                <input asp-for="ConfigurationVersion" class="form-control" readonly="readonly"/>
+                <span asp-validation-for="ConfigurationVersion" class="text-danger"></span>
+            </div>
+
+            <partial name="@Model.CustomConfigurationPartialName" model="@Model.CustomConfigurationViewModel"/>
+
+            <div class="form-group">
+                <input type="submit" value="@Localizer.Translate("save")" class="btn btn-primary"/>
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">@Localizer.Translate("back")</a>
+</div>

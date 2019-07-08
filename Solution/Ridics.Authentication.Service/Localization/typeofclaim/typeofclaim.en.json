@@ -1,0 +1,10 @@
+﻿{
+  "culture": "en",
+  "scope": "TypeOfClaim",
+  "dictionary": {
+    "string": "String",
+    "integer": "Integer",
+    "date-time": "Date/time",
+    "boolean": "Boolean"
+  }
+}

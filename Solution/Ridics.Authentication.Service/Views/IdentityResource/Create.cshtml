@@ -1,0 +1,57 @@
+﻿@using Scalesoft.Localization.AspNetCore
+@model Ridics.Authentication.Service.Models.ViewModel.Resources.IdentityResources.EditableIdentityResourceViewModel
+@inject ILocalizationService Localizer
+
+@{
+    ViewData["Title"] = Localizer.Translate("create-identity-resource-title");
+}
+
+<h2>@Localizer.Translate("create-identity-resource-heading")</h2>
+<hr/>
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="IdentityResourceViewModel.Name" class="control-label"></label>
+                <input asp-for="IdentityResourceViewModel.Name" class="form-control"/>
+                <span asp-validation-for="IdentityResourceViewModel.Name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="IdentityResourceViewModel.Description" class="control-label"></label>
+                <textarea asp-for="IdentityResourceViewModel.Description" class="form-control"></textarea>
+                <span asp-validation-for="IdentityResourceViewModel.Description" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label>@Localizer.Translate("select-claims")</label><br/>
+                @for (int i = 0; i < Model.SelectableClaimTypes.Count(); i++)
+                {
+                    <input asp-for="SelectableClaimTypes[i].Item.Name" value="@Model.SelectableClaimTypes[i].Item.Name" type="hidden"/>
+                    <input asp-for="SelectableClaimTypes[i].Item.Id" value="@Model.SelectableClaimTypes[i].Item.Id" type="hidden"/>
+                    <input asp-for="SelectableClaimTypes[i].IsSelected" type="checkbox"/>
+                    <label asp-for="SelectableClaimTypes[i].IsSelected">@Model.SelectableClaimTypes[i].Item.Name</label>
+                    <br/>
+                }
+            </div>
+            <div class="form-group">
+                <div class="checkbox">
+                    <label>
+                        <input asp-for="IdentityResourceViewModel.Required"/> @Html.DisplayNameFor(model => model.IdentityResourceViewModel.Required)
+                    </label>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="checkbox">
+                    <label>
+                        <input asp-for="IdentityResourceViewModel.ShowInDiscoveryDocument"/> @Html.DisplayNameFor(model => model.IdentityResourceViewModel.ShowInDiscoveryDocument)
+                    </label>
+                </div>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="@Localizer.Translate("create")" class="btn btn-primary"/>
+            </div>
+        </form>
+    </div>
+</div>
+
+<partial name="_BackButton" />

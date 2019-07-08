@@ -1,0 +1,54 @@
+﻿@using Scalesoft.Localization.AspNetCore;
+@using Ridics.Authentication.Service.Models.ViewModel;
+@model ViewModel<Ridics.Authentication.Service.Models.ViewModel.Permission.ResourcePermissionTypeViewModel>
+@inject ILocalizationService Localizer
+
+@{
+    ViewData["Title"] = Localizer.Translate("resource-permission-type-title");
+    var deleteFormId = $"delete_{Model.Item.Id}";
+}
+
+<form asp-action="Delete" asp-route-id="@Model.Item.Id" id="@deleteFormId" hidden>
+    <input type="hidden" name="id" value="@Model.Item.Id"/>
+</form>
+<a class="float-right" href="#" data-formid="@deleteFormId" data-info="@Model.Item.Name" data-toggle="modal" data-target="#confirmModal">@Localizer.Translate("delete")</a>
+
+<h2>@Localizer.Translate("resource-permission-type-heading")</h2>
+<hr/>
+
+<div class="card mb-3">
+    <div class="card-header">
+        @Localizer.Translate("basic-info")
+        <a class="float-right" asp-action="Edit" asp-route-id="@Model.Item.Id">@Localizer.Translate("edit")</a>
+    </div>
+    <div class="card-body">
+        <div class="card-text">
+            <div>@Html.DisplayNameFor(model => model.Item.Id): @Html.DisplayFor(model => model.Item.Id)</div>
+            <div>@Html.DisplayNameFor(model => model.Item.Name): @Html.DisplayFor(model => model.Item.Name)</div>
+            <div>@Html.DisplayNameFor(model => model.Item.Description): @Html.DisplayFor(model => model.Item.Description)</div>
+        </div>
+    </div>
+</div>
+
+<div class="card mb-3">
+    <div class="card-header">
+        @Html.DisplayNameFor(model => model.Item.ResourcePermissionTypeActions)
+        <a class="float-right" asp-action="Actions" asp-route-id="@Model.Item.Id">@Localizer.Translate("edit")</a>
+    </div>
+    <div class="card-body">
+        <div class="card-text">
+            @if (Model.Item.ResourcePermissionTypeActions != null)
+            {
+                foreach (var action in Model.Item.ResourcePermissionTypeActions)
+                {
+                    <a asp-action="View" asp-controller="ResourcePermissionTypeAction" asp-route-id="@action.Id">@Html.DisplayFor(modelItem => action.Name)</a>
+                    <br/>
+                }
+            }
+        </div>
+    </div>
+</div>
+
+<partial name="_ConfirmDialog" model="@Model.DeleteConfirmDialog"/>
+
+<partial name="_BackButton" />

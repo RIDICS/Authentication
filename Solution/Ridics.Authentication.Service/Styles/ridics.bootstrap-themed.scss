@@ -1,0 +1,4 @@
+$theme-muted-color: rgb(221, 221, 221);
+$theme-colors: ( "muted": $theme-muted-color );
+
+@import "../wwwroot/node_modules/bootstrap/scss/bootstrap.scss";

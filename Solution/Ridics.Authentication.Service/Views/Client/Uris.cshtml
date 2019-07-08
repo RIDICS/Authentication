@@ -1,0 +1,84 @@
+﻿@using Scalesoft.Localization.AspNetCore
+@using Ridics.Authentication.Service.Models
+@model Ridics.Authentication.Service.Models.ViewModel.ListViewModel<Ridics.Authentication.Service.Models.ViewModel.Clients.UriViewModel>
+@inject ILocalizationService Localizer
+
+@{
+    ViewData["Title"] = Localizer.Translate("uris-title");
+}
+
+<h2>@Localizer.Translate("uris-heading")</h2>
+<partial name="_ValidationSummary" />
+
+@if (Model == null)
+{
+    return;
+}
+
+@if (Model.Items != null && Model.Items.Count != 0)
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Items[0].Value)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Items[0].IsRedirect)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Items[0].IsPostLogoutRedirect)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Items[0].IsCorsOrigin)
+                    <span class="btn-sm btn-muted small tooltip-help" title="<h4>@Localizer.Translate("cors-origin-tooltip-heading", "UriViewModel")</h4><span>@Localizer.Translate("cors-origin-tooltip-text", "UriViewModel")</span>">
+                        ?
+                    </span>
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Items[0].IsFrontChannelLogout)
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var uri in Model.Items)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => uri.Value)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => uri.IsRedirect)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => uri.IsPostLogoutRedirect)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => uri.IsCorsOrigin)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => uri.IsFrontChannelLogout)
+                    </td>
+                    <td>
+                        @{
+                            var deleteFormId = $"delete_{uri.Id}";
+                        }
+                        <form asp-action="RemoveUri" asp-route-clientId="@uri.ClientId" asp-route-uriId="@uri.Id" id="@deleteFormId" hidden>
+                            <input type="hidden" name="id" value="@uri.Id" />
+                        </form>
+                        <a href="#" data-formid="@deleteFormId" data-info="@uri.Value" data-toggle="modal" data-target="#@Model.DeleteConfirmDialog.Id">@Localizer.Translate("delete") </a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else
+{
+    <div class="no-items">@Localizer.Translate("no-uris")</div>
+}
+<a asp-action="CreateUri">@Localizer.Translate("create-new-uri")</a>
+<partial name="_ConfirmDialog" model="@Model.DeleteConfirmDialog" />
+
+<partial name="_BackButton" />

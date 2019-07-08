@@ -1,0 +1,10 @@
+﻿{
+  "culture": "en",
+  "scope": "ClaimTypeViewModel",
+  "dictionary": {
+    "name": "Name",
+    "name-required": "Name required",
+    "type": "Type",
+    "description": "Description"
+  }
+}

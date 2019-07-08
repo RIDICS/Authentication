@@ -1,0 +1,15 @@
+﻿{
+  "culture": "cs",
+  "scope": "LoginWith2FaViewModel",
+  "dictionary": {
+    "remember-me": "Zapamatovat si mě?",
+    "authenticator-code": "Autentizační kód",
+    "remember-this-machine": "Zapamatovat si zařízení",
+    "return-url": "Návratová adresa",
+    "username": "Uživatelské jméno",
+    "pswd": "Heslo",
+    "code-required": "Autentikační kód je povinný",
+    "cancel": "Zpět na přihlášení",
+    "no-valid-2f-session": "Nebyla nalezena žádná platná relace pro dvou faktorové ověření. Přihlašte se prosím znovu."
+  }
+}

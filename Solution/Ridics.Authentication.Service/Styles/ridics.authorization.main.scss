@@ -1,0 +1,106 @@
+@import "color-definition";
+@import "../wwwroot/node_modules/bootstrap/scss/_functions.scss";
+@import "../wwwroot/node_modules/bootstrap/scss/_variables.scss";
+@import "../wwwroot/node_modules/bootstrap/scss/_mixins.scss";
+
+$consent-height: 3.5em;
+
+html {
+    body {
+        color: rgb(0, 0, 0);
+
+        .error {
+            color: $red;
+        }
+
+        .pagination-container {
+            display: flex;
+            position: relative;
+            padding: 0;
+            margin: 0;
+            flex-direction: row;
+            justify-content: center;
+            align-items: center;
+
+            .pagination {
+                display: flex;
+            }
+
+            .items-on-page-container {
+                position: absolute;
+                top: 0;
+                right: 0;
+                display: flex;
+                align-items: inherit;
+                white-space: nowrap;
+
+                label {
+                    margin: 5px;
+                }
+            }
+        }
+
+        .no-items {
+            padding: 30px;
+            text-align: center;
+        }
+
+        .btn.btn-primary {
+            color: #ffffff;
+        }
+
+        .single-value {
+            padding: 0.3em 0.5em;
+            border-radius: 0.3em;
+            background: $gray;
+            line-height: calc(100% + 1em);
+            white-space: nowrap;
+        }
+    }
+
+    .consent:before {
+        content: "#{$consent-height}";
+    }
+
+    .page-header {
+        position: sticky;
+        top: 0;
+        z-index: 1000;
+
+        .navbar-custom {
+            position: relative;
+        }
+    }
+
+    .cookie-consent-wrapper {
+        position: fixed;
+        top: 0;
+        right: 0;
+        left: 0;
+        z-index: 1051;
+        opacity: 0.95;
+
+        .cookie-consent-container {
+            background-color: $dark;
+            color: $light;
+            flex-wrap: wrap;
+
+            .consent-buttons-wrapper {
+                white-space: nowrap;
+                align-self: flex-end;
+            }
+
+            .consent-text-wrapper {
+                padding: 0;
+            }
+        }
+
+        .cookie-informations-collapse {
+            background-color: $light;
+        }
+    }
+
+    .tooltip-help {
+        cursor: help;
+    }
+}

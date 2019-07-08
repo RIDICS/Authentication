@@ -1,0 +1,54 @@
+{
+  "Logging": {
+    "LogLevel": {
+      "Default": "Warning"
+    }
+  },
+  "Localization": {
+    "BasePath": "Localization",
+    "SupportedCultures": ["cs", "en"],
+    "DefaultCulture": "cs",
+    "FirstAutoTranslateResource": "File",
+    "AutoLoadResources": true,
+    "TranslateFallbackMode": "Key"
+  },
+  "AllowedHosts": "*",
+  "DatabaseServer": "SqlServer",
+  "ConnectionStrings": {
+    "MainDatabase": ""
+  },
+  "ReverseProxy": {
+    "IsDefault": true,
+    "ForwardLimit": 1
+  },
+  "JwtAuthentication": {
+    "Authority": "https://localhost/Auth"
+  },
+  "GoogleReCaptcha": {
+    "publicKey": "",
+    "secretKey": "",
+    "responseUrl": "https://www.google.com/recaptcha/api/siteverify?secret={0}&response={1}"
+  },
+  "ExternalIdentityResolveConfig": {
+    "DataTypeExternalIdentitiesDict": {}
+  },
+  "ReturnUrlConfig": {
+    "DefaultRedirectUrl": "https://localhost/WebHub",
+    "DefaultFailedExternalLoginUrl": "https://localhost/WebHub/Home/Faq",
+    "LoginUrlForClient": "https://localhost/WebHub/Account/Login",
+    "RegisterUrlForClient": "https://localhost/WebHub/Account/Register"
+  },
+  "ValidatorConfig": {
+    "ValidatorsToValidatedDictionary": {
+      "unique": [ ]
+    }
+  },
+  "LoginExpiration": {
+    "TimeInSeconds": 1800,
+    "WarningBeforeExpirationInSeconds": 600
+  },
+  "TokensExpiration": {
+    "TwoFactorTokenExpirationInSeconds" : 360,
+    "PasswordResetTokenExpirationInSeconds" : 86400 //24 hours
+  }
+}

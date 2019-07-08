@@ -1,0 +1,93 @@
+﻿@using Scalesoft.Localization.AspNetCore
+@model Ridics.Authentication.Service.Models.ViewModel.Clients.EditableClientViewModel
+@inject ILocalizationService Localizer
+
+@{
+    ViewData["Title"] = Localizer.Translate("update-client-title");
+}
+
+<h2>@Localizer.Translate("update-client-heading")</h2>
+<div class="lead">@Model.Name</div>
+<hr/>
+
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Name" class="control-label"></label>
+                <input asp-for="Name" class="form-control" />
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Description" class="control-label"></label>
+                <textarea asp-for="Description" class="form-control"> </textarea>
+                <span asp-validation-for="Description" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label>@Localizer.Translate("select-grant-types")</label><br />
+
+                @for (int i = 0; i < Model.SelectableGrantTypes.Count(); i++)
+                {
+                    <input asp-for="SelectableGrantTypes[i].Item.Id" value="@Model.SelectableGrantTypes[i].Item.Id" type="hidden" />
+                    <input asp-for="SelectableGrantTypes[i].Item.Value" value="@Model.SelectableGrantTypes[i].Item.Value" type="hidden" />
+                    <input asp-for="SelectableGrantTypes[i].IsSelected" type="checkbox" />
+                    <label asp-for="SelectableGrantTypes[i].IsSelected">@Model.SelectableGrantTypes[i].Item.DisplayName</label>
+                    <br />
+                }
+            </div>
+            <div class="form-group">
+                <label>@Localizer.Translate("select-identity-resources")</label><br />
+
+                @for (int i = 0; i < Model.SelectableIdentityresources.Count(); i++)
+                {
+                    <input asp-for="SelectableIdentityresources[i].Item.Id" value="@Model.SelectableIdentityresources[i].Item.Id" type="hidden" />
+                    <input asp-for="SelectableIdentityresources[i].Item.Name" value="@Model.SelectableIdentityresources[i].Item.Name" type="hidden" />
+                    <input asp-for="SelectableIdentityresources[i].IsSelected" type="checkbox" />
+                    <label asp-for="SelectableIdentityresources[i].IsSelected">@Model.SelectableIdentityresources[i].Item.Name</label>
+                    <br />
+                }
+            </div>
+            <div class="form-group">
+                <label>@Localizer.Translate("select-scopes")</label><br />
+                @for (int i = 0; i < Model.SelectableScopes.Count(); i++)
+                {
+                    <input asp-for="SelectableScopes[i].Item.Id" value="@Model.SelectableScopes[i].Item.Id" type="hidden" />
+                    <input asp-for="SelectableScopes[i].Item.Name" value="@Model.SelectableScopes[i].Item.Name" type="hidden" />
+                    <input asp-for="SelectableScopes[i].IsSelected" type="checkbox" />
+                    <label asp-for="SelectableScopes[i].IsSelected">@Model.SelectableScopes[i].Item.Name</label>
+                    <br />
+                }
+            </div>
+            <div class="form-group">
+                <label asp-for="DisplayUrl" class="control-label"></label>
+                <input asp-for="DisplayUrl" class="form-control" />
+                <span asp-validation-for="DisplayUrl" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="LogoUrl" class="control-label"></label>
+                <input asp-for="LogoUrl" class="form-control" />
+                <span asp-validation-for="LogoUrl" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <div class="checkbox">
+                    <label>
+                        <input asp-for="RequireConsent" /> @Html.DisplayNameFor(model => model.RequireConsent)
+                    </label>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="checkbox">
+                    <label>
+                        <input asp-for="AllowAccessTokensViaBrowser" /> @Html.DisplayNameFor(model => model.AllowAccessTokensViaBrowser)
+                    </label>
+                </div>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="@Localizer.Translate("save")" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<partial name="_BackButton" />

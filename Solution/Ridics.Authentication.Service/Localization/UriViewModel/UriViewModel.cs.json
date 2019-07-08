@@ -1,0 +1,15 @@
+﻿{
+  "culture": "cs",
+  "scope": "UriViewModel",
+  "dictionary": {
+    "uri": "URL",
+    "uri-required": "URL je povinná",
+    "not-valid-uri": "Neplatná URL adresa",
+    "is-redirect": "Návratová po přihlášení",
+    "is-post-logout-redirect": "Návratová po odhlášení",
+    "is-cors-origin": "CORS Origin",
+    "is-front-channel-logout": "Odhlášení na klientovi",
+    "cors-origin-tooltip-heading": "CORS",
+    "cors-origin-tooltip-text": "K mnoha koncovým bodům v Autorizační službě bude přistupováno pomocí Ajaxových volání z klientů postavených na JavaScriptu. Kvůli tomu, že Autorizační služba bude pravděpodobně hostována na jiné adrese než klienti, bude třeba nakonfigurovat tzv. Cross-Origin Resource Sharing(CORS) pro sdílení zdrojů."
+  }
+}

@@ -1,0 +1,12 @@
+﻿{
+  "culture": "en",
+  "scope": "RoleViewModel",
+  "dictionary": {
+    "name": "Name",
+    "name-required": "Name required",
+    "description": "Description",
+    "permissions": "Permissions",
+    "resource-permissions": "Resource permissions",
+    "resource-permission-types": "Resource type permissions"
+  }
+}

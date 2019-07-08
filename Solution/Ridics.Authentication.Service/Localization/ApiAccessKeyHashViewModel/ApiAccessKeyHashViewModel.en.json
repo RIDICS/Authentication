@@ -1,0 +1,14 @@
+﻿{
+  "culture": "en",
+  "scope": "ApiAccessKeyHashViewModel",
+  "scopeAlias": [
+    "EditableApiAccessKeyHashViewModel"
+  ],
+  "dictionary": {
+    "name": "Name",
+    "algorithm": "Algorithm",
+    "algorithm-required": "Algorithm required",
+    "value": "Value",
+    "value-required": "Value required"
+  }
+}

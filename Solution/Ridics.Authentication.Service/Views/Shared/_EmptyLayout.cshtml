@@ -1,0 +1,35 @@
+﻿@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"]</title>
+
+    <link rel="stylesheet" href="~/css/ridics.bootstrap-themed.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/ridics.authorization.main.css" asp-append-version="true" />
+    
+    @RenderSection("Styles", false)
+</head>
+<body class="empty-layout-background">
+    <div class="container body-content">
+        @RenderBody()
+    </div>
+
+    <div id="base-url" data-path="@Url.Content("~/")" class="hidden"></div>
+
+    <script src="~/node_modules/jquery/dist/jquery.js" asp-append-version="true"></script>
+    <script src="~/node_modules/bootstrap/dist/js/bootstrap.js" asp-append-version="true"></script>
+    <script src="~/node_modules/@("@")fortawesome/fontawesome-free/js/all.min.js" asp-append-version="true" data-auto-add-css="false"></script>
+    <link href="~/node_modules/@("@")fortawesome/fontawesome-free/css/svg-with-js.css" rel="stylesheet" asp-append-version="true" />
+    <script src="~/js/ridics.authorization.main.js" asp-append-version="true"></script>
+    <script src="~/node_modules/jquery-validation/dist/jquery.validate.min.js" asp-append-version="true"></script>
+    <script src="~/node_modules/jquery-validation-unobtrusive/dist/jquery.validate.unobtrusive.min.js" asp-append-version="true"></script>
+    <script src="~/js/ridics.utils.js" asp-append-version="true" ></script>
+    <script src="~/js/ridics.auth-api-client.js" asp-append-version="true" ></script>
+
+    @RenderSection("Scripts", false)
+</body>
+</html>
