@@ -63,6 +63,11 @@ namespace Ridics.Authentication.DataEntities.Validators
 
             var dict = m_validatorConfig.ValidatorsToValidatedDictionary;
 
+            if (dict == null)
+            {
+                return list;
+            }
+
             foreach (var key in dict.Keys)
             {
                 if (dict[key].Contains(type)) list.Add(key);
