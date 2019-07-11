@@ -29,7 +29,6 @@ using Ridics.Authentication.Service.Controllers.API;
 using Ridics.Authentication.TicketStore;
 using Ridics.Authentication.TicketStore.Store;
 using Scalesoft.Localization.AspNetCore;
-using Ridics.Core.Structures;
 using Ridics.Core.Structures.Shared;
 
 namespace Ridics.Authentication.Service.IoC
@@ -132,8 +131,18 @@ namespace Ridics.Authentication.Service.IoC
             if (!string.IsNullOrEmpty(signingCredentialCertificatePath))
             {
                 var signingCredentialCertificatePassword = configuration.GetSection("IdentityServer:SigningCredentialPassword").Value;
-                var signingCredentialCertificate = new X509Certificate2(signingCredentialCertificatePath, signingCredentialCertificatePassword);
-                identityServerBuilder.AddSigningCredential(signingCredentialCertificate);
+                
+                try
+                {
+                    var signingCredentialCertificate = new X509Certificate2(signingCredentialCertificatePath, signingCredentialCertificatePassword);
+                    identityServerBuilder.AddSigningCredential(signingCredentialCertificate);
+                }
+                catch (Exception exception) // expected type is probably WindowsCryptographicException
+                {
+                    var logger = loggerFactory.CreateLogger<X509Certificate2>();
+                    logger.LogCritical(exception, "Unable to load Signing Credential certificate");
+                    throw;
+                }
             }
             else
             {
