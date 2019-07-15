@@ -29,7 +29,7 @@ namespace Ridics.Authentication.HttpClient.Client.Auth
             return await m_authorizationServiceHttpClient.SendRequestAsync<IList<PermissionContract>>(HttpMethod.Get, fullPath);
         }
 
-        public async Task<bool> CheckUserHasPermission(int userId, string permissionName)
+        public async Task<bool> CheckUserHasPermissionAsync(int userId, string permissionName)
         {
             var query = m_authorizationServiceHttpClient.CreateQueryCollection();
             query.Add("userId", userId.ToString());

@@ -107,7 +107,7 @@ namespace Ridics.Authentication.HttpClient.Client.Auth
             return response;
         }
 
-        public async Task<IList<UserContactContract>> GetUserContacts(UserIdentifierTypeContract userIdType, string idValue)
+        public async Task<IList<UserContactContract>> GetUserContactsAsync(UserIdentifierTypeContract userIdType, string idValue)
         {
             var query = m_authorizationServiceHttpClient.CreateQueryCollection();
             query.Add("userIdType", userIdType.ToString());
