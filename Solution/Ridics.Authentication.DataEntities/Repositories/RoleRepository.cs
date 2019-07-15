@@ -210,7 +210,7 @@ namespace Ridics.Authentication.DataEntities.Repositories
 
             try
             {
-                return GetSingleValue<RoleEntity>(FetchCollections, criterion);
+                return GetSingleValue<RoleEntity>(null, criterion);
             }
             catch (HibernateException ex)
             {

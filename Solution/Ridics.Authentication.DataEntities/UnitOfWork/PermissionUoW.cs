@@ -136,5 +136,28 @@ namespace Ridics.Authentication.DataEntities.UnitOfWork
 
             m_permissionRepository.Update(permissionEntity);
         }
+
+        [Transaction]
+        public virtual void EnsurePermissionsExist(IEnumerable<PermissionEntity> permissions, string newAssignToRoleName)
+        {
+            var roleEntity = !string.IsNullOrEmpty(newAssignToRoleName) ? m_roleRepository.GetRoleByName(newAssignToRoleName) : null;
+
+            foreach (var permission in permissions)
+            {
+                var permissionEntity = m_permissionRepository.GetPermissionByName(permission.Name);
+                if (permissionEntity == null)
+                {
+                    if (roleEntity != null)
+                    {
+                        permission.Roles = new HashSet<RoleEntity>
+                        {
+                            roleEntity
+                        };
+                    }
+                    
+                    m_permissionRepository.Create(permission);
+                }
+            }
+        }
     }
 }

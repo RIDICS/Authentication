@@ -39,5 +39,11 @@ namespace Ridics.Authentication.HttpClient.Client.Auth
 
             return await m_authorizationServiceHttpClient.SendRequestAsync<bool>(HttpMethod.Get, fullPath);
         }
+
+        public Task EnsurePermissionsExistAsync(EnsurePermissionsContract data)
+        {
+            var fullPath = $"{BasePath}ensure";
+            return m_authorizationServiceHttpClient.SendRequestAsync(HttpMethod.Put, fullPath, data);
+        }
     }
 }
