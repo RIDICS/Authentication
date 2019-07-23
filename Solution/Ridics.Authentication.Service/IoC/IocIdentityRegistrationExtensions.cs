@@ -26,10 +26,10 @@ using Ridics.Authentication.Service.Authorization;
 using Ridics.Authentication.Service.Authorization.Handlers;
 using Ridics.Authentication.Service.Configuration;
 using Ridics.Authentication.Service.Controllers.API;
+using Ridics.Authentication.Service.Helpers;
 using Ridics.Authentication.TicketStore;
 using Ridics.Authentication.TicketStore.Store;
 using Scalesoft.Localization.AspNetCore;
-using Ridics.Core.Structures;
 using Ridics.Core.Structures.Shared;
 
 namespace Ridics.Authentication.Service.IoC
