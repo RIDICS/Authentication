@@ -1,0 +1,37 @@
+﻿{
+  "culture": "en",
+  "scope": "IdentityErrorDescriber",
+  "dictionary": {
+    "default-error": "An unknown failure has occurred.",
+    "concurrency-failure": "Optimistic concurrency failure, object has been modified.",
+    "password-mismatch": "Incorrect password.",
+    "invalid-token": "Invalid token.",
+    "login-already-associated": "A user with this login already exists.",
+    "invalid-user-name": "User name '{0}' is invalid, can only contain letters or digits.",
+    "invalid-email": "Email '{0}' is invalid.",
+    "duplicate-user-name": "User Name '{0}' is already taken.",
+    "duplicate-email": "Email '{0}' is already taken.",
+    "invalid-role-name": "Role name '{0}' is invalid.",
+    "duplicate-role-name": "Role name '{0}' is already taken.",
+    "user-already-has-password": "User already has a password set.",
+    "user-lockout-not-enabled": "Lockout is not enabled for this user.",
+    "user-already-in-role": "User already in role '{0}'.",
+    "user-not-in-role": "User is not in role '{0}'.",
+    "password-too-short": "Passwords must be at least {0} {1}.",
+    "password-requires-non-alphanumeric": "Passwords must have at least one non alphanumeric character.",
+    "password-requires-digit": "Passwords must have at least one digit ('0'-'9').",
+    "password-requires-lower": "Passwords must have at least one lowercase ('a'-'z').",
+    "password-requires-upper": "Passwords must have at least one uppercase ('A'-'Z')."
+  },
+  "plural": {
+    "characters": {
+      "characters": [
+        [ null, -2, "characters" ],
+        [ -1, -1, "character" ],
+        [ 0, 0, "characters" ],
+        [ 1, 1, "character" ],
+        [ 2, null, "characters" ]
+      ]
+    }
+  }
+}

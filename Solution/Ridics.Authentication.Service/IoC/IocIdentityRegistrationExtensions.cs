@@ -99,7 +99,8 @@ namespace Ridics.Authentication.Service.IoC
                 .AddTokenProvider<SmsTokenProvider>(SmsTokenProvider.ProviderName)
                 .AddTokenProvider<PasswordResetTokenProvider>(PasswordResetTokenProvider.ProviderName)
                 .AddTokenProvider<AuthenticatorTokenProvider>(AuthenticatorTokenProvider.ProviderName)
-                .AddTokenProvider<DataProtectorTokenProvider<ApplicationUser>>(nameof(DataProtectorTokenProvider<ApplicationUser>));
+                .AddTokenProvider<DataProtectorTokenProvider<ApplicationUser>>(nameof(DataProtectorTokenProvider<ApplicationUser>))
+                .AddErrorDescriber<LocalizedIdentityErrorDescriber>();
         }
 
         private static void RegisterIdentityServer(
