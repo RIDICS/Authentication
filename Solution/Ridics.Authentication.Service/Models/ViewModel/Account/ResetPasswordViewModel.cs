@@ -1,4 +1,5 @@
 using System.ComponentModel.DataAnnotations;
+using Ridics.Authentication.Service.Configuration;
 
 namespace Ridics.Authentication.Service.Models.ViewModel.Account
 {
@@ -11,10 +12,9 @@ namespace Ridics.Authentication.Service.Models.ViewModel.Account
         [Required(ErrorMessage = "token-required")]
         public string PasswordResetToken { get; set; }
 
-        //TODO extract password and its regex rules to standalone viewmodel and fix all usages
         [Required(ErrorMessage = "pswd-required"), DataType(DataType.Password)]
         [Display(Name = "pswd")]
-        [RegularExpression(@"^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[\W_]).{8,}$", ErrorMessage = "pswd-requirement")]
+        [RegularExpression(PasswordRequirements.ValidationRegexOfViewModel, ErrorMessage = PasswordRequirements.ErrorOfResetPasswordViewModel)]
         public string Password { get; set; }
 
         [DataType(DataType.Password), Compare(nameof(Password), ErrorMessage = "pswd-match")]

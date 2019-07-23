@@ -9,10 +9,13 @@ namespace Ridics.Authentication.Service.MapperProfiles.Contracts
     {
         public PermissionContractProfile(IRoleSorter roleSorter)
         {
-            CreateMap<PermissionInfoModel, PermissionContract>()
+            CreateMap<PermissionInfoModel, PermissionContractBase>()
                 .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.Id))
                 .ForMember(dest => dest.Name, opt => opt.MapFrom(src => src.Name))
-                .ForMember(dest => dest.Description, opt => opt.MapFrom(src => src.Description))
+                .ForMember(dest => dest.Description, opt => opt.MapFrom(src => src.Description));
+
+            CreateMap<PermissionInfoModel, PermissionContract>()
+                .IncludeBase<PermissionInfoModel, PermissionContractBase>()
                 .ForMember(dest => dest.Roles, opt => opt.Ignore());
 
             CreateMap<PermissionModel, PermissionContract>()
@@ -20,10 +23,13 @@ namespace Ridics.Authentication.Service.MapperProfiles.Contracts
                 .ForMember(dest => dest.Roles, opt => opt.MapFrom(src => src.Roles))
                 .AfterMap((src, dest) => { dest.Roles = roleSorter.SortRoles(dest.Roles); });
 
-            CreateMap<PermissionContract, PermissionInfoModel>()
+            CreateMap<PermissionContractBase, PermissionInfoModel>()
                 .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.Id))
                 .ForMember(dest => dest.Name, opt => opt.MapFrom(src => src.Name))
                 .ForMember(dest => dest.Description, opt => opt.MapFrom(src => src.Description));
+
+            CreateMap<PermissionContract, PermissionInfoModel>()
+                .IncludeBase<PermissionContractBase, PermissionInfoModel>();
 
             CreateMap<PermissionContract, PermissionModel>()
                 .IncludeBase<PermissionContract, PermissionInfoModel>()

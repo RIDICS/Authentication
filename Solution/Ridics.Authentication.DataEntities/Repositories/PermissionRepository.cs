@@ -130,5 +130,19 @@ namespace Ridics.Authentication.DataEntities.Repositories
                 throw new DatabaseException("Get policy list by ids operation failed", ex);
             }
         }
+
+        public PermissionEntity GetPermissionByName(string name)
+        {
+            var criterion = Restrictions.Where<PermissionEntity>(x => x.Name == name);
+
+            try
+            {
+                return GetSingleValue<PermissionEntity>(null, criterion);
+            }
+            catch (HibernateException ex)
+            {
+                throw new DatabaseException("Get policy by name operation failed", ex);
+            }
+        }
     }
 }

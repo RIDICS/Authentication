@@ -63,9 +63,17 @@ namespace Ridics.Authentication.Service
                     throwIfUnresolved: type => type.Name.EndsWith("Controller")
                 );
 
-            m_container.RegisterAllComponents();
-            m_container.AddAutoTx();
-            m_container.AddNHibernate();
+            try
+            {
+                m_container.RegisterAllComponents();
+                m_container.AddAutoTx();
+                m_container.AddNHibernate();
+            }
+            catch (Exception ex) // Any exception can be thrown including exception from database driver, e.g. SqlException
+            {
+                m_loggerFactory.CreateLogger<Startup>().LogCritical(ex, "Unable to initialize NHibernate using Auto Transactions");
+                throw;
+            }
 
             return m_container.Resolve<IServiceProvider>();
         }

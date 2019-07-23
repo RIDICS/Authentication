@@ -78,12 +78,12 @@ namespace Ridics.Authentication.Service.IoC
         {
             services.AddIdentity<ApplicationUser, ApplicationRole>(options =>
                 {
-                    options.Password.RequireDigit = true;
-                    options.Password.RequireLowercase = true;
-                    options.Password.RequireUppercase = true;
-                    options.Password.RequireNonAlphanumeric = true;
+                    options.Password.RequireDigit = PasswordRequirements.RequireDigit;
+                    options.Password.RequireLowercase = PasswordRequirements.RequireLowercase;
+                    options.Password.RequireUppercase = PasswordRequirements.RequireUppercase;
+                    options.Password.RequireNonAlphanumeric = PasswordRequirements.RequireNonAlphanumeric;
                     options.Password.RequiredUniqueChars = 1; //required min count of unique chars
-                    options.Password.RequiredLength = 8; //required minimal length
+                    options.Password.RequiredLength = PasswordRequirements.MinLength; //required minimal length
 
                     options.SignIn.RequireConfirmedEmail = false;
                     options.SignIn.RequireConfirmedPhoneNumber = false;
@@ -133,8 +133,18 @@ namespace Ridics.Authentication.Service.IoC
             if (!string.IsNullOrEmpty(signingCredentialCertificatePath))
             {
                 var signingCredentialCertificatePassword = configuration.GetSection("IdentityServer:SigningCredentialPassword").Value;
-                var signingCredentialCertificate = new X509Certificate2(signingCredentialCertificatePath, signingCredentialCertificatePassword);
-                identityServerBuilder.AddSigningCredential(signingCredentialCertificate);
+                
+                try
+                {
+                    var signingCredentialCertificate = new X509Certificate2(signingCredentialCertificatePath, signingCredentialCertificatePassword);
+                    identityServerBuilder.AddSigningCredential(signingCredentialCertificate);
+                }
+                catch (Exception exception) // expected type is probably WindowsCryptographicException
+                {
+                    var logger = loggerFactory.CreateLogger<X509Certificate2>();
+                    logger.LogCritical(exception, "Unable to load Signing Credential certificate");
+                    throw;
+                }
             }
             else
             {

@@ -10,7 +10,6 @@ using Ridics.Authentication.DataContracts;
 using Ridics.Authentication.Service.Attributes;
 using Ridics.Authentication.Service.Authentication.Identity.Managers;
 using Ridics.Authentication.Service.Authorization;
-using Ridics.Core.Structures;
 using Ridics.Core.Structures.Shared;
 
 namespace Ridics.Authentication.Service.Controllers.API
@@ -183,6 +182,21 @@ namespace Ridics.Authentication.Service.Controllers.API
         public IActionResult AssignRolesToPermissions([Required] [FromRoute] int id, [Required] [FromBody] List<int> selectedRoles)
         {
             var result = m_permissionManager.AssignRolesToPermissions(id, selectedRoles, false);
+
+            if (result.HasError)
+            {
+                return Error(result.Error);
+            }
+
+            return Ok();
+        }
+
+        [HttpPut("ensure")]
+        [JwtAuthorize]
+        public IActionResult EnsurePermissionsExist([Required] [FromBody] EnsurePermissionsContract data)
+        {
+            var permissionsModel = Mapper.Map<IList<PermissionInfoModel>>(data.Permissions);
+            var result = m_permissionManager.EnsurePermissionsExist(permissionsModel, data.NewAssignToRoleName);
 
             if (result.HasError)
             {

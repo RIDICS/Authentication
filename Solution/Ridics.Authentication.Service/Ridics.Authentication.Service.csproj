@@ -118,6 +118,13 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
+
+  <ItemGroup>
+    <None Include="C:\Pool\itjakub-secrets\Auth\*.json5">
+      <Link>%(RecursiveDir)\%(FileName).json5</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
   
 
   <ItemGroup>

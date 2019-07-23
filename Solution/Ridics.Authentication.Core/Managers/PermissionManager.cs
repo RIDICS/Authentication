@@ -1,9 +1,11 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using AutoMapper;
 using Microsoft.Extensions.Logging;
 using Ridics.Authentication.Core.Configuration;
 using Ridics.Authentication.Core.Models;
 using Ridics.Authentication.Core.Models.DataResult;
+using Ridics.Authentication.DataContracts;
 using Ridics.Authentication.DataEntities.Entities;
 using Ridics.Authentication.DataEntities.Exceptions;
 using Ridics.Authentication.DataEntities.UnitOfWork;
@@ -180,6 +182,25 @@ namespace Ridics.Authentication.Core.Managers
             {
                 m_logger.LogWarning(e);
                 return Error<bool>(m_translator.Translate("invalid-permission-id"), DataResultErrorCode.PermissionNotExistId);
+            }
+            catch (DatabaseException e)
+            {
+                m_logger.LogWarning(e);
+                return Error<bool>(e.Message);
+            }
+        }
+
+        public DataResult<bool> EnsurePermissionsExist(IList<PermissionInfoModel> permissions, string newAssignToRoleName)
+        {
+            try
+            {
+                var permissionEntities = permissions.Select(x => new PermissionEntity
+                {
+                    Name = x.Name,
+                    Description = x.Description,
+                });
+                m_permissionUoW.EnsurePermissionsExist(permissionEntities, newAssignToRoleName);
+                return Success(true);
             }
             catch (DatabaseException e)
             {
