@@ -149,7 +149,7 @@ namespace Ridics.Authentication.Service.Helpers
 
         public override IdentityError PasswordTooShort(int length)
         {
-            string charactersLabel = m_localizationService.TranslatePluralization("characters", "IdentityErrorDescriber", length);
+            var charactersLabel = m_localizationService.TranslatePluralization("characters", "IdentityErrorDescriber", length);
             return new IdentityError
             {
                 Code = nameof(PasswordTooShort),
@@ -190,6 +190,27 @@ namespace Ridics.Authentication.Service.Helpers
             {
                 Code = nameof(PasswordRequiresUpper),
                 Description = m_localizationService.Translate("password-requires-upper", "IdentityErrorDescriber")
+            };
+        }
+
+        public override IdentityError RecoveryCodeRedemptionFailed()
+        {
+            return new IdentityError
+            {
+                Code = nameof(RecoveryCodeRedemptionFailed),
+                Description = m_localizationService.Translate("recovery-code-redemption-failed", "IdentityErrorDescriber")
+            };
+        }
+
+        public override IdentityError PasswordRequiresUniqueChars(int uniqueChars)
+        {
+            var charactersLabel = m_localizationService.TranslatePluralization("characters", "IdentityErrorDescriber", uniqueChars);
+            var specialLabel = m_localizationService.TranslatePluralization("special", "IdentityErrorDescriber", uniqueChars);
+
+            return new IdentityError
+            {
+                Code = nameof(PasswordRequiresUniqueChars),
+                Description = m_localizationService.TranslateFormat("password-requires-unique-chars", "IdentityErrorDescriber", uniqueChars, specialLabel, charactersLabel)
             };
         }
     }

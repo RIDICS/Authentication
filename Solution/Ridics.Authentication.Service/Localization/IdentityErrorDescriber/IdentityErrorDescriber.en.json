@@ -21,7 +21,9 @@
     "password-requires-non-alphanumeric": "Passwords must have at least one non alphanumeric character.",
     "password-requires-digit": "Passwords must have at least one digit ('0'-'9').",
     "password-requires-lower": "Passwords must have at least one lowercase ('a'-'z').",
-    "password-requires-upper": "Passwords must have at least one uppercase ('A'-'Z')."
+    "password-requires-upper": "Passwords must have at least one uppercase ('A'-'Z').",
+    "recovery-code-redemption-failed": "Recovery code redemption failed.",
+    "password-requires-unique-chars": "Passwords must use at least {0} {1} {2}."
   },
   "plural": {
     "characters": {
@@ -32,6 +34,9 @@
         [ 1, 1, "character" ],
         [ 2, null, "characters" ]
       ]
+    },
+    "special": {
+      "different": []
     }
   }
 }
