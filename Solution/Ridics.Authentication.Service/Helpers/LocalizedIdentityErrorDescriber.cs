@@ -204,13 +204,12 @@ namespace Ridics.Authentication.Service.Helpers
 
         public override IdentityError PasswordRequiresUniqueChars(int uniqueChars)
         {
-            var charactersLabel = m_localizationService.TranslatePluralization("characters", "IdentityErrorDescriber", uniqueChars);
-            var specialLabel = m_localizationService.TranslatePluralization("special", "IdentityErrorDescriber", uniqueChars);
-
+            var charactersLabel = m_localizationService.TranslatePluralization("special-characters", "IdentityErrorDescriber", uniqueChars);
+            
             return new IdentityError
             {
                 Code = nameof(PasswordRequiresUniqueChars),
-                Description = m_localizationService.TranslateFormat("password-requires-unique-chars", "IdentityErrorDescriber", uniqueChars, specialLabel, charactersLabel)
+                Description = m_localizationService.TranslateFormat("password-requires-unique-chars", "IdentityErrorDescriber", uniqueChars, charactersLabel)
             };
         }
     }

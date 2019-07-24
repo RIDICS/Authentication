@@ -23,7 +23,7 @@
     "password-requires-lower": "Passwords must have at least one lowercase ('a'-'z').",
     "password-requires-upper": "Passwords must have at least one uppercase ('A'-'Z').",
     "recovery-code-redemption-failed": "Recovery code redemption failed.",
-    "password-requires-unique-chars": "Passwords must use at least {0} {1} {2}."
+    "password-requires-unique-chars": "Passwords must have at least {0} {1}."
   },
   "plural": {
     "characters": {
@@ -35,8 +35,14 @@
         [ 2, null, "characters" ]
       ]
     },
-    "special": {
-      "different": []
+    "special-characters": {
+      "different characters": [
+        [ null, -2, "different characters" ],
+        [ -1, -1, "different character" ],
+        [ 0, 0, "different characters" ],
+        [ 1, 1, "different character" ],
+        [ 2, null, "different characters" ]
+      ]
     }
   }
 }

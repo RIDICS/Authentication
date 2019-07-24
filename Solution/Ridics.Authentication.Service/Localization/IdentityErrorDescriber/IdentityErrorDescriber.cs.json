@@ -23,7 +23,7 @@
     "password-requires-lower": "Heslo musí obsahovat minimálně jedno malé písmeno ('a'-'z').",
     "password-requires-upper": "Heslo musí obsahovat minimálně jedno velké písmeno ('A'-'Z').",
     "recovery-code-redemption-failed": "Nepodařilo se uplatnit obnovovací kód.",
-    "password-requires-unique-chars": "Heslo musí obsahovat {0} {1} {2}."
+    "password-requires-unique-chars": "Heslo musí obsahovat minimálně {0} {1}."
   },
   "plural": {
     "characters": {
@@ -37,13 +37,15 @@
         [ 5, null, "znaků" ]
       ]
     },
-    "special": {
-      "speciálních": [
-        [ null, -5, "speciálních" ],
-        [ -4, -1, "speciální" ],
-        [ 0, 0, "speciálních" ],
-        [ 1, 4, "speciální" ],
-        [ 5, null, "speciálních" ]
+    "special-characters": {
+      "speciálních znaků": [
+        [ null, -5, "speciálních znaků" ],
+        [ -4, -2, "speciální znaky" ],
+        [ -1, -1, "speciální znak" ],
+        [ 0, 0, "speciálních znaků" ],
+        [ 1, 1, "speciální znak" ],
+        [ 2, 4, "speciální znaky" ],
+        [ 5, null, "speciálních znaků" ]
       ]
     } 
   }
