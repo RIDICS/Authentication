@@ -34,13 +34,13 @@ The configuration for local Development is prepared directly in the solution.
 * Run Ridics.Authentication.Service to run Authentication Service with `LocalDebug` configuration
 * Default username is "Admin" with password "administrator" or "PortalAdmin" (reduced permissions) with password "administrator"
 
-## Deployment
+## Deployment to the server
 
 Deployment to Production or Staging server requires creating specific configurations. The app configuration can be placed in `C:\Pool\itjakub-secrets\Auth` and `C:\Pool\itjakub-secrets\DatabaseMigratorAuth` folder on build computer. The configuration is separated to avoid commiting sensitive files to git. The files in this folder are included to publish package during build.
 
 Default deployment script assumes that the Authentication Service will be placed in `Default Web Site/Auth` site, e.g. `https://localhost/Auth`.
 
-* Choose the environment name, e.g. Production
+* Choose the environment name, e.g. Production (the name should be the same as will be used for Vokabulář deployment project - ITJakub)
 * Create all configuration files for specified environment according to https://github.com/RIDICS/itjakub-secrets
   * e.g. `modules.Production.json` and so on
 * Fill correct values to these files
@@ -81,4 +81,47 @@ This configuration can be performed in GUI after login:
 * Configure clients which can use this Authentication Service
   * Some values are preconfigured primarly for Development purposes
   * Remove all not valid clients
+
+## Troubleshooting
+
+* Not working login to Auth service on linux with application in insecure mode using `$env:ASPNETCORE_DISABLE_HTTPS_REDIRECT=true`  
+  * Solution: Clear storage in Chrome in Application tab of the developer tools  
+
+* Problem: YarnInstall (yarn) can not fetch/download packages
+  * Solution: Try to disable your firewall and rerun script.
+
+* Problem: Unable to start application in IIS.
+  * Check if ".NET Core Windows Server Hosting" is installed.
+  * Enable logging for additional info.
+
+* Problem: Logging doesn't work on IIS.
+  * System user IIS_IUSRS must has permission to write to "logs" folder.
+  * If app crash during start, additional logging can be enabled in web.config file by changing stdoutLogEnabled="false" attribute to true.
+
+* Problem: (IIS Express) Unable to start process dotnet.exe. The web server request failed with status code 403.
+  * Solution: Enable SSL for the project and set `applicationUrl` in `launchSettings.json` to use HTTPS version.
+
+* Problem: Load certificate from disk using X509Certificate2 constructor throws CryptographicException: Access denied (probably in IIS)
+  * Solution: Ensure that the X509KeyStorageFlags.UserKeySet flag is specified in constructor and set "Load User Profile" to True in Application Pool > Advanced Settings.
+
+* Problem: Logging doesn't work - no logs are appended to the log file.
+  * There exists two logging configurations, one for Microsoft Logging abstraction in appsettings.json and second for logging library NLog in NLog.config file. Both configurations are applied (as logical AND).
+
+* Problem: Communication with auth service failed with status 405.
+  * Solution: Ensure that `Common HTTP Features > WebDAV Publishing` is not installed in IIS.
+
+* Problem: Automatic logout from clients when user signs out from auth service does not work
+  * Solution: Check if every client has only one frontchannel logout uri specified, if there are more frontchannel logout uris for one client automatic logout wont work properly. 
+
+* Problem: Application loads first page slowly when deployed to IIS (app is idle after some period of time).
+  * Solution: Change Application Pool settings: `Start Mode` to `AlwaysRunning` and `Idle Time-out (minutes)` to `0`.
+
+* Problem: Unable to login on production server if deployed behind proxy server (infinite redirect between WebHub and Authentication service).
+  * Solution: Ensure that time on all servers is synchronized and therefore the .AspNetCore.Correlation.OpenIdConnect cookie doesn't expire before sending HTTP response (the time specified in "Date" HTTP header).
+
+* Problem: Unable to start ASP.NET Core application InProcess in IIS.
+  * Solution: All our apps and services should be configured to run OutOfProcess. InProcess hosting model is not tested and requires to every app run in own Application Pool.
+
+* Problem: Auth service failed to start with `InvalidOperationException: No service for type 'LiveManager' has been registered`.
+  * Solution: Very likely some exception was thrown during `ConfigureServices()` method in `Startup` class. These exceptions are not propagated to `Program` class, so this exception is not logged.
 
