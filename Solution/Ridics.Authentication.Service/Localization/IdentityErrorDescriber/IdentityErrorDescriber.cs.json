@@ -1,0 +1,52 @@
+﻿{
+  "culture": "cs",
+  "scope": "IdentityErrorDescriber",
+  "dictionary": {
+    "default-error": "Nastala neočekávaná chyba.",
+    "concurrency-failure": "Optimistické řízení selhalo, objekt byl již upraven.",
+    "password-mismatch": "Neplatné heslo.",
+    "invalid-token": "Neplatný token.",
+    "login-already-associated": "Tento účet je již svázán s externím přihlášením.",
+    "invalid-user-name": "Uživatelské jméno '{0}' není validní. Uživatelské jméno může obsahovat pouze písmena a číslice.",
+    "invalid-email": "Email '{0}' je neplatný.",
+    "duplicate-user-name": "Uživatelské jméno '{0}' je již zabrané.",
+    "duplicate-email": "Účet s e-mailovou adresou '{0}' již existuje.",
+    "invalid-role-name": "Název role '{0}' je neplatný.",
+    "duplicate-role-name": "Název role '{0}' je již používán.",
+    "user-already-has-password": "Uživatel již má nastavené heslo.",
+    "user-lockout-not-enabled": "Blokování není zapnuté pro tohoto uživatele.",
+    "user-already-in-role": "Uživatel má již přiřazenou roli '{0}'.",
+    "user-not-in-role": "Uživatel nemá přiřazenou roli '{0}'.",
+    "password-too-short": "Heslo musí být minimálně {0} {1} dlouhé.",
+    "password-requires-non-alphanumeric": "Heslo musí obsahovat minimálně jeden speciální znak.",
+    "password-requires-digit": "Heslo musí obsahovat minimálně jednu číslici ('0'-'9').",
+    "password-requires-lower": "Heslo musí obsahovat minimálně jedno malé písmeno ('a'-'z').",
+    "password-requires-upper": "Heslo musí obsahovat minimálně jedno velké písmeno ('A'-'Z').",
+    "recovery-code-redemption-failed": "Nepodařilo se uplatnit obnovovací kód.",
+    "password-requires-unique-chars": "Heslo musí obsahovat minimálně {0} {1}."
+  },
+  "plural": {
+    "characters": {
+      "znaků": [
+        [ null, -5, "znaků" ],
+        [ -4, -2, "znaky" ],
+        [ -1, -1, "znak" ],
+        [ 0, 0, "znaků" ],
+        [ 1, 1, "znak" ],
+        [ 2, 4, "znaky" ],
+        [ 5, null, "znaků" ]
+      ]
+    },
+    "special-characters": {
+      "speciálních znaků": [
+        [ null, -5, "speciálních znaků" ],
+        [ -4, -2, "speciální znaky" ],
+        [ -1, -1, "speciální znak" ],
+        [ 0, 0, "speciálních znaků" ],
+        [ 1, 1, "speciální znak" ],
+        [ 2, 4, "speciální znaky" ],
+        [ 5, null, "speciálních znaků" ]
+      ]
+    } 
+  }
+}

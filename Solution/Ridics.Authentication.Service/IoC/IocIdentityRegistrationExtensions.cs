@@ -26,6 +26,7 @@ using Ridics.Authentication.Service.Authorization;
 using Ridics.Authentication.Service.Authorization.Handlers;
 using Ridics.Authentication.Service.Configuration;
 using Ridics.Authentication.Service.Controllers.API;
+using Ridics.Authentication.Service.Helpers;
 using Ridics.Authentication.TicketStore;
 using Ridics.Authentication.TicketStore.Store;
 using Scalesoft.Localization.AspNetCore;
@@ -98,7 +99,8 @@ namespace Ridics.Authentication.Service.IoC
                 .AddTokenProvider<SmsTokenProvider>(SmsTokenProvider.ProviderName)
                 .AddTokenProvider<PasswordResetTokenProvider>(PasswordResetTokenProvider.ProviderName)
                 .AddTokenProvider<AuthenticatorTokenProvider>(AuthenticatorTokenProvider.ProviderName)
-                .AddTokenProvider<DataProtectorTokenProvider<ApplicationUser>>(nameof(DataProtectorTokenProvider<ApplicationUser>));
+                .AddTokenProvider<DataProtectorTokenProvider<ApplicationUser>>(nameof(DataProtectorTokenProvider<ApplicationUser>))
+                .AddErrorDescriber<LocalizedIdentityErrorDescriber>();
         }
 
         private static void RegisterIdentityServer(
