@@ -23,6 +23,14 @@ namespace Ridics.Authentication.Database.Migrations.Migrations.Authentication
 
             Execute.WithConnection((connection, transaction) =>
             {
+                var adminUserId = Query.Conn(connection, transaction).Select<int>("Id").From("Role")
+                    .Where("Name", "Admin")
+                    .Run().Single();
+
+                var portalAdminUserId = Query.Conn(connection, transaction).Select<int>("Id").From("Role")
+                    .Where("Name", "PortalAdmin")
+                    .Run().Single();
+
                 var registeredUserId = Query.Conn(connection, transaction).Select<int>("Id").From("Role")
                     .Where("Name", "RegisteredUser")
                     .Run().Single();
@@ -42,6 +50,10 @@ namespace Ridics.Authentication.Database.Migrations.Migrations.Authentication
                     .Run().Single();
 
                 Query.Conn(connection, transaction).Insert("Role_Permission")
+                    .Row(new { RoleId = adminUserId, PermissionId = permissionEditSelfPersonalData })
+                    .Row(new { RoleId = adminUserId, PermissionId = permissionEditSelfContacts })
+                    .Row(new { RoleId = portalAdminUserId, PermissionId = permissionEditSelfPersonalData })
+                    .Row(new { RoleId = portalAdminUserId, PermissionId = permissionEditSelfContacts })
                     .Row(new { RoleId = registeredUserId, PermissionId = permissionEditSelfPersonalData })
                     .Row(new { RoleId = registeredUserId, PermissionId = permissionEditSelfContacts })
                     .Row(new { RoleId = verifiedUserId, PermissionId = permissionEditSelfContacts })
