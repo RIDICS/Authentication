@@ -124,8 +124,8 @@ namespace Ridics.Authentication.Service.MapperProfiles.Contracts
 
             CreateMap<UserModel, UserWithRolesContract>()
                 .ForMember(dest => dest.UserId, opt => opt.MapFrom(src => src.Id))
-                .ForMember(dest => dest.FirstName, opt => opt.MapFrom(src => src.FirstName))
-                .ForMember(dest => dest.LastName, opt => opt.MapFrom(src => src.LastName))
+                .ForMember(dest => dest.FirstName, opt => opt.MapFrom(new UserDataStringValueResolver<UserWithRolesContract>(UserDataTypes.FirstName)))
+                .ForMember(dest => dest.LastName, opt => opt.MapFrom(new UserDataStringValueResolver<UserWithRolesContract>(UserDataTypes.LastName)))
                 .ForMember(dest => dest.Roles, opt => opt.MapFrom(src => src.Roles));
         }
     }

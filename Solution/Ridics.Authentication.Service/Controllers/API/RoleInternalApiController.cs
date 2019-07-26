@@ -181,8 +181,8 @@ namespace Ridics.Authentication.Service.Controllers.API
 
         [HttpGet("{id}/users")]
         [JwtAuthorize(Policy = PermissionNames.ListUsers)]
-        [ProducesResponseType(typeof(ListContract<UserContract>), StatusCodes.Status200OK)]
-        public async Task<IActionResult> GetUsersByRoleAsync(
+        [ProducesResponseType(typeof(ListContract<UserWithRolesContract>), StatusCodes.Status200OK)]
+        public IActionResult GetUsersByRole(
             [Required] [FromRoute] int id, [FromQuery] int start = 0, [FromQuery] int count = DefaultListCount, [FromQuery] string search = null)
         {
             if (count > MaxListCount)
@@ -203,14 +203,12 @@ namespace Ridics.Authentication.Service.Controllers.API
                 return Error(usersCountResult.Error);
             }
             
-            var userContracts = Mapper.Map<IList<UserContract>>(usersResult.Result);
-
-            await m_userHelper.FillValidTwoFactorProvidersAsync(userContracts);
+            var userContracts = Mapper.Map<IList<UserWithRolesContract>>(usersResult.Result);
 
             Response.Headers.Add(HeaderStart, start.ToString());
             Response.Headers.Add(HeaderCount, count.ToString());
             
-            var contractList = new ListContract<UserContract>
+            var contractList = new ListContract<UserWithRolesContract>
             {
                 Items = userContracts,
                 ItemsCount = usersCountResult.Result,
