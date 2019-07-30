@@ -49,15 +49,6 @@ namespace Ridics.Authentication.Database.Migrations.Migrations.Authentication
                         CreateTime = new DateTime(2018, 9, 4),
                         ConfirmCodeChangeTime = (DateTime?) null
                     })
-                    .Row(new
-                    {
-                        UserId = userId,
-                        Type = "Phone",
-                        Value = "+420000000002",
-                        Confirmed = false,
-                        CreateTime = new DateTime(2018, 9, 4),
-                        ConfirmCodeChangeTime = (DateTime?)null
-                    })
                     .Run();
 
                 var portalAdminRoleId = Query.Conn(connection, transaction).Select<int>("Id").From("Role")

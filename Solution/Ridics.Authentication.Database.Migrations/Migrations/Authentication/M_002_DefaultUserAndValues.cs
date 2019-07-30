@@ -65,15 +65,6 @@ namespace Ridics.Authentication.Database.Migrations.Migrations.Authentication
                         CreateTime = new DateTime(2018, 7, 10),
                         ConfirmCodeChangeTime = (DateTime?) null
                     })
-                    .Row(new
-                    {
-                        UserId = userId,
-                        Type = "Phone",
-                        Value = "+420000000001",
-                        Confirmed = true,
-                        CreateTime = new DateTime(2018, 7, 10),
-                        ConfirmCodeChangeTime = (DateTime?) null
-                    })
                     .Run();
 
                 var roleId = Query.Conn(connection, transaction).Select<int>("Id").From("Role")
