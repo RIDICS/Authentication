@@ -3,7 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Routing;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using Ridics.Authentication.Core.Managers;
@@ -22,6 +25,7 @@ namespace Ridics.Authentication.Service.Authentication.Identity.Managers
         private readonly UserContactManager m_userContactManager;
         private readonly MessageSenderManager m_messageSenderManager;
         private readonly ITranslator m_translator;
+        private readonly LinkGenerator m_linkGenerator;
 
         private int m_maxGenerateResetPasswordTokenRetries = 10; //TODO make configurable
         
@@ -31,7 +35,7 @@ namespace Ridics.Authentication.Service.Authentication.Identity.Managers
             IEnumerable<IUserValidator<ApplicationUser>> userValidators,
             IEnumerable<IPasswordValidator<ApplicationUser>> passwordValidators, ILookupNormalizer keyNormalizer,
             IdentityErrorDescriber errors, IServiceProvider services, ILogger<UserManager<ApplicationUser>> logger,
-            ITranslator translator) :
+            ITranslator translator, LinkGenerator linkGenerator) :
             base(store, optionsAccessor, passwordHasher, userValidators, passwordValidators, keyNormalizer, errors,
                 services, logger)
         {
@@ -39,6 +43,7 @@ namespace Ridics.Authentication.Service.Authentication.Identity.Managers
             m_userContactManager = userContactManager;
             m_messageSenderManager = messageSenderManager;
             m_translator = translator;
+            m_linkGenerator = linkGenerator;
         }
 
         public async Task<bool> IsInRoleAsync(int userId, string role)
@@ -324,6 +329,21 @@ namespace Ridics.Authentication.Service.Authentication.Identity.Managers
 
             var user = await  FindByEmailAsync(usernameOrEmail) ?? await FindByNameAsync(usernameOrEmail);
             return user;
+        }
+
+        public async Task SendResetPasswordAsync(IUrlHelper url, ApplicationUser user, string httpProtocol)
+        {
+            var token = await GeneratePasswordResetTokenAsync(user);
+            var culture = m_translator.GetRequestCulture().Name;
+
+            var resetLink = url.Action( "ResetPassword", "Account",
+                new {username = user.UserName, token = token, culture = culture}, httpProtocol);
+
+            var userModel = Mapper.Map<UserModel>(user);
+
+            m_messageSenderManager.SendMessage(userModel, MessageSenderType.Email,
+                m_translator.Translate("reset-password-subject", "RequestResetPasswordViewModel"),
+                string.Format(m_translator.Translate("reset-password-message", "RequestResetPasswordViewModel"), resetLink));
         }
 
         public override async Task<string> GeneratePasswordResetTokenAsync(ApplicationUser user)

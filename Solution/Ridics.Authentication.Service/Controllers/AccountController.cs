@@ -18,10 +18,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Ridics.Authentication.Core.Configuration;
 using Ridics.Authentication.Core.Managers;
-using Ridics.Authentication.Core.MessageSenders;
-using Ridics.Authentication.Core.Models;
 using Ridics.Authentication.DataContracts;
-using Ridics.Authentication.DataEntities;
 using Ridics.Authentication.Modules.Shared;
 using Ridics.Authentication.Modules.Shared.Model;
 using Ridics.Authentication.Service.Attributes;
@@ -336,19 +333,7 @@ namespace Ridics.Authentication.Service.Controllers
 
             try
             {
-                var token = await m_identityUserManager.GeneratePasswordResetTokenAsync(user);
-
-                var culture = m_localization.GetRequestCulture().Name;
-
-                var resetLink = Url.Action("ResetPassword", "Account",
-                    new {username = user.UserName, token = token, culture = culture},
-                    HttpContext.Request.Scheme);
-
-                var userModel = Mapper.Map<UserModel>(user);
-
-                m_messageSenderManager.SendMessage(userModel, MessageSenderType.Email,
-                    Translator.Translate("reset-password-subject", "RequestResetPasswordViewModel"),
-                    string.Format(Translator.Translate("reset-password-message", "RequestResetPasswordViewModel"), resetLink));
+                await m_identityUserManager.SendResetPasswordAsync(Url, user, HttpContext.Request.Protocol);
 
                 return RedirectToAction(nameof(RequestResetPasswordSuccess), new {returnUrl = viewModel.ReturnUrl});
             }
