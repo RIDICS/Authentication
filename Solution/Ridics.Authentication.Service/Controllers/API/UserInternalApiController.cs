@@ -17,9 +17,11 @@ using Ridics.Authentication.Service.Attributes;
 using Ridics.Authentication.Service.Authentication.Identity.Managers;
 using Ridics.Authentication.Service.Authentication.Identity.Models;
 using Ridics.Authentication.Service.Authorization;
+using Ridics.Authentication.Service.Exceptions;
 using Ridics.Authentication.Service.Helpers;
 using Ridics.Core.Shared.Types;
 using Ridics.Core.Structures.Shared;
+using Scalesoft.Localization.AspNetCore;
 
 namespace Ridics.Authentication.Service.Controllers.API
 {
@@ -33,14 +35,16 @@ namespace Ridics.Authentication.Service.Controllers.API
         private readonly ILogger m_logger;
         private readonly RoleManager m_roleManager;
         private readonly UserHelper m_userHelper;
+        private readonly ILocalizationService m_localizationService;
 
         public UserInternalApiV1Controller(UserManager usersManager, IdentityUserManager identityUserManager,
             TwoFactorValidator twoFactorValidator, RoleManager roleManager, UserHelper userHelper,
-            ILogger<UserInternalApiV1Controller> logger) : base(identityUserManager)
+            ILogger<UserInternalApiV1Controller> logger, ILocalizationService localizationService) : base(identityUserManager)
         {
             m_usersManager = usersManager;
             m_twoFactorValidator = twoFactorValidator;
             m_logger = logger; // Logger must be with specified generics in controller, otherwise is unresolved
+            m_localizationService = localizationService;
             m_roleManager = roleManager;
             m_userHelper = userHelper;
         }
@@ -614,6 +618,28 @@ namespace Ridics.Authentication.Service.Controllers.API
 
             var muid = userResult.Result.UserData.First(x => x.UserDataType == UserDataTypes.MasterUserId)?.Value;
             return Json(muid);
+        }
+
+        [HttpPost("{userid}/reset-password")]
+        [Authorize(PermissionNames.EditAnyUsersData)]
+        public async Task<IActionResult> ResetUserPassword([FromRoute] [Required] int userid)
+        {
+            var user = await m_identityUserManager.GetUserByIdAsync(userid);
+
+            if (user == null)
+            {
+                return Error(m_localizationService.Translate("user-not-exist", "RequestResetPasswordViewModel"));
+            }
+
+            try
+            {
+                await m_identityUserManager.SendResetPasswordAsync(Url, user, HttpContext.Request.Protocol);
+                return Ok();
+            }
+            catch (GenerateResetPasswordTokenException e)
+            {
+                return Error(e.Message);
+            }
         }
     }
 }
