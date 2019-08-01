@@ -1,4 +1,5 @@
-﻿using Scalesoft.Localization.AspNetCore;
+﻿using System.Globalization;
+using Scalesoft.Localization.AspNetCore;
 using Ridics.Authentication.Shared;
 
 namespace Ridics.Authentication.Service.SharedInterfaceImpl
@@ -20,6 +21,11 @@ namespace Ridics.Authentication.Service.SharedInterfaceImpl
         public string Translate(string key, string scope)
         {
             return m_localization.Translate(key, scope).Value;
+        }
+
+        public CultureInfo GetRequestCulture()
+        {
+            return m_localization.GetRequestCulture();
         }
     }
 }
