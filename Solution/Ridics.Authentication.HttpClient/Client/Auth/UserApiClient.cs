@@ -148,5 +148,11 @@ namespace Ridics.Authentication.HttpClient.Client.Auth
             var response = await m_authorizationServiceHttpClient.SendRequestAsync<string>(HttpMethod.Get, path);
             return response;
         }
+
+        public async Task<HttpResponseMessage> ResetUserPassword(int id)
+        {
+            var fullPath = $"{BasePath}{id}/reset-password";
+            return await m_authorizationServiceHttpClient.SendRequestAsync(HttpMethod.Post, fullPath);
+        }
     }
 }
