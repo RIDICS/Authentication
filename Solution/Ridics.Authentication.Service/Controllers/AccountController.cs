@@ -24,7 +24,6 @@ using Ridics.Authentication.Modules.Shared.Model;
 using Ridics.Authentication.Service.Attributes;
 using Ridics.Authentication.Service.Authentication.Identity.Managers;
 using Ridics.Authentication.Service.Authentication.Identity.Models;
-using Ridics.Authentication.Service.Authorization;
 using Ridics.Authentication.Service.Configuration.Enum;
 using Ridics.Authentication.Service.Exceptions;
 using Ridics.Authentication.Service.Extensions;
@@ -33,6 +32,7 @@ using Ridics.Authentication.Service.Managers;
 using Ridics.Authentication.Service.Models;
 using Ridics.Authentication.Service.Models.Account;
 using Ridics.Authentication.Service.Models.ViewModel.Account;
+using Ridics.Core.Structures.Shared;
 using Scalesoft.Localization.AspNetCore;
 
 namespace Ridics.Authentication.Service.Controllers

@@ -16,7 +16,6 @@ using Ridics.Authentication.Service.Authentication.Identity.Managers;
 using Ridics.Authentication.Service.Authentication.Identity.Models;
 using Ridics.Authentication.Service.Authentication.Identity.Stores;
 using Ridics.Authentication.Service.Authorization;
-using Ridics.Authentication.Service.Configuration;
 using Ridics.Authentication.Service.Constants;
 using Ridics.Authentication.Service.Extensions;
 using Ridics.Authentication.Service.Helpers;
@@ -25,6 +24,7 @@ using Ridics.Authentication.Service.Models.ViewModel.Permission;
 using Ridics.Authentication.Service.Models.ViewModel.Roles;
 using Ridics.Authentication.Service.Models.ViewModel.Users;
 using Ridics.Authentication.Service.Models.ViewModel.Users.Claims;
+using Ridics.Core.Structures.Shared;
 
 namespace Ridics.Authentication.Service.Controllers
 {
