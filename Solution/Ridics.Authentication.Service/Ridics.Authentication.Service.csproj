@@ -94,6 +94,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Update="Deploy.AuthService.ps1">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </None>
     <None Update="tempkey.rsa">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
