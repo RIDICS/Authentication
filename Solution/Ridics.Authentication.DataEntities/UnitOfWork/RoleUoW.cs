@@ -87,6 +87,19 @@ namespace Ridics.Authentication.DataEntities.UnitOfWork
         }
 
         [Transaction]
+        public virtual RoleEntity FindRoleByName(string name)
+        {
+            var role = m_roleRepository.FindRoleById(id);
+
+            if (role == null)
+            {
+                throw new NoResultException<RoleEntity>();
+            }
+
+            return role;
+        }
+
+        [Transaction]
         public virtual void UpdateRole(int id, RoleEntity role)
         {
             var roleEntity = m_roleRepository.FindRoleById(id);

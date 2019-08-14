@@ -133,6 +133,20 @@ namespace Ridics.Authentication.DataEntities.Repositories
             }
         }
 
+        public RoleEntity FindRoleByName(string name)
+        {
+            var criterion = Restrictions.Where<RoleEntity>(x => x.Name == name);
+
+            try
+            {
+                return GetSingleValue<RoleEntity>(FetchCollections, criterion);
+            }
+            catch (HibernateException ex)
+            {
+                throw new DatabaseException("Find role by name operation failed", ex);
+            }
+        }
+
         public IList<RoleEntity> GetRoles(int start, int count, string searchByName = null)
         {
             var criteria = CreateSearchCriteria(searchByName);

@@ -42,5 +42,13 @@ namespace Ridics.Authentication.HttpClient.Client.Auth
 
             return response;
         }
+
+        public async Task<RoleContract> GetRoleByName(string name)
+        {
+            var path = $"{BasePath}{name}";
+            var response = await m_authorizationServiceHttpClient.SendRequestAsync<RoleContract>(HttpMethod.Get, path);
+
+            return response;
+        }
     }
 }
