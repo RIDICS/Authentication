@@ -89,7 +89,7 @@ namespace Ridics.Authentication.DataEntities.UnitOfWork
         [Transaction]
         public virtual RoleEntity FindRoleByName(string name)
         {
-            var role = m_roleRepository.FindRoleById(id);
+            var role = m_roleRepository.FindRoleByName(name);
 
             if (role == null)
             {
