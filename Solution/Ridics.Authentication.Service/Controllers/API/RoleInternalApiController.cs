@@ -190,8 +190,8 @@ namespace Ridics.Authentication.Service.Controllers.API
                 count = MaxListCount;
             }
 
-            var usersResult = m_usersManager.FindUsersByRole(id, start, count, search);
-            var usersCountResult = m_usersManager.GetUsersByRoleCount(id, search);
+            var usersResult = m_usersManager.FindNonAuthenticationUsersByRole(id, start, count, search);
+            var usersCountResult = m_usersManager.GetNonAuthenticationUsersByRoleCount(id, search);
 
             if (usersResult.HasError)
             {

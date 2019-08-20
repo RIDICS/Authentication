@@ -316,7 +316,7 @@ namespace Ridics.Authentication.Core.Managers
             }
         }
 
-        public DataResult<List<UserModel>> FindUsersByRole(int roleId, int start, int count, string searchByName)
+        public DataResult<List<UserModel>> FindNonAuthenticationUsersByRole(int roleId, int start, int count, string searchByName)
         {
             try
             {
@@ -331,7 +331,7 @@ namespace Ridics.Authentication.Core.Managers
             }
         }
 
-        public DataResult<int> GetUsersByRoleCount(int roleId, string searchByName)
+        public DataResult<int> GetNonAuthenticationUsersByRoleCount(int roleId, string searchByName)
         {
             try
             {
