@@ -20,21 +20,21 @@ namespace Ridics.Core.HttpClient.Provider
         private readonly ILogger m_logger;
 
         private readonly IDateTimeProvider m_dateTimeProvider;
-        private readonly ITokenEndpointClient m_tokenClient;
+        private readonly Func<ITokenEndpointClient> m_tokenClientFactory;
         private readonly OpenIdConnectConfig m_openIdConnectConfig;
 
         private readonly ITokenStorage m_tokenStorage;
 
         public AuthApiAccessTokenProvider(IHttpContextAccessor httpContextAccessor, 
             ILogger logger,
-            ITokenEndpointClient tokenClient, 
+            Func<ITokenEndpointClient> tokenClientFactory, 
             IDateTimeProvider dateTimeProvider, 
             ITokenStorage tokenStorage, 
             OpenIdConnectConfig openIdConnectConfig)
         {
             m_httpContextAccessor = httpContextAccessor;
             m_logger = logger;
-            m_tokenClient = tokenClient;
+            m_tokenClientFactory = tokenClientFactory;
             m_dateTimeProvider = dateTimeProvider;
             m_tokenStorage = tokenStorage;
             m_openIdConnectConfig = openIdConnectConfig;
@@ -70,7 +70,7 @@ namespace Ridics.Core.HttpClient.Provider
                 return clientAccessToken.Token;
             }
 
-            var tokenResponse = await m_tokenClient.GetAccessTokenAsync(string.Join(" ", m_openIdConnectConfig.Scopes));
+            var tokenResponse = await m_tokenClientFactory.Invoke().GetAccessTokenAsync(string.Join(" ", m_openIdConnectConfig.Scopes));
 
             if (tokenResponse.IsError)
             {
