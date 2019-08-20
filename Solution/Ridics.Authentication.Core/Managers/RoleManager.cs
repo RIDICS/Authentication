@@ -45,6 +45,27 @@ namespace Ridics.Authentication.Core.Managers
             }
         }
 
+        public DataResult<RoleModel> FindRoleByName(string name)
+        {
+            try
+            {
+                var role = m_roleUoW.FindRoleByName(name);
+                var viewModel = m_mapper.Map<RoleModel>(role);
+
+                return Success(viewModel);
+            }
+            catch (NoResultException<RoleEntity> e)
+            {
+                m_logger.LogWarning(e);
+                return Error<RoleModel>(m_translator.Translate("invalid-role-name"), DataResultErrorCode.RoleNotExistName);
+            }
+            catch (DatabaseException e)
+            {
+                m_logger.LogWarning(e);
+                return Error<RoleModel>(e.Message);
+            }
+        }
+
         public DataResult<List<RoleModel>> GetAllRoles()
         {
             var roles = m_roleUoW.GetAllRoles();

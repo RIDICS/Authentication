@@ -216,5 +216,21 @@ namespace Ridics.Authentication.Service.Controllers.API
 
             return Json(contractList);
         }
+
+        [HttpGet]
+        [JwtAuthorize]
+        [ProducesResponseType(typeof(RoleContract), StatusCodes.Status200OK)]
+        public IActionResult GetRoleByName([Required] [FromQuery] string name)
+        {
+            var roleResult = m_rolesManager.FindRoleByName(name);
+
+            if (roleResult.HasError)
+            {
+                return Error(roleResult.Error);
+            }
+            
+            var role = Mapper.Map<RoleContract>(roleResult.Result);
+            return Json(role);
+        }
     }
 }
