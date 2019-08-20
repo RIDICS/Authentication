@@ -45,7 +45,10 @@ namespace Ridics.Authentication.HttpClient.Client.Auth
 
         public async Task<RoleContract> GetRoleByName(string name)
         {
-            var path = $"{BasePath}{name}";
+            var query = m_authorizationServiceHttpClient.CreateQueryCollection();
+            query.Add("name", name);
+             
+            var path = $"{BasePath}?{query}";
             var response = await m_authorizationServiceHttpClient.SendRequestAsync<RoleContract>(HttpMethod.Get, path);
 
             return response;

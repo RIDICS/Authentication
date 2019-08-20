@@ -217,10 +217,10 @@ namespace Ridics.Authentication.Service.Controllers.API
             return Json(contractList);
         }
 
-        [HttpGet("{name}")]
+        [HttpGet]
         [JwtAuthorize]
         [ProducesResponseType(typeof(RoleContract), StatusCodes.Status200OK)]
-        public IActionResult GetRoleByName([Required] [FromRoute] string name)
+        public IActionResult GetRoleByName([Required] [FromQuery] string name)
         {
             var roleResult = m_rolesManager.FindRoleByName(name);
 
