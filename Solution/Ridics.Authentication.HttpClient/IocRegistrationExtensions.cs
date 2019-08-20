@@ -1,3 +1,4 @@
+using System;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
@@ -25,11 +26,11 @@ namespace Ridics.Authentication.HttpClient
             AuthServiceControllerBasePathsConfiguration pathConfiguration = null)
             where TClientLocalization : class, IAuthorizationServiceClientLocalization
         {
-            services.AddScoped<IAuthorizationServiceClientLocalization, TClientLocalization>();
+            services.AddSingleton<IAuthorizationServiceClientLocalization, TClientLocalization>();
 
             services.AddSingleton<AuthorizationServiceHttpClient>();
 
-            services.AddScoped<AuthServiceControllerBasePathsProvider>();
+            services.AddSingleton<AuthServiceControllerBasePathsProvider>();
 
             services.AddScoped<RegistrationApiClient>();
             services.AddScoped<ExternalIdentityProviderApiClient>();
@@ -40,12 +41,14 @@ namespace Ridics.Authentication.HttpClient
             services.AddScoped<PermissionApiClient>();
             services.AddScoped<ContactApiClient>();
             services.TryAddScoped<IDateTimeProvider, DateTimeProvider>();
-            services.TryAddScoped<AuthApiAccessTokenProvider>();
+            services.TryAddSingleton<AuthApiAccessTokenProvider>();
 
             services.TryAddSingleton<ITokenStorage, InMemoryTokenStorage>();
 
             services.TryAddTransient<ITokenEndpointClient, TokenEndpointClient>();
             services.TryAddSingleton<TokenEndpointHttpClientProvider>();
+            services.TryAddSingleton<Func<ITokenEndpointClient>>(provider =>
+                provider.GetRequiredService<ITokenEndpointClient>);
 
             if (configuration != null)
             {
