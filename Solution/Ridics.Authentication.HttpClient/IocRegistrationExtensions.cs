@@ -27,7 +27,7 @@ namespace Ridics.Authentication.HttpClient
         {
             services.AddScoped<IAuthorizationServiceClientLocalization, TClientLocalization>();
 
-            services.AddScoped<AuthorizationServiceHttpClient>();
+            services.AddSingleton<AuthorizationServiceHttpClient>();
 
             services.AddScoped<AuthServiceControllerBasePathsProvider>();
 
