@@ -633,7 +633,7 @@ namespace Ridics.Authentication.Service.Controllers.API
 
             try
             {
-                await m_identityUserManager.SendResetPasswordAsync(Url, user, HttpContext.Request.Protocol);
+                await m_identityUserManager.SendResetPasswordAsync(Url, user, HttpContext.Request.Scheme);
                 return Ok();
             }
             catch (GenerateResetPasswordTokenException e)

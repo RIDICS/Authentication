@@ -327,13 +327,13 @@ namespace Ridics.Authentication.Service.Authentication.Identity.Managers
             return user;
         }
 
-        public async Task SendResetPasswordAsync(IUrlHelper url, ApplicationUser user, string httpProtocol)
+        public async Task SendResetPasswordAsync(IUrlHelper url, ApplicationUser user, string protocol)
         {
             var token = await GeneratePasswordResetTokenAsync(user);
             var culture = m_translator.GetRequestCulture().Name;
 
             var resetLink = url.Action( "ResetPassword", "Account",
-                new {username = user.UserName, token = token, culture = culture}, httpProtocol);
+                new {username = user.UserName, token = token, culture = culture}, protocol);
 
             var userModel = Mapper.Map<UserModel>(user);
 

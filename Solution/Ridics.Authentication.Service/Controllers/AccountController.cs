@@ -333,7 +333,7 @@ namespace Ridics.Authentication.Service.Controllers
 
             try
             {
-                await m_identityUserManager.SendResetPasswordAsync(Url, user, HttpContext.Request.Protocol);
+                await m_identityUserManager.SendResetPasswordAsync(Url, user, HttpContext.Request.Scheme);
 
                 return RedirectToAction(nameof(RequestResetPasswordSuccess), new {returnUrl = viewModel.ReturnUrl});
             }
