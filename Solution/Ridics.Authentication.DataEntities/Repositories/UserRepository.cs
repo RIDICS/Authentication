@@ -174,7 +174,7 @@ namespace Ridics.Authentication.DataEntities.Repositories
             }
         }
 
-        public IList<UserEntity> FindUsersByRole(int roleId, int start, int count, string searchByName)
+        public IList<UserEntity> FindUsersByRole(UserType type, int roleId, int start, int count, string searchByName)
         {
             UserEntity userAlias = null;
             try
@@ -188,6 +188,7 @@ namespace Ridics.Authentication.DataEntities.Repositories
 
                 var query = session.QueryOver(() => userAlias);
 
+                query = AddRestrictionOnUserTypeToQuery(query, type);
                 query = AddOrderingByLastNameAndFirstNameToQuery(query, userAlias);
                 query = AddSearchByNameToQuery(query, searchByName);
 
@@ -208,7 +209,7 @@ namespace Ridics.Authentication.DataEntities.Repositories
             }
         }
 
-        public int GetUsersByRoleCount(int roleId, string searchByName)
+        public int GetUsersByRoleCount(UserType type, int roleId, string searchByName)
         {
             UserEntity userAlias = null;
             try
@@ -222,6 +223,7 @@ namespace Ridics.Authentication.DataEntities.Repositories
 
                 var query = session.QueryOver(() => userAlias);
 
+                query = AddRestrictionOnUserTypeToQuery(query, type);
                 query = AddSearchByNameToQuery(query, searchByName);
 
                 var result = query

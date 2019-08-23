@@ -190,8 +190,8 @@ namespace Ridics.Authentication.Service.Controllers.API
                 count = MaxListCount;
             }
 
-            var usersResult = m_usersManager.FindUsersByRole(id, start, count, search);
-            var usersCountResult = m_usersManager.GetUsersByRoleCount(id, search);
+            var usersResult = m_usersManager.FindNonAuthenticationUsersByRole(id, start, count, search);
+            var usersCountResult = m_usersManager.GetNonAuthenticationUsersByRoleCount(id, search);
 
             if (usersResult.HasError)
             {
@@ -215,6 +215,22 @@ namespace Ridics.Authentication.Service.Controllers.API
             }; 
 
             return Json(contractList);
+        }
+
+        [HttpGet]
+        [JwtAuthorize]
+        [ProducesResponseType(typeof(RoleContract), StatusCodes.Status200OK)]
+        public IActionResult GetRoleByName([Required] [FromQuery] string name)
+        {
+            var roleResult = m_rolesManager.FindRoleByName(name);
+
+            if (roleResult.HasError)
+            {
+                return Error(roleResult.Error);
+            }
+            
+            var role = Mapper.Map<RoleContract>(roleResult.Result);
+            return Json(role);
         }
     }
 }

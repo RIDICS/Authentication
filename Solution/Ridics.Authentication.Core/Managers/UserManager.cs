@@ -316,11 +316,11 @@ namespace Ridics.Authentication.Core.Managers
             }
         }
 
-        public DataResult<List<UserModel>> FindUsersByRole(int roleId, int start, int count, string searchByName)
+        public DataResult<List<UserModel>> FindNonAuthenticationUsersByRole(int roleId, int start, int count, string searchByName)
         {
             try
             {
-                var users = m_userUoW.FindUsersByRole(roleId, start, GetItemsOnPageCount(count), searchByName);
+                var users = m_userUoW.FindNonAuthenticationServiceUsersByRole(roleId, start, GetItemsOnPageCount(count), searchByName);
                 var viewModelList = m_mapper.Map<List<UserModel>>(users);
                 return Success(viewModelList);
             }
@@ -331,11 +331,11 @@ namespace Ridics.Authentication.Core.Managers
             }
         }
 
-        public DataResult<int> GetUsersByRoleCount(int roleId, string searchByName)
+        public DataResult<int> GetNonAuthenticationUsersByRoleCount(int roleId, string searchByName)
         {
             try
             {
-                var usersCount = m_userUoW.GetUsersByRoleCount(roleId, searchByName);
+                var usersCount = m_userUoW.GetNonAuthenticationServiceUsersByRoleCount(roleId, searchByName);
                 return Success(usersCount);
             }
             catch (DatabaseException e)

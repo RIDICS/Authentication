@@ -109,18 +109,18 @@ namespace Ridics.Authentication.DataEntities.UnitOfWork
         }
 
         [Transaction]
-        public virtual IList<UserEntity> FindUsersByRole(int roleId, int start, int count, string searchByName)
+        public virtual IList<UserEntity> FindNonAuthenticationServiceUsersByRole(int roleId, int start, int count, string searchByName)
         {
-            var users = m_userRepository.FindUsersByRole(roleId, start, count, searchByName);
+            var users = m_userRepository.FindUsersByRole(UserType.NonAuthenticationService, roleId, start, count, searchByName);
 
             HydrateUserListWithUserDataAndContacts(users);
             return users;
         }
 
         [Transaction]
-        public virtual int GetUsersByRoleCount(int roleId, string searchByName)
+        public virtual int GetNonAuthenticationServiceUsersByRoleCount(int roleId, string searchByName)
         {
-            var usersCount = m_userRepository.GetUsersByRoleCount(roleId, searchByName);
+            var usersCount = m_userRepository.GetUsersByRoleCount(UserType.NonAuthenticationService, roleId, searchByName);
             return usersCount;
         }
 
