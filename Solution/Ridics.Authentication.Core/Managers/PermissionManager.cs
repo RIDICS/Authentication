@@ -156,11 +156,11 @@ namespace Ridics.Authentication.Core.Managers
             }
         }
 
-        public DataResult<List<PermissionModel>> GetAllPermissions()
+        public DataResult<List<PermissionModel>> GetAllPermissions(string search = null)
         {
             try
             {
-                var permissions = m_permissionUoW.GetAllPermissions();
+                var permissions = m_permissionUoW.GetAllPermissions(search);
                 var viewModelList = m_mapper.Map<List<PermissionModel>>(permissions);
                 return Success(viewModelList);
             }

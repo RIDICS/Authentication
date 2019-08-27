@@ -105,11 +105,15 @@ namespace Ridics.Authentication.DataEntities.Repositories
             }
         }
 
-        public IList<PermissionEntity> GetAllPermissions()
+        public IList<PermissionEntity> GetAllPermissions(string search = null)
         {
             try
             {
-                return GetValuesList(FetchCollections, null, null, m_defaultOrdering);
+                var criterion = string.IsNullOrEmpty(search)
+                    ? null
+                    : Restrictions.On<PermissionEntity>(x => x.Name).IsLike(search, MatchMode.Anywhere);
+
+                return GetValuesList(FetchCollections, criterion, null, m_defaultOrdering);
             }
             catch (HibernateException ex)
             {

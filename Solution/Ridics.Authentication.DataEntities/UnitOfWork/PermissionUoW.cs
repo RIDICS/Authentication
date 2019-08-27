@@ -100,9 +100,9 @@ namespace Ridics.Authentication.DataEntities.UnitOfWork
         }
 
         [Transaction]
-        public virtual IList<PermissionEntity> GetAllPermissions()
+        public virtual IList<PermissionEntity> GetAllPermissions(string search = null)
         {
-            var permissions = m_permissionRepository.GetAllPermissions();
+            var permissions = m_permissionRepository.GetAllPermissions(search);
 
             return permissions;
         }

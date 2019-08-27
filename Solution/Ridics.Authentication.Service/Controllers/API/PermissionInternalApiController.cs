@@ -78,9 +78,9 @@ namespace Ridics.Authentication.Service.Controllers.API
         [HttpGet("allpermissions")]
         [JwtAuthorize]
         [ProducesResponseType(typeof(IList<PermissionContract>), StatusCodes.Status200OK)]
-        public IActionResult AllPermissions()
+        public IActionResult AllPermissions([FromQuery] string search = null)
         {
-            var permissionsResult = m_permissionManager.GetAllPermissions();
+            var permissionsResult = m_permissionManager.GetAllPermissions(search);
 
             if (permissionsResult.HasError)
             {

@@ -23,9 +23,20 @@ namespace Ridics.Authentication.HttpClient.Client.Auth
             await m_authorizationServiceHttpClient.SendRequestAsync(HttpMethod.Post, fullPath, selectedRoles);
         }
 
-        public async Task<IList<PermissionContract>> GetAllPermissionsAsync()
+        public async Task<IList<PermissionContract>> GetAllPermissionsAsync(string search = null)
         {
+            var query = m_authorizationServiceHttpClient.CreateQueryCollection();
+            if (search != null)
+            {
+                query.Add("search", search);
+            }
+
             var fullPath = $"{BasePath}AllPermissions";
+            if (query.Count > 0)
+            {
+                fullPath = $"{fullPath}?{query}";
+            }
+
             return await m_authorizationServiceHttpClient.SendRequestAsync<IList<PermissionContract>>(HttpMethod.Get, fullPath);
         }
 
