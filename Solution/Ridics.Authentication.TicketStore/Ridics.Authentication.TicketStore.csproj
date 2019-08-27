@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp2.2</TargetFramework>
-    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <!--<GeneratePackageOnBuild>true</GeneratePackageOnBuild>-->
     <PackageOutputPath>..\..\build\</PackageOutputPath>
     <PackageLicenseExpression>BSD-3-Clause</PackageLicenseExpression>
     <Authors>RIDICS</Authors>
