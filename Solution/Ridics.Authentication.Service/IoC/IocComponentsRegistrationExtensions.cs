@@ -3,6 +3,7 @@ using DryIoc.Facilities.NHibernate;
 using DryIoc.Microsoft.DependencyInjection;
 using Microsoft.AspNetCore.Mvc.DataAnnotations;
 using Microsoft.Extensions.DependencyInjection;
+using Ridics.Authentication.Core.MessageSenders;
 using Ridics.Authentication.Core.Utils;
 using Ridics.Authentication.Service.Builders.Implementation;
 using Ridics.Authentication.Service.Builders.Interface;
@@ -16,6 +17,7 @@ using Ridics.Authentication.Service.Managers;
 using Ridics.Authentication.Service.Models;
 using Ridics.Authentication.Service.SharedInterfaceImpl;
 using Ridics.Authentication.Service.Utils;
+using Ridics.Authentication.Service.Utils.MessageSenders;
 using Ridics.Authentication.Shared;
 using Ridics.Core.Service.Shared.IoC;
 using Ridics.Core.ReCaptcha.Managers;
@@ -31,6 +33,7 @@ namespace Ridics.Authentication.Service.IoC
             var serviceCollection = new ServiceCollection();
             serviceCollection.RegisterComponents();
             serviceCollection.RegisterAttributeAdapters();
+            serviceCollection.RegisterMessageSenders();
 
             container.Populate(serviceCollection);
         }
@@ -67,6 +70,18 @@ namespace Ridics.Authentication.Service.IoC
         private static void RegisterAttributeAdapters(this IServiceCollection services)
         {
             services.AddSingleton<IValidationAttributeAdapterProvider, CustomUriAttributeAdapterProvider>();
+        }
+        
+        private static void RegisterMessageSenders(this IServiceCollection services)
+        {
+            // Null senders are registered because of missing client implementation or missing credentials
+
+            // SMS sender:
+            services.AddScoped<IMessageSender, NullSmsSender>();
+
+            // E-mail sender:
+            services.AddScoped<IMessageSender, NullEmailSender>();
+            //services.AddScoped<IMessageSender, SmtpEmailSender>();
         }
     }
 }

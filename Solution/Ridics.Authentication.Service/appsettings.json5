@@ -48,7 +48,14 @@
     "WarningBeforeExpirationInSeconds": 600
   },
   "TokensExpiration": {
-    "TwoFactorTokenExpirationInSeconds" : 360,
-    "PasswordResetTokenExpirationInSeconds" : 86400 //24 hours
-  }
+    "TwoFactorTokenExpirationInSeconds": 360,
+    "PasswordResetTokenExpirationInSeconds": 86400 //24 hours
+  },
+  "SmtpEmail": {
+    "SenderAddress": "",
+    "SmtpServer": "",
+    "SmtpPort": 465,
+    "SmtpUsername": "",
+    "SmtpPassword": ""
+  } 
 }

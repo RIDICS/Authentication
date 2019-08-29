@@ -30,6 +30,8 @@ namespace Ridics.Authentication.Service.IoC
             services.AddConfigOptions<LoginExpirationConfig>(configuration, "LoginExpiration");
             services.AddConfigOptions<TokensExpirationConfiguration>(configuration, "TokensExpiration");
             services.AddConfigOptions<FeatureFlagsConfiguration>(configuration, "FeatureFlags");
+
+            services.AddConfigOptions<SmtpEmailConfiguration>(configuration, "SmtpEmail");
         }
 
         private static IServiceCollection AddConfigOptions<TOptions>(this IServiceCollection services, Action<TOptions> configureOptions)

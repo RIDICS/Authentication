@@ -5,10 +5,8 @@ using Ridics.Authentication.Core.Configuration;
 using Ridics.Authentication.Core.ExternalIdentity;
 using Ridics.Authentication.Core.Managers;
 using Ridics.Authentication.Core.MapperProfiles;
-using Ridics.Authentication.Core.MessageSenders;
 using Ridics.Authentication.Core.Utils.CodeGenerator.Configuration;
 using Ridics.Authentication.Core.Utils.CodeGenerator.ContactConfirm;
-using Ridics.Authentication.Core.Utils.CodeGenerator.Generic;
 using Ridics.Authentication.Core.Utils.CodeGenerator.User;
 using Ridics.Authentication.Core.Utils.Formatter;
 using Ridics.Authentication.Core.Utils.Hashing;
@@ -25,7 +23,6 @@ namespace Ridics.Authentication.Core
         {
             services.RegisterManagers();
             services.RegisterCodeGenerators();
-            services.RegisterMessageSenders();
             services.RegisterMapperProfiles();
             services.RegisterDataEntitiesComponents();
             services.RegisterConfiguration();
@@ -70,12 +67,6 @@ namespace Ridics.Authentication.Core
             services.AddScoped<ContactManager>();
 
             services.AddTransient<ApiAccessKeyManager>();
-        }
-
-        private static void RegisterMessageSenders(this IServiceCollection services)
-        {
-            services.AddScoped<IMessageSender, NullSmsSender>();
-            services.AddScoped<IMessageSender, NullEmailSender>();
         }
 
         private static void RegisterExternalIdentityResolvers(this IServiceCollection services)
