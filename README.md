@@ -45,6 +45,14 @@ Default deployment script assumes that the Authentication Service will be placed
   * e.g. `modules.Production.json` and so on
 * Fill correct values to these files
 
+### Requirements for sending notifications
+* SMTP server for sending notifications (two-factor login, forgotten password, ...)
+* SMS gateway for sending notifications (two-factor login)
+
+> The Authentication service is using `IocComponentsRegistrationExtensions.RegisterMessageSenders()` method for registering component able to sending some notification messages. Defaultly there are registered `NullSmsSender` and `NullEmailSender` which discards all messages.
+> * Sending e-mails can be enabled by registering component `SmtpEmailSender` instead of `NullEmailSender`
+> * There is no implementation for sending SMS because each gateway have different API
+
 ### Required software:
 * Microsoft Windows Server 2012 R2 +
 * SQL Server or PostgreSQL 11
