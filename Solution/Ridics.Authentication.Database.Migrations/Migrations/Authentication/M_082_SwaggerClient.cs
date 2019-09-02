@@ -66,6 +66,7 @@ namespace Ridics.Authentication.Database.Migrations.Migrations.Authentication
             {
                 "https://localhost:44395/swagger/oauth2-redirect.html",
                 "https://localhost/Auth/swagger/oauth2-redirect.html",
+                "https://localhost:44331/swagger/oauth2-redirect.html",
             };
 
             var uriInsertQuery = Query.Conn(connection, transaction).Insert("Uri");
