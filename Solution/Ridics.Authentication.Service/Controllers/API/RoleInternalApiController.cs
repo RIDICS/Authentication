@@ -1,18 +1,15 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Threading.Tasks;
 using AutoMapper;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Ridics.Authentication.Core.Managers;
 using Ridics.Authentication.Core.Models;
 using Ridics.Authentication.DataContracts;
-using Ridics.Authentication.DataContracts.User;
 using Ridics.Authentication.Service.Attributes;
 using Ridics.Authentication.Service.Authentication.Identity.Managers;
 using Ridics.Authentication.Service.Authorization;
 using Ridics.Authentication.Service.Helpers;
-using Ridics.Core.Structures;
 using Ridics.Core.Structures.Shared;
 
 namespace Ridics.Authentication.Service.Controllers.API
@@ -72,7 +69,7 @@ namespace Ridics.Authentication.Service.Controllers.API
 
         [HttpGet("allroles")]
         [JwtAuthorize]
-        [ProducesResponseType(typeof(IList<RoleContract>), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(IList<RoleContractBase>), StatusCodes.Status200OK)]
         public IActionResult AllRoles([FromQuery] int start = 0, [FromQuery] int count = DefaultListCount)
         {
             if (count > MaxListCount)
@@ -88,7 +85,7 @@ namespace Ridics.Authentication.Service.Controllers.API
                 return Error(rolesResult.Error);
             }
 
-            var roleContracts = Mapper.Map<IList<RoleContract>>(rolesResult.Result);
+            var roleContracts = Mapper.Map<IList<RoleContractBase>>(rolesResult.Result);
 
             return Json(roleContracts);
         }
@@ -96,7 +93,7 @@ namespace Ridics.Authentication.Service.Controllers.API
         [HttpPost("create")]
         [JwtAuthorize(Policy = PermissionNames.ManageUserRoles)]
         [ProducesResponseType(typeof(int), StatusCodes.Status200OK)]
-        public ActionResult Create([FromBody] [Required] RoleContract roleContract)
+        public ActionResult Create([FromBody] [Required] RoleContractBase roleContract)
         {
             if (ModelState.IsValid)
             {
@@ -136,7 +133,7 @@ namespace Ridics.Authentication.Service.Controllers.API
 
         [HttpPut("{id}/edit")]
         [JwtAuthorize(Policy = PermissionNames.ManageUserRoles)]
-        public ActionResult Edit([Required] [FromRoute] int id, [Required] [FromBody] RoleContract roleContract)
+        public ActionResult Edit([Required] [FromRoute] int id, [Required] [FromBody] RoleContractBase roleContract)
         {
             var roleModel = Mapper.Map<RoleModel>(roleContract);
 

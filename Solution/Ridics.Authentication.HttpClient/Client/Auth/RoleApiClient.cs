@@ -23,10 +23,10 @@ namespace Ridics.Authentication.HttpClient.Client.Auth
             await m_authorizationServiceHttpClient.SendRequestAsync(HttpMethod.Post, fullPath, selectedPermissions);
         }
 
-        public async Task<IList<RoleContract>> GetAllRolesAsync()
+        public async Task<IList<RoleContractBase>> GetAllRolesAsync()
         {
             var fullPath = $"{BasePath}AllRoles";
-            return await m_authorizationServiceHttpClient.SendRequestAsync<IList<RoleContract>>(HttpMethod.Get, fullPath);
+            return await m_authorizationServiceHttpClient.SendRequestAsync<IList<RoleContractBase>>(HttpMethod.Get, fullPath);
         }
 
         public async Task<ListContract<UserWithRolesContract>> GetUserListByRoleAsync(int roleId, int? start, int? count, string search)

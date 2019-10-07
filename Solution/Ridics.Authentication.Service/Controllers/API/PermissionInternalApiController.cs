@@ -77,7 +77,7 @@ namespace Ridics.Authentication.Service.Controllers.API
 
         [HttpGet("allpermissions")]
         [JwtAuthorize]
-        [ProducesResponseType(typeof(IList<PermissionContract>), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(IList<PermissionContractBase>), StatusCodes.Status200OK)]
         public IActionResult AllPermissions([FromQuery] string search = null)
         {
             var permissionsResult = m_permissionManager.GetAllPermissions(search);
@@ -89,7 +89,7 @@ namespace Ridics.Authentication.Service.Controllers.API
 
             FilterAuthServiceRoles(permissionsResult.Result);
 
-            var permissionContracts = Mapper.Map<IList<PermissionContract>>(permissionsResult.Result);
+            var permissionContracts = Mapper.Map<IList<PermissionContractBase>>(permissionsResult.Result);
 
             return Json(permissionContracts);
         }
@@ -97,7 +97,7 @@ namespace Ridics.Authentication.Service.Controllers.API
         [HttpPost("create")]
         [JwtAuthorize(Policy = PermissionNames.ManageUserPermissions)]
         [ProducesResponseType(typeof(int), StatusCodes.Status200OK)]
-        public ActionResult Create([Required] [FromBody] PermissionContract permissionContract)
+        public ActionResult Create([Required] [FromBody] PermissionContractBase permissionContract)
         {
             var permissionModel = Mapper.Map<PermissionModel>(permissionContract);
 
@@ -149,7 +149,7 @@ namespace Ridics.Authentication.Service.Controllers.API
         [HttpPut("{id}/edit")]
         [JwtAuthorize(Policy = PermissionNames.ManageUserPermissions)]
         public ActionResult Edit([Required] [FromRoute] int id,
-            [Required] [FromBody] PermissionContract permissionContract)
+            [Required] [FromBody] PermissionContractBase permissionContract)
         {
             var permissionModel = Mapper.Map<PermissionModel>(permissionContract);
 
