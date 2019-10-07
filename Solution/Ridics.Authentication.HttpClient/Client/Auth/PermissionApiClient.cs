@@ -33,17 +33,17 @@ namespace Ridics.Authentication.HttpClient.Client.Auth
             return m_authorizationServiceHttpClient.GetItemAsync<PermissionContract>(id, parameters);
         }
 
-        public Task<HttpResponseMessage> Create(PermissionContractBase permissionContract)
+        public Task<HttpResponseMessage> CreateItemAsync(PermissionContractBase permissionContract)
         {
             return m_authorizationServiceHttpClient.CreateItemAsync(permissionContract);
         }
 
-        public Task<HttpResponseMessage> Edit(int id, PermissionContractBase permissionContract)
+        public Task<HttpResponseMessage> EditItemAsync(int id, PermissionContractBase permissionContract)
         {
             return m_authorizationServiceHttpClient.EditItemAsync(id, permissionContract);
         }
 
-        public Task<HttpResponseMessage> Delete(int id)
+        public Task<HttpResponseMessage> DeleteItemAsync(int id)
         {
             return m_authorizationServiceHttpClient.DeleteItemAsync<PermissionContract>(id);
         }

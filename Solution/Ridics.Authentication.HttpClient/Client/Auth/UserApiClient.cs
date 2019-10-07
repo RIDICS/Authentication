@@ -29,12 +29,12 @@ namespace Ridics.Authentication.HttpClient.Client.Auth
             return m_authorizationServiceHttpClient.GetItemAsync<UserContract>(id);
         }
         
-        public Task<HttpResponseMessage> Edit(int id, UserContract userContract)
+        public Task<HttpResponseMessage> EditItemAsync(int id, UserContract userContract)
         {
             return m_authorizationServiceHttpClient.EditItemAsync(id, userContract);
         }
 
-        public Task<HttpResponseMessage> Delete(int id)
+        public Task<HttpResponseMessage> DeleteItemAsync(int id)
         {
             return m_authorizationServiceHttpClient.DeleteItemAsync<UserContract>(id);
         }
