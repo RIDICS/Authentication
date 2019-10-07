@@ -17,6 +17,22 @@ namespace Ridics.Authentication.HttpClient.Client.Auth
 
         protected override string BasePath => m_basePathsConfiguration.RoleBasePath;
 
+        public Task<ListContract<RoleContract>> GetRoleListAsync(int start, int count, string search = null, bool fetchPermissions = false)
+        {
+            var parameters = m_authorizationServiceHttpClient.CreateQueryCollection();
+            parameters.Add("fetchPermissions", fetchPermissions.ToString());
+
+            return m_authorizationServiceHttpClient.GetListAsync<RoleContract>(start, count, search, parameters);
+        }
+
+        public Task<RoleContract> GetItemAsync(int id, bool fetchPermissions = false)
+        {
+            var parameters = m_authorizationServiceHttpClient.CreateQueryCollection();
+            parameters.Add("fetchPermissions", fetchPermissions.ToString());
+
+            return m_authorizationServiceHttpClient.GetItemAsync<RoleContract>(id, parameters);
+        }
+
         public async Task AssignPermissionsToRoleAsync(int id, IEnumerable<int> selectedPermissions)
         {
             var fullPath = $"{BasePath}{id}/Permissions";
@@ -43,11 +59,12 @@ namespace Ridics.Authentication.HttpClient.Client.Auth
             return response;
         }
 
-        public async Task<RoleContract> GetRoleByName(string name)
+        public async Task<RoleContract> GetRoleByName(string name, bool fetchPermissions = false)
         {
             var query = m_authorizationServiceHttpClient.CreateQueryCollection();
             query.Add("name", name);
-             
+            query.Add("fetchPermissions", fetchPermissions.ToString());
+
             var path = $"{BasePath}?{query}";
             var response = await m_authorizationServiceHttpClient.SendRequestAsync<RoleContract>(HttpMethod.Get, path);
 

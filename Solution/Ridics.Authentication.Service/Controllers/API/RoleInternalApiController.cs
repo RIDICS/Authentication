@@ -33,7 +33,7 @@ namespace Ridics.Authentication.Service.Controllers.API
         [HttpGet("list")]
         [JwtAuthorize(Policy = PermissionNames.ManageUserRoles)]
         [ProducesResponseType(typeof(ListContract<RoleContract>), StatusCodes.Status200OK)]
-        public IActionResult ListRoles([FromQuery] int start = 0, [FromQuery] int count = DefaultListCount, [FromQuery] string search = null)
+        public IActionResult ListRoles([FromQuery] int start = 0, [FromQuery] int count = DefaultListCount, [FromQuery] string search = null, [FromQuery] bool fetchPermissions = false)
         {
             if (count > MaxListCount)
             {
@@ -115,7 +115,7 @@ namespace Ridics.Authentication.Service.Controllers.API
         [HttpGet("{id}")]
         [JwtAuthorize]
         [ProducesResponseType(typeof(RoleContract), StatusCodes.Status200OK)]
-        public ActionResult Get([Required] [FromRoute] int id)
+        public ActionResult Get([Required] [FromRoute] int id, [FromQuery] bool fetchPermissions = false)
         {
 
             var result = m_rolesManager.FindRoleById(id);
@@ -217,7 +217,7 @@ namespace Ridics.Authentication.Service.Controllers.API
         [HttpGet]
         [JwtAuthorize]
         [ProducesResponseType(typeof(RoleContract), StatusCodes.Status200OK)]
-        public IActionResult GetRoleByName([Required] [FromQuery] string name)
+        public IActionResult GetRoleByName([Required] [FromQuery] string name, [FromQuery] bool fetchPermissions = false)
         {
             var roleResult = m_rolesManager.FindRoleByName(name);
 

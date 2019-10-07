@@ -31,7 +31,7 @@ namespace Ridics.Authentication.Service.Controllers.API
         [HttpGet("list")]
         [JwtAuthorize(Policy = PermissionNames.ManageUserPermissions)]
         [ProducesResponseType(typeof(ListContract<PermissionContract>), StatusCodes.Status200OK)]
-        public ActionResult ListPermissions([FromQuery] int start = 0, [FromQuery] int count = DefaultListCount, [FromQuery] string search = null)
+        public ActionResult ListPermissions([FromQuery] int start = 0, [FromQuery] int count = DefaultListCount, [FromQuery] string search = null, [FromQuery] bool fetchRoles = false)
         {
             if (count > MaxListCount)
             {
@@ -132,7 +132,7 @@ namespace Ridics.Authentication.Service.Controllers.API
 
         [HttpGet("{id}")]
         [JwtAuthorize(Policy = PermissionNames.ManageUserPermissions)]
-        public ActionResult Get([Required] [FromRoute] int id)
+        public ActionResult Get([Required] [FromRoute] int id, [FromQuery] bool fetchRoles = false)
         {
             var result = m_permissionManager.FindPermissionById(id);
 

@@ -41,7 +41,8 @@ namespace Ridics.Core.HttpClient.Client
             return HttpUtility.ParseQueryString(string.Empty);
         }
 
-        protected virtual NameValueCollection CreateListedQuery(int start, int count, string search)
+        protected virtual NameValueCollection CreateListedQuery(int start, int count, string search,
+            NameValueCollection additionalParameters)
         {
             var parameters = CreateQuery();
 
@@ -51,6 +52,11 @@ namespace Ridics.Core.HttpClient.Client
             if (!string.IsNullOrEmpty(search))
             {
                 parameters.Add("search", search);
+            }
+
+            if (additionalParameters != null)
+            {
+                parameters.Add(additionalParameters);
             }
 
             return parameters;

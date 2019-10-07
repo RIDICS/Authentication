@@ -10,7 +10,6 @@ using Ridics.Authentication.HttpClient.Contract;
 using Ridics.Authentication.HttpClient.Exceptions;
 using Ridics.Authentication.HttpClient.Provider;
 using Ridics.Core.HttpClient.Client;
-using Ridics.Core.HttpClient.Config;
 using Ridics.Core.HttpClient.Provider;
 
 namespace Ridics.Authentication.HttpClient.Client
@@ -111,16 +110,22 @@ namespace Ridics.Authentication.HttpClient.Client
             return responseObject;
         }
 
-        public async Task<ListContract<TContract>> GetListAsync<TContract>(int start, int count, string search = null)
+        public async Task<ListContract<TContract>> GetListAsync<TContract>(int start, int count, string search = null, NameValueCollection parameters = null)
         {
-            var path = $"{GetControllerBasePath<TContract>()}list?{CreateListedQuery(start, count, search)}";
+            var path = $"{GetControllerBasePath<TContract>()}list?{CreateListedQuery(start, count, search, parameters)}";
             var response = await SendRequestAsync<ListContract<TContract>>(HttpMethod.Get, path);
             return response;
         }
 
-        public async Task<TContract> GetItemAsync<TContract>(int id)
+        public async Task<TContract> GetItemAsync<TContract>(int id, NameValueCollection parameters = null)
         {
             var path = $"{GetControllerBasePath<TContract>()}{id}";
+            if (parameters != null)
+            {
+                var queryParameters = CreateQuery();
+                queryParameters.Add(parameters);
+                path = $"{path}?{queryParameters}";
+            }
             var response = await SendRequestAsync<TContract>(HttpMethod.Get, path);
             return response;
         }

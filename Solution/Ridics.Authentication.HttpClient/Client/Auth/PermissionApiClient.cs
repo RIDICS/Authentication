@@ -17,6 +17,22 @@ namespace Ridics.Authentication.HttpClient.Client.Auth
 
         protected override string BasePath => m_basePathsConfiguration.PermissionBasePath;
 
+        public Task<ListContract<PermissionContract>> GetPermissionListAsync(int start, int count, string search = null, bool fetchPermissions = false)
+        {
+            var parameters = m_authorizationServiceHttpClient.CreateQueryCollection();
+            parameters.Add("fetchPermissions", fetchPermissions.ToString());
+
+            return m_authorizationServiceHttpClient.GetListAsync<PermissionContract>(start, count, search, parameters);
+        }
+
+        public Task<PermissionContract> GetItemAsync(int id, bool fetchPermissions = false)
+        {
+            var parameters = m_authorizationServiceHttpClient.CreateQueryCollection();
+            parameters.Add("fetchPermissions", fetchPermissions.ToString());
+
+            return m_authorizationServiceHttpClient.GetItemAsync<PermissionContract>(id, parameters);
+        }
+
         public async Task AssignRolesToPermissionAsync(int id, IEnumerable<int> selectedRoles)
         {
             var fullPath = $"{BasePath}{id}/Roles";
