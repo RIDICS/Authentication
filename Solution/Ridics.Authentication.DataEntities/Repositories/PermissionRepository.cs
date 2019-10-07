@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using DryIoc.Facilities.NHibernate;
 using NHibernate;
@@ -32,6 +33,17 @@ namespace Ridics.Authentication.DataEntities.Repositories
                 .Future<PermissionEntity>();
         }
 
+        private Action<ISession, ICriterion, IList<QueryJoinAlias<PermissionEntity>>> GetFetchMethod(bool isFetchEnabled)
+        {
+            Action<ISession, ICriterion, IList<QueryJoinAlias<PermissionEntity>>> fetchMethod = FetchCollections;
+            if (!isFetchEnabled)
+            {
+                fetchMethod = null;
+            }
+
+            return fetchMethod;
+        }
+
         private AbstractCriterion CreateSearchCriteria(string searchByName)
         {
             var criteria = string.IsNullOrEmpty(searchByName)
@@ -40,14 +52,14 @@ namespace Ridics.Authentication.DataEntities.Repositories
 
             return criteria;
         }
-
-        public IList<PermissionEntity> GetPermissions(int start, int count, string searchByName = null)
+        
+        public IList<PermissionEntity> GetPermissions(int start, int count, string searchByName = null, bool fetch = false)
         {
             var criteria = CreateSearchCriteria(searchByName);
 
             try
             {
-                return GetValuesList(start, count, FetchCollections, criteria, null, m_defaultOrdering);
+                return GetValuesList(start, count, GetFetchMethod(fetch), criteria, null, m_defaultOrdering);
             }
             catch (HibernateException ex)
             {
@@ -69,13 +81,13 @@ namespace Ridics.Authentication.DataEntities.Repositories
             }
         }
 
-        public PermissionEntity FindPermissionById(int id)
+        public PermissionEntity FindPermissionById(int id, bool fetch)
         {
             var criterion = Restrictions.Where<PermissionEntity>(x => x.Id == id);
-
+            
             try
             {
-                return GetSingleValue<PermissionEntity>(FetchCollections, criterion);
+                return GetSingleValue<PermissionEntity>(GetFetchMethod(fetch), criterion);
             }
             catch (HibernateException ex)
             {
@@ -105,7 +117,7 @@ namespace Ridics.Authentication.DataEntities.Repositories
             }
         }
 
-        public IList<PermissionEntity> GetAllPermissions(string search = null)
+        public IList<PermissionEntity> GetAllPermissions(bool fetch, string search = null)
         {
             try
             {
@@ -113,7 +125,7 @@ namespace Ridics.Authentication.DataEntities.Repositories
                     ? null
                     : Restrictions.On<PermissionEntity>(x => x.Name).IsLike(search, MatchMode.Anywhere);
 
-                return GetValuesList(FetchCollections, criterion, null, m_defaultOrdering);
+                return GetValuesList(GetFetchMethod(fetch), criterion, null, m_defaultOrdering);
             }
             catch (HibernateException ex)
             {
@@ -121,13 +133,13 @@ namespace Ridics.Authentication.DataEntities.Repositories
             }
         }
 
-        public IList<PermissionEntity> GetPermissionsById(IEnumerable<int> ids)
+        public IList<PermissionEntity> GetPermissionsById(IEnumerable<int> ids, bool fetch)
         {
             var criterion = Restrictions.On<PermissionEntity>(x => x.Id).IsIn(ids.ToList());
 
             try
             {
-                return GetValuesList(FetchCollections, criterion, null, m_defaultOrdering);
+                return GetValuesList(GetFetchMethod(fetch), criterion, null, m_defaultOrdering);
             }
             catch (HibernateException ex)
             {

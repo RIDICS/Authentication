@@ -23,9 +23,9 @@ namespace Ridics.Authentication.DataEntities.UnitOfWork
         }
 
         [Transaction]
-        public virtual PermissionEntity FindPermissionById(int id)
+        public virtual PermissionEntity FindPermissionById(int id, bool fetchRoles)
         {
-            var permission = m_permissionRepository.FindPermissionById(id);
+            var permission = m_permissionRepository.FindPermissionById(id, fetchRoles);
 
             if (permission == null)
             {
@@ -55,7 +55,7 @@ namespace Ridics.Authentication.DataEntities.UnitOfWork
         [Transaction]
         public virtual void UpdatePermission(int id, PermissionEntity permission)
         {
-            var permissionEntity = m_permissionRepository.FindPermissionById(id);
+            var permissionEntity = m_permissionRepository.FindPermissionById(id, false);
 
             if (permissionEntity == null)
             {
@@ -69,9 +69,9 @@ namespace Ridics.Authentication.DataEntities.UnitOfWork
         }
 
         [Transaction]
-        public virtual IList<PermissionEntity> GetPermissions(int start, int count, string searchByName)
+        public virtual IList<PermissionEntity> GetPermissions(int start, int count, string searchByName, bool fetchRoles)
         {
-            var permissions = m_permissionRepository.GetPermissions(start, count, searchByName);
+            var permissions = m_permissionRepository.GetPermissions(start, count, searchByName, fetchRoles);
 
             return permissions;
         }
@@ -100,9 +100,9 @@ namespace Ridics.Authentication.DataEntities.UnitOfWork
         }
 
         [Transaction]
-        public virtual IList<PermissionEntity> GetAllPermissions(string search = null)
+        public virtual IList<PermissionEntity> GetAllPermissions(bool fetch, string search = null)
         {
-            var permissions = m_permissionRepository.GetAllPermissions(search);
+            var permissions = m_permissionRepository.GetAllPermissions(fetch, search);
 
             return permissions;
         }
@@ -110,7 +110,7 @@ namespace Ridics.Authentication.DataEntities.UnitOfWork
         [Transaction]
         public virtual void AssignRolesToPermission(int id, IEnumerable<int> roleIds, bool overwriteAuthOnlyRoles)
         {
-            var permissionEntity = m_permissionRepository.FindPermissionById(id);
+            var permissionEntity = m_permissionRepository.FindPermissionById(id, true);
 
             if (permissionEntity == null)
             {

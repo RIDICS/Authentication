@@ -158,7 +158,7 @@ namespace Ridics.Authentication.DataEntities.UnitOfWork
             }
 
             roleEntity.Permissions =
-                new HashSet<PermissionEntity>(m_permissionRepository.GetPermissionsById(permissionIds));
+                new HashSet<PermissionEntity>(m_permissionRepository.GetPermissionsById(permissionIds, false));
 
             m_roleRepository.Update(roleEntity);
         }

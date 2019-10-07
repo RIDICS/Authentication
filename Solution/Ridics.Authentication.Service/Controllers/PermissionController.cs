@@ -29,7 +29,7 @@ namespace Ridics.Authentication.Service.Controllers
             int count = PaginationConstants.ItemsOnPage, string searchByName = null, bool partial = false)
         {
             LoadCachedModelState();
-            var permissionsResult = m_permissionManager.GetPermissions(start, count, searchByName);
+            var permissionsResult = m_permissionManager.GetPermissions(start, count, searchByName, true);
             var permissionsCountResult = m_permissionManager.GetPermissionsCount(searchByName);
 
             if (permissionsResult.HasError)
@@ -65,7 +65,7 @@ namespace Ridics.Authentication.Service.Controllers
         [Route("[controller]/{id}/[action]")]
         public ActionResult View(int id)
         {
-            var result = m_permissionManager.FindPermissionById(id);
+            var result = m_permissionManager.FindPermissionById(id, true);
 
             if (result.HasError)
             {
@@ -116,7 +116,7 @@ namespace Ridics.Authentication.Service.Controllers
         [Route("[controller]/{id}/[action]")]
         public ActionResult Edit(int id)
         {
-            var result = m_permissionManager.FindPermissionById(id);
+            var result = m_permissionManager.FindPermissionById(id, true);
 
             if (result.HasError)
             {

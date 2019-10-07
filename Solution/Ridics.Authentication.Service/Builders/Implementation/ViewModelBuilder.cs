@@ -343,7 +343,7 @@ namespace Ridics.Authentication.Service.Builders.Implementation
 
         public IList<SelectableViewModel<RoleViewModel>> BuildPermissionRolesViewModel(ModelStateDictionary modelState, int permissionId)
         {
-            var permissionResult = m_permissionManager.FindPermissionById(permissionId);
+            var permissionResult = m_permissionManager.FindPermissionById(permissionId, true);
 
             var rolesResult = m_roleManager.GetAllRoles();
 

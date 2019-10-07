@@ -38,7 +38,7 @@ namespace Ridics.Authentication.Service.Controllers.API
                 count = MaxListCount;
             }
 
-            var permissionsResult = m_permissionManager.GetPermissions(start, count, search);
+            var permissionsResult = m_permissionManager.GetPermissions(start, count, search, fetchRoles);
             var permissionCountResult = m_permissionManager.GetPermissionsCount(search);
 
             if (permissionsResult.HasError)
@@ -134,7 +134,7 @@ namespace Ridics.Authentication.Service.Controllers.API
         [JwtAuthorize(Policy = PermissionNames.ManageUserPermissions)]
         public ActionResult Get([Required] [FromRoute] int id, [FromQuery] bool fetchRoles = false)
         {
-            var result = m_permissionManager.FindPermissionById(id);
+            var result = m_permissionManager.FindPermissionById(id, fetchRoles);
 
             if (result.HasError)
             {

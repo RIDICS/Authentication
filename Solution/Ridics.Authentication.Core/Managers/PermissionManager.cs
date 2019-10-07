@@ -5,7 +5,6 @@ using Microsoft.Extensions.Logging;
 using Ridics.Authentication.Core.Configuration;
 using Ridics.Authentication.Core.Models;
 using Ridics.Authentication.Core.Models.DataResult;
-using Ridics.Authentication.DataContracts;
 using Ridics.Authentication.DataEntities.Entities;
 using Ridics.Authentication.DataEntities.Exceptions;
 using Ridics.Authentication.DataEntities.UnitOfWork;
@@ -26,11 +25,11 @@ namespace Ridics.Authentication.Core.Managers
             m_permissionUoW = permissionUoW;
         }
 
-        public DataResult<PermissionModel> FindPermissionById(int id)
+        public DataResult<PermissionModel> FindPermissionById(int id, bool fetchRoles)
         {
             try
             {
-                var permission = m_permissionUoW.FindPermissionById(id);
+                var permission = m_permissionUoW.FindPermissionById(id, fetchRoles);
                 var viewModel = m_mapper.Map<PermissionModel>(permission);
                 return Success(viewModel);
             }
@@ -47,11 +46,11 @@ namespace Ridics.Authentication.Core.Managers
         }
 
 
-        public DataResult<List<PermissionModel>> GetPermissions(int start, int count, string searchByName)
+        public DataResult<List<PermissionModel>> GetPermissions(int start, int count, string searchByName, bool fetchRoles)
         {
             try
             {
-                var permissions = m_permissionUoW.GetPermissions(start, GetItemsOnPageCount(count), searchByName);
+                var permissions = m_permissionUoW.GetPermissions(start, GetItemsOnPageCount(count), searchByName, fetchRoles);
                 var viewModelList = m_mapper.Map<List<PermissionModel>>(permissions);
                 return Success(viewModelList);
             }
@@ -160,7 +159,7 @@ namespace Ridics.Authentication.Core.Managers
         {
             try
             {
-                var permissions = m_permissionUoW.GetAllPermissions(search);
+                var permissions = m_permissionUoW.GetAllPermissions(false, search);
                 var viewModelList = m_mapper.Map<List<PermissionModel>>(permissions);
                 return Success(viewModelList);
             }
