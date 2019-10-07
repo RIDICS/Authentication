@@ -15,7 +15,9 @@ namespace Ridics.Authentication.HttpClient.Provider
             m_basePaths = new Dictionary<Type, string>
             {
                 {typeof(PermissionContract), basePathsConfiguration.PermissionBasePath},
+                {typeof(PermissionContractBase), basePathsConfiguration.PermissionBasePath},
                 {typeof(RoleContract), basePathsConfiguration.RoleBasePath},
+                {typeof(RoleContractBase), basePathsConfiguration.RoleBasePath},
                 {typeof(UserContractBase), basePathsConfiguration.UserBasePath},
                 {typeof(BasicUserInfoContract), basePathsConfiguration.UserBasePath},
                 {typeof(UserContract), basePathsConfiguration.UserBasePath},

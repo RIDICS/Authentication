@@ -33,6 +33,21 @@ namespace Ridics.Authentication.HttpClient.Client.Auth
             return m_authorizationServiceHttpClient.GetItemAsync<RoleContract>(id, parameters);
         }
 
+        public Task<HttpResponseMessage> Create(RoleContractBase roleContract)
+        {
+            return m_authorizationServiceHttpClient.CreateItemAsync(roleContract);
+        }
+
+        public Task<HttpResponseMessage> Edit(int id, RoleContractBase roleContract)
+        {
+            return m_authorizationServiceHttpClient.EditItemAsync(id, roleContract);
+        }
+
+        public Task<HttpResponseMessage> Delete(int id)
+        {
+            return m_authorizationServiceHttpClient.DeleteItemAsync<RoleContract>(id);
+        }
+
         public async Task AssignPermissionsToRoleAsync(int id, IEnumerable<int> selectedPermissions)
         {
             var fullPath = $"{BasePath}{id}/Permissions";

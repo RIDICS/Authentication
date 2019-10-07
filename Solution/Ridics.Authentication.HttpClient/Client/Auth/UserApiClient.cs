@@ -19,6 +19,26 @@ namespace Ridics.Authentication.HttpClient.Client.Auth
 
         protected override string BasePath => m_basePathsConfiguration.UserBasePath;
 
+        public Task<ListContract<UserContract>> GetUserListAsync(int start, int count, string search = null)
+        {
+            return m_authorizationServiceHttpClient.GetListAsync<UserContract>(start, count, search);
+        }
+
+        public Task<UserContract> GetItemAsync(int id)
+        {
+            return m_authorizationServiceHttpClient.GetItemAsync<UserContract>(id);
+        }
+        
+        public Task<HttpResponseMessage> Edit(int id, UserContract userContract)
+        {
+            return m_authorizationServiceHttpClient.EditItemAsync(id, userContract);
+        }
+
+        public Task<HttpResponseMessage> Delete(int id)
+        {
+            return m_authorizationServiceHttpClient.DeleteItemAsync<UserContract>(id);
+        }
+
         public async Task<HttpResponseMessage> EditSelfAsync(int id, UserContract content)
         {
             var fullPath = $"{BasePath}{id}/editself";
