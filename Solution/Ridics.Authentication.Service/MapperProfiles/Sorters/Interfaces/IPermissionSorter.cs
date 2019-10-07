@@ -8,7 +8,7 @@ namespace Ridics.Authentication.Service.MapperProfiles.Sorters.Interfaces
     public interface IPermissionSorter
     {
         List<PermissionViewModel> SortPermissions(List<PermissionViewModel> permissions);
-        List<PermissionContract> SortPermissions(List<PermissionContract> permissions);
+        List<PermissionContractBase> SortPermissions(List<PermissionContractBase> permissions);
         IList<PermissionInfoModel> SortPermissions(IList<PermissionInfoModel> permissions);
         List<PermissionModel> SortPermissions(List<PermissionModel> permissions);
     }

@@ -9,7 +9,7 @@ namespace Ridics.Authentication.Service.MapperProfiles.Sorters.Interfaces
     public interface IRoleSorter
     {
         List<RoleViewModel> SortRoles(List<RoleViewModel> roles);
-        List<RoleContract> SortRoles(List<RoleContract> roles);
+        List<RoleContractBase> SortRoles(List<RoleContractBase> roles);
         IList<RoleInfoModel> SortRoles(IList<RoleInfoModel> roles);
         IList<RoleModel> SortRoles(IList<RoleModel> roles);
         List<ApplicationRole> SortRoles(List<ApplicationRole> roles);

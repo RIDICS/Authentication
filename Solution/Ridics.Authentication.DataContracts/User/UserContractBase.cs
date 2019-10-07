@@ -43,7 +43,7 @@ namespace Ridics.Authentication.DataContracts.User
 
         public IList<string> ValidTwoFactorProviders { get; set; }
 
-        public List<RoleContract> Roles { get; set; }
+        public List<RoleContractBase> Roles { get; set; }
         
         public List<ExternalLoginContract> ExternalLogin { get; set; }
 

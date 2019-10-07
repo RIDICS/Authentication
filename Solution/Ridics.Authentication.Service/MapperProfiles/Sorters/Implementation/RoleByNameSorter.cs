@@ -17,7 +17,7 @@ namespace Ridics.Authentication.Service.MapperProfiles.Sorters.Implementation
             return roles;
         }
        
-        public List<RoleContract> SortRoles(List<RoleContract> roles)
+        public List<RoleContractBase> SortRoles(List<RoleContractBase> roles)
         {
             roles = roles.OrderBy(x => x.Name).ToList();
 

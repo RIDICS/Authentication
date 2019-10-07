@@ -16,7 +16,7 @@ namespace Ridics.Authentication.Service.MapperProfiles.Sorters.Implementation
             return permissions;
         }
 
-        public List<PermissionContract> SortPermissions(List<PermissionContract> permissions)
+        public List<PermissionContractBase> SortPermissions(List<PermissionContractBase> permissions)
         {
             permissions = permissions.OrderBy(x => x.Name).ToList();
 

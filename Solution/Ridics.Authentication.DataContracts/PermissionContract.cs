@@ -15,6 +15,6 @@ namespace Ridics.Authentication.DataContracts
 
     public class PermissionContract : PermissionContractBase
     {
-        public List<RoleContract> Roles { get; set; }
+        public List<RoleContractBase> Roles { get; set; }
     }
 }

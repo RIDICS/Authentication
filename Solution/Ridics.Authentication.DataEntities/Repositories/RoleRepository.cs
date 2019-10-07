@@ -29,21 +29,21 @@ namespace Ridics.Authentication.DataEntities.Repositories
             CreateBaseQuery(session, criterion, joinAliases)
                 .Fetch(SelectMode.Fetch, x => x.User)
                 .Fetch(SelectMode.Fetch, x => x.Permissions)
-                .Fetch(SelectMode.Fetch, x => x.Permissions.First().Roles)
+                //.Fetch(SelectMode.Fetch, x => x.Permissions.First().Roles)
                 .Future<RoleEntity>();
 
             CreateBaseQuery(session, criterion, joinAliases)
                 .Fetch(SelectMode.Fetch, x => x.ResourcePermissions)
-                .Fetch(SelectMode.Fetch, x => x.ResourcePermissions.First().Roles)
-                .Fetch(SelectMode.Fetch, x => x.ResourcePermissions.First().Users)
+                //.Fetch(SelectMode.Fetch, x => x.ResourcePermissions.First().Roles)
+                //.Fetch(SelectMode.Fetch, x => x.ResourcePermissions.First().Users)
                 .Fetch(SelectMode.Fetch, x => x.ResourcePermissions.First().ResourceTypeAction)
                 .Future<RoleEntity>();
 
             CreateBaseQuery(session, criterion, joinAliases)
                 .Fetch(SelectMode.Fetch, x => x.ResourcePermissionTypeActions)
                 .Fetch(SelectMode.Fetch, x => x.ResourcePermissionTypeActions.First().ResourcePermissionType)
-                .Fetch(SelectMode.Fetch, x => x.ResourcePermissionTypeActions.First().Roles)
-                .Fetch(SelectMode.Fetch, x => x.ResourcePermissionTypeActions.First().Users)
+                //.Fetch(SelectMode.Fetch, x => x.ResourcePermissionTypeActions.First().Roles)
+                //.Fetch(SelectMode.Fetch, x => x.ResourcePermissionTypeActions.First().Users)
                 .Future<RoleEntity>();
         }
 

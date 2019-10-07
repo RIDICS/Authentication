@@ -27,8 +27,8 @@ namespace Ridics.Authentication.DataEntities.Repositories
         {
             CreateBaseQuery(session, criterion, joinAliases)
                 .Fetch(SelectMode.Fetch, x => x.Roles)
-                .Fetch(SelectMode.Fetch, x => x.Roles.First().Permissions)
-                .Fetch(SelectMode.Fetch, x => x.Roles.First().Permissions.First().Roles)
+                //.Fetch(SelectMode.Fetch, x => x.Roles.First().Permissions)
+                //.Fetch(SelectMode.Fetch, x => x.Roles.First().Permissions.First().Roles)
                 .Future<PermissionEntity>();
         }
 
