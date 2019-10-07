@@ -25,7 +25,7 @@ namespace Ridics.Authentication.HttpClient.Client.Auth
             return m_authorizationServiceHttpClient.GetListAsync<PermissionContract>(start, count, search, parameters);
         }
 
-        public Task<PermissionContract> GetItemAsync(int id, bool fetchPermissions = false)
+        public Task<PermissionContract> GetPermissionAsync(int id, bool fetchPermissions = false)
         {
             var parameters = m_authorizationServiceHttpClient.CreateQueryCollection();
             parameters.Add("fetchPermissions", fetchPermissions.ToString());
@@ -33,17 +33,17 @@ namespace Ridics.Authentication.HttpClient.Client.Auth
             return m_authorizationServiceHttpClient.GetItemAsync<PermissionContract>(id, parameters);
         }
 
-        public Task<HttpResponseMessage> CreateItemAsync(PermissionContractBase permissionContract)
+        public Task<HttpResponseMessage> CreatePermissionAsync(PermissionContractBase permissionContract)
         {
             return m_authorizationServiceHttpClient.CreateItemAsync(permissionContract);
         }
 
-        public Task<HttpResponseMessage> EditItemAsync(int id, PermissionContractBase permissionContract)
+        public Task<HttpResponseMessage> EditPermissionAsync(int id, PermissionContractBase permissionContract)
         {
             return m_authorizationServiceHttpClient.EditItemAsync(id, permissionContract);
         }
 
-        public Task<HttpResponseMessage> DeleteItemAsync(int id)
+        public Task<HttpResponseMessage> DeletePermissionAsync(int id)
         {
             return m_authorizationServiceHttpClient.DeleteItemAsync<PermissionContract>(id);
         }

@@ -25,7 +25,7 @@ namespace Ridics.Authentication.HttpClient.Client.Auth
             return m_authorizationServiceHttpClient.GetListAsync<RoleContract>(start, count, search, parameters);
         }
 
-        public Task<RoleContract> GetItemAsync(int id, bool fetchPermissions = false)
+        public Task<RoleContract> GetRoleAsync(int id, bool fetchPermissions = false)
         {
             var parameters = m_authorizationServiceHttpClient.CreateQueryCollection();
             parameters.Add("fetchPermissions", fetchPermissions.ToString());
@@ -33,17 +33,17 @@ namespace Ridics.Authentication.HttpClient.Client.Auth
             return m_authorizationServiceHttpClient.GetItemAsync<RoleContract>(id, parameters);
         }
 
-        public Task<HttpResponseMessage> CreateItemAsync(RoleContractBase roleContract)
+        public Task<HttpResponseMessage> CreateRoleAsync(RoleContractBase roleContract)
         {
             return m_authorizationServiceHttpClient.CreateItemAsync(roleContract);
         }
 
-        public Task<HttpResponseMessage> EditItemAsync(int id, RoleContractBase roleContract)
+        public Task<HttpResponseMessage> EditRoleAsync(int id, RoleContractBase roleContract)
         {
             return m_authorizationServiceHttpClient.EditItemAsync(id, roleContract);
         }
 
-        public Task<HttpResponseMessage> DeleteItemAsync(int id)
+        public Task<HttpResponseMessage> DeleteRoleAsync(int id)
         {
             return m_authorizationServiceHttpClient.DeleteItemAsync<RoleContract>(id);
         }
