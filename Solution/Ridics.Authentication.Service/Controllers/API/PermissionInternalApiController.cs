@@ -205,5 +205,19 @@ namespace Ridics.Authentication.Service.Controllers.API
 
             return Ok();
         }
+
+        [HttpGet("{permissionId}/role-id")]
+        [JwtAuthorize]
+        public ActionResult<IList<int>> GetRoleIdsByPermission([Required] [FromRoute] int permissionId)
+        {
+            var result = m_permissionManager.GetRoleIdsByPermission(permissionId);
+
+            if (result.HasError)
+            {
+                return Error(result.Error);
+            }
+
+            return Ok(result.Result);
+        }
     }
 }

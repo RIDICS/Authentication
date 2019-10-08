@@ -159,5 +159,12 @@ namespace Ridics.Authentication.DataEntities.UnitOfWork
                 }
             }
         }
+
+        [Transaction]
+        public virtual IList<int> GetRoleIdsByPermission(int permissionId)
+        {
+            var roles = m_roleRepository.GetRoleIdsByPermission(permissionId);
+            return roles;
+        }
     }
 }

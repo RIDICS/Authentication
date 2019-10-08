@@ -207,5 +207,19 @@ namespace Ridics.Authentication.Core.Managers
                 return Error<bool>(e.Message);
             }
         }
+
+        public DataResult<IList<int>> GetRoleIdsByPermission(int permissionId)
+        {
+            try
+            {
+                var result = m_permissionUoW.GetRoleIdsByPermission(permissionId);
+                return Success(result);
+            }
+            catch (DatabaseException e)
+            {
+                m_logger.LogWarning(e);
+                return Error<IList<int>>(e.Message);
+            }
+        }
     }
 }

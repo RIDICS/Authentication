@@ -243,5 +243,27 @@ namespace Ridics.Authentication.DataEntities.Repositories
                 throw new DatabaseException("Get role by name operation failed", ex);
             }
         }
+
+        public IList<int> GetRoleIdsByPermission(int permissionId)
+        {
+            PermissionEntity permissionAlias = null;
+
+            try
+            {
+                var session = GetSession();
+
+                var result = session.QueryOver<RoleEntity>()
+                    .JoinAlias(x => x.Permissions, () => permissionAlias)
+                    .Where(() => permissionAlias.Id == permissionId)
+                    .Select(x => x.Id)
+                    .List<int>();
+
+                return result;
+            }
+            catch (HibernateException ex)
+            {
+                throw new DatabaseException("Get roles by user operation failed", ex);
+            }
+        }
     }
 }

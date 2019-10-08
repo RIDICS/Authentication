@@ -87,5 +87,11 @@ namespace Ridics.Authentication.HttpClient.Client.Auth
             var fullPath = $"{BasePath}ensure";
             return m_authorizationServiceHttpClient.SendRequestAsync(HttpMethod.Put, fullPath, data);
         }
+
+        public Task<IList<int>> GetRoleIdsByPermission(int permissionId)
+        {
+            var fullPath = $"{BasePath}{permissionId}/role-id";
+            return m_authorizationServiceHttpClient.SendRequestAsync<IList<int>>(HttpMethod.Get, fullPath);
+        }
     }
 }
