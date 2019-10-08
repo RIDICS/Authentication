@@ -5,7 +5,6 @@ using Microsoft.AspNetCore.Mvc;
 using Ridics.Authentication.Core.Managers;
 using Ridics.Authentication.Core.Models;
 using Ridics.Authentication.Service.Authorization;
-using Ridics.Authentication.Service.Configuration;
 using Ridics.Authentication.Service.Constants;
 using Ridics.Authentication.Service.Extensions;
 using Ridics.Authentication.Service.Models.ViewModel;
@@ -29,7 +28,7 @@ namespace Ridics.Authentication.Service.Controllers
             int count = PaginationConstants.ItemsOnPage, string searchByName = null, bool partial = false)
         {
             LoadCachedModelState();
-            var rolesResult = m_rolesManager.GetRoles(start, count, searchByName);
+            var rolesResult = m_rolesManager.GetRoles(start, count, searchByName, true);
             var itemsCountResult = m_rolesManager.GetRolesCount(searchByName);
 
             if (rolesResult.HasError)
@@ -66,7 +65,7 @@ namespace Ridics.Authentication.Service.Controllers
         [Route("[controller]/{id}/[action]")]
         public ActionResult View(int id)
         {
-            var result = m_rolesManager.FindRoleById(id);
+            var result = m_rolesManager.FindRoleById(id, true);
 
             if (result.HasError)
             {
@@ -118,7 +117,7 @@ namespace Ridics.Authentication.Service.Controllers
         [Route("[controller]/{id}/[action]")]
         public ActionResult Edit(int id)
         {
-            var result = m_rolesManager.FindRoleById(id);
+            var result = m_rolesManager.FindRoleById(id, true);
 
             if (result.HasError)
             {

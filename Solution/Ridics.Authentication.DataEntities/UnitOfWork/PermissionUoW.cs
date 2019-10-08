@@ -117,7 +117,7 @@ namespace Ridics.Authentication.DataEntities.UnitOfWork
                 throw new NoResultException<PermissionEntity>();
             }
 
-            var roles = new HashSet<RoleEntity>(m_roleRepository.GetRolesById(roleIds));
+            var roles = new HashSet<RoleEntity>(m_roleRepository.GetRolesById(roleIds, false));
 
             if (!overwriteAuthOnlyRoles)
             {

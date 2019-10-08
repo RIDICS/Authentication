@@ -24,11 +24,11 @@ namespace Ridics.Authentication.Core.Managers
             m_roleUoW = roleUoW;
         }
 
-        public DataResult<RoleModel> FindRoleById(int id)
+        public DataResult<RoleModel> FindRoleById(int id, bool fetchPermissions)
         {
             try
             {
-                var role = m_roleUoW.FindRoleById(id);
+                var role = m_roleUoW.FindRoleById(id, fetchPermissions);
                 var viewModel = m_mapper.Map<RoleModel>(role);
 
                 return Success(viewModel);
@@ -45,11 +45,11 @@ namespace Ridics.Authentication.Core.Managers
             }
         }
 
-        public DataResult<RoleModel> FindRoleByName(string name)
+        public DataResult<RoleModel> FindRoleByName(string name, bool fetchPermissions)
         {
             try
             {
-                var role = m_roleUoW.FindRoleByName(name);
+                var role = m_roleUoW.FindRoleByName(name, fetchPermissions);
                 var viewModel = m_mapper.Map<RoleModel>(role);
 
                 return Success(viewModel);
@@ -68,7 +68,7 @@ namespace Ridics.Authentication.Core.Managers
 
         public DataResult<List<RoleModel>> GetAllRoles()
         {
-            var roles = m_roleUoW.GetAllRoles();
+            var roles = m_roleUoW.GetAllRoles(false);
 
             if (roles == null)
             {
@@ -82,7 +82,7 @@ namespace Ridics.Authentication.Core.Managers
 
         public DataResult<List<RoleModel>> GetAllNonAuthenticationServiceRoles()
         {
-            var roles = m_roleUoW.GetAllNonAuthenticationServiceRoles();
+            var roles = m_roleUoW.GetAllNonAuthenticationServiceRoles(false);
 
             if (roles == null)
             {
@@ -94,11 +94,11 @@ namespace Ridics.Authentication.Core.Managers
             return Success(viewModelList);
         }
 
-        public DataResult<List<RoleModel>> GetRoles(int start, int count, string searchByName)
+        public DataResult<List<RoleModel>> GetRoles(int start, int count, string searchByName, bool fetchPermissions)
         {
             try
             {
-                var roles = m_roleUoW.GetRoles(start, GetItemsOnPageCount(count), searchByName);
+                var roles = m_roleUoW.GetRoles(start, GetItemsOnPageCount(count), searchByName, fetchPermissions);
                 var viewModelList = m_mapper.Map<List<RoleModel>>(roles);
 
                 return Success(viewModelList);
@@ -125,11 +125,12 @@ namespace Ridics.Authentication.Core.Managers
             
         }
 
-        public DataResult<List<RoleModel>> GetNonAuthenticationServiceRoles(int start, int count, string searchByName)
+        public DataResult<List<RoleModel>> GetNonAuthenticationServiceRoles(int start, int count, string searchByName,
+            bool fetchPermissions)
         {
             try
             {
-                var roles = m_roleUoW.GetNonAuthenticationServiceRoles(start, GetItemsOnPageCount(count), searchByName);
+                var roles = m_roleUoW.GetNonAuthenticationServiceRoles(start, GetItemsOnPageCount(count), searchByName, fetchPermissions);
                 var viewModelList = m_mapper.Map<List<RoleModel>>(roles);
                 return Success(viewModelList);
             }

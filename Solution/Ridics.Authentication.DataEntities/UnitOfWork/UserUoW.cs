@@ -568,7 +568,7 @@ namespace Ridics.Authentication.DataEntities.UnitOfWork
 
         private void AddRoleToUserInternal(int id, int roleId)
         {
-            var roleEntity = m_roleRepository.FindRoleById(roleId);
+            var roleEntity = m_roleRepository.FindRoleById(roleId, false);
 
             if (roleEntity == null)
             {
@@ -626,7 +626,7 @@ namespace Ridics.Authentication.DataEntities.UnitOfWork
 
         private void RemoveRoleFromUserInternal(int id, int roleId)
         {
-            var roleEntity = m_roleRepository.FindRoleById(roleId);
+            var roleEntity = m_roleRepository.FindRoleById(roleId, false);
 
             if (roleEntity == null)
             {
@@ -700,7 +700,7 @@ namespace Ridics.Authentication.DataEntities.UnitOfWork
                 throw new NoResultException<UserEntity>();
             }
 
-            userEntity.Roles = new HashSet<RoleEntity>(m_roleRepository.GetRolesById(rolesIds));
+            userEntity.Roles = new HashSet<RoleEntity>(m_roleRepository.GetRolesById(rolesIds, false));
 
             m_userRepository.Update(userEntity);
         }

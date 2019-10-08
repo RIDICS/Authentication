@@ -186,7 +186,7 @@ namespace Ridics.Authentication.Service.Builders.Implementation
 
         public List<SelectableViewModel<PermissionViewModel>> BuildPermissionsViewModel(ModelStateDictionary modelState, int id)
         {
-            var roleResult = m_roleManager.FindRoleById(id);
+            var roleResult = m_roleManager.FindRoleById(id, true);
 
             var permissionsResult = m_permissionManager.GetAllPermissions();
 
@@ -217,7 +217,7 @@ namespace Ridics.Authentication.Service.Builders.Implementation
         public List<SelectableViewModel<ResourcePermissionViewModel>> BuildRoleResourcePermissionsViewModel(ModelStateDictionary modelState,
             int id)
         {
-            var roleResult = m_roleManager.FindRoleById(id);
+            var roleResult = m_roleManager.FindRoleById(id, true);
 
             var permissionsResult = m_resourcePermissionManager.GetAllPermissions();
 
@@ -248,7 +248,7 @@ namespace Ridics.Authentication.Service.Builders.Implementation
         public List<SelectableViewModel<ResourcePermissionTypeActionViewModel>> BuildRoleResourcePermissionTypeActionsViewModel(
             ModelStateDictionary modelState, int id)
         {
-            var roleResult = m_roleManager.FindRoleById(id);
+            var roleResult = m_roleManager.FindRoleById(id, true);
 
             var permissionsResult = m_resourcePermissionTypeActionManager.GetAllPermissionTypeActions();
 

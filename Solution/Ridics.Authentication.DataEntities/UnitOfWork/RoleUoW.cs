@@ -27,17 +27,17 @@ namespace Ridics.Authentication.DataEntities.UnitOfWork
         }
 
         [Transaction]
-        public virtual IList<RoleEntity> GetAllRoles()
+        public virtual IList<RoleEntity> GetAllRoles(bool fetchPermissions)
         {
-            var roles = m_roleRepository.GetAllRoles();
+            var roles = m_roleRepository.GetAllRoles(fetchPermissions);
 
             return roles;
         }
 
         [Transaction]
-        public virtual IList<RoleEntity> GetAllNonAuthenticationServiceRoles()
+        public virtual IList<RoleEntity> GetAllNonAuthenticationServiceRoles(bool fetchPermissions)
         {
-            var roles = m_roleRepository.GetAllNonAuthenticationServiceRoles();
+            var roles = m_roleRepository.GetAllNonAuthenticationServiceRoles(fetchPermissions);
 
             return roles;
         }
@@ -74,9 +74,9 @@ namespace Ridics.Authentication.DataEntities.UnitOfWork
         }
 
         [Transaction]
-        public virtual RoleEntity FindRoleById(int id)
+        public virtual RoleEntity FindRoleById(int id, bool fetchPermissions)
         {
-            var role = m_roleRepository.FindRoleById(id);
+            var role = m_roleRepository.FindRoleById(id, fetchPermissions);
 
             if (role == null)
             {
@@ -87,9 +87,9 @@ namespace Ridics.Authentication.DataEntities.UnitOfWork
         }
 
         [Transaction]
-        public virtual RoleEntity FindRoleByName(string name)
+        public virtual RoleEntity FindRoleByName(string name, bool fetchPermissions)
         {
-            var role = m_roleRepository.FindRoleByName(name);
+            var role = m_roleRepository.FindRoleByName(name, fetchPermissions);
 
             if (role == null)
             {
@@ -102,7 +102,7 @@ namespace Ridics.Authentication.DataEntities.UnitOfWork
         [Transaction]
         public virtual void UpdateRole(int id, RoleEntity role)
         {
-            var roleEntity = m_roleRepository.FindRoleById(id);
+            var roleEntity = m_roleRepository.FindRoleById(id, false);
 
             if (roleEntity == null)
             {
@@ -116,9 +116,9 @@ namespace Ridics.Authentication.DataEntities.UnitOfWork
         }
 
         [Transaction]
-        public virtual IList<RoleEntity> GetRoles(int start, int count, string searchByName)
+        public virtual IList<RoleEntity> GetRoles(int start, int count, string searchByName, bool fetchPermissions)
         {
-            var roles = m_roleRepository.GetRoles(start, count, searchByName);
+            var roles = m_roleRepository.GetRoles(start, count, searchByName, fetchPermissions);
 
             return roles;
         }
@@ -132,9 +132,9 @@ namespace Ridics.Authentication.DataEntities.UnitOfWork
         }
 
         [Transaction]
-        public virtual IList<RoleEntity> GetNonAuthenticationServiceRoles(int start, int count, string searchByName)
+        public virtual IList<RoleEntity> GetNonAuthenticationServiceRoles(int start, int count, string searchByName, bool fetchPermissions)
         {
-            var roles = m_roleRepository.GetNonAuthenticationServiceRoles(start, count, searchByName);
+            var roles = m_roleRepository.GetNonAuthenticationServiceRoles(start, count, searchByName, fetchPermissions);
 
             return roles;
         }

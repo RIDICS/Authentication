@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using DryIoc.Facilities.NHibernate;
 using NHibernate;
@@ -47,6 +48,17 @@ namespace Ridics.Authentication.DataEntities.Repositories
                 .Future<RoleEntity>();
         }
 
+        private Action<ISession, ICriterion, IList<QueryJoinAlias<RoleEntity>>> GetFetchMethod(bool isFetchEnabled)
+        {
+            Action<ISession, ICriterion, IList<QueryJoinAlias<RoleEntity>>> fetchMethod = FetchCollections;
+            if (!isFetchEnabled)
+            {
+                fetchMethod = null;
+            }
+
+            return fetchMethod;
+        }
+
         private AbstractCriterion CreateSearchCriteria(string searchByName)
         {
             var criteria = string.IsNullOrEmpty(searchByName)
@@ -56,11 +68,11 @@ namespace Ridics.Authentication.DataEntities.Repositories
             return criteria;
         }
 
-        public IList<RoleEntity> GetAllRoles()
+        public IList<RoleEntity> GetAllRoles(bool fetch)
         {
             try
             {
-                return GetValuesList(FetchCollections, null, null, m_defaultOrdering);
+                return GetValuesList(GetFetchMethod(fetch), null, null, m_defaultOrdering);
             }
             catch (HibernateException ex)
             {
@@ -68,13 +80,13 @@ namespace Ridics.Authentication.DataEntities.Repositories
             }
         }
 
-        public IList<RoleEntity> GetAllNonAuthenticationServiceRoles()
+        public IList<RoleEntity> GetAllNonAuthenticationServiceRoles(bool fetch)
         {
             var criteria = Restrictions.WhereNot<RoleEntity>(x => x.AuthenticationServiceOnly);
 
             try
             {
-                return GetValuesList<RoleEntity>(FetchCollections, criteria, null, m_defaultOrdering);
+                return GetValuesList<RoleEntity>(GetFetchMethod(fetch), criteria, null, m_defaultOrdering);
             }
             catch (HibernateException ex)
             {
@@ -82,13 +94,13 @@ namespace Ridics.Authentication.DataEntities.Repositories
             }
         }
 
-        public IList<RoleEntity> GetRolesById(IEnumerable<int> ids)
+        public IList<RoleEntity> GetRolesById(IEnumerable<int> ids, bool fetch)
         {
             var criterion = Restrictions.On<RoleEntity>(x => x.Id).IsIn(ids.ToList());
 
             try
             {
-                return GetValuesList<RoleEntity>(FetchCollections, criterion, null, m_defaultOrdering);
+                return GetValuesList<RoleEntity>(GetFetchMethod(fetch), criterion, null, m_defaultOrdering);
             }
             catch (HibernateException ex)
             {
@@ -119,13 +131,13 @@ namespace Ridics.Authentication.DataEntities.Repositories
             }
         }
 
-        public RoleEntity FindRoleById(int id)
+        public RoleEntity FindRoleById(int id, bool fetch)
         {
             var criterion = Restrictions.Where<RoleEntity>(x => x.Id == id);
 
             try
             {
-                return GetSingleValue<RoleEntity>(FetchCollections, criterion);
+                return GetSingleValue<RoleEntity>(GetFetchMethod(fetch), criterion);
             }
             catch (HibernateException ex)
             {
@@ -133,13 +145,13 @@ namespace Ridics.Authentication.DataEntities.Repositories
             }
         }
 
-        public RoleEntity FindRoleByName(string name)
+        public RoleEntity FindRoleByName(string name, bool fetch)
         {
             var criterion = Restrictions.Where<RoleEntity>(x => x.Name == name);
 
             try
             {
-                return GetSingleValue<RoleEntity>(FetchCollections, criterion);
+                return GetSingleValue<RoleEntity>(GetFetchMethod(fetch), criterion);
             }
             catch (HibernateException ex)
             {
@@ -147,13 +159,13 @@ namespace Ridics.Authentication.DataEntities.Repositories
             }
         }
 
-        public IList<RoleEntity> GetRoles(int start, int count, string searchByName = null)
+        public IList<RoleEntity> GetRoles(int start, int count, string searchByName = null, bool fetch = false)
         {
             var criteria = CreateSearchCriteria(searchByName);
 
             try
             {
-                return GetValuesList(start, count, FetchCollections, criteria, null, m_defaultOrdering);
+                return GetValuesList(start, count, GetFetchMethod(fetch), criteria, null, m_defaultOrdering);
             }
             catch (HibernateException ex)
             {
@@ -176,7 +188,7 @@ namespace Ridics.Authentication.DataEntities.Repositories
             }
         }
 
-        public IList<RoleEntity> GetNonAuthenticationServiceRoles(int start, int count, string searchByName = null)
+        public IList<RoleEntity> GetNonAuthenticationServiceRoles(int start, int count, string searchByName = null, bool fetch = false)
         {
             var criteria = Restrictions.WhereNot<RoleEntity>(x => x.AuthenticationServiceOnly);
 
@@ -189,7 +201,7 @@ namespace Ridics.Authentication.DataEntities.Repositories
 
             try
             {
-                return GetValuesList(start, count, FetchCollections, criteria, null, m_defaultOrdering);
+                return GetValuesList(start, count, GetFetchMethod(fetch), criteria, null, m_defaultOrdering);
             }
             catch (HibernateException ex)
             {

@@ -41,7 +41,7 @@ namespace Ridics.Authentication.Service.Controllers.API
             }
 
             var rolesCountResult = m_rolesManager.GetNonAuthenticationServiceRolesCount(search);
-            var rolesResult = m_rolesManager.GetNonAuthenticationServiceRoles(start, count, search);
+            var rolesResult = m_rolesManager.GetNonAuthenticationServiceRoles(start, count, search, fetchPermissions);
 
             if (rolesResult.HasError)
             {
@@ -118,7 +118,7 @@ namespace Ridics.Authentication.Service.Controllers.API
         public ActionResult Get([Required] [FromRoute] int id, [FromQuery] bool fetchPermissions = false)
         {
 
-            var result = m_rolesManager.FindRoleById(id);
+            var result = m_rolesManager.FindRoleById(id, fetchPermissions);
 
             if (result.HasError)
             {
@@ -219,7 +219,7 @@ namespace Ridics.Authentication.Service.Controllers.API
         [ProducesResponseType(typeof(RoleContract), StatusCodes.Status200OK)]
         public IActionResult GetRoleByName([Required] [FromQuery] string name, [FromQuery] bool fetchPermissions = false)
         {
-            var roleResult = m_rolesManager.FindRoleByName(name);
+            var roleResult = m_rolesManager.FindRoleByName(name, fetchPermissions);
 
             if (roleResult.HasError)
             {
