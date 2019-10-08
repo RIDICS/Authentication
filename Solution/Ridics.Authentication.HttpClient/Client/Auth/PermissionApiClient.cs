@@ -88,7 +88,7 @@ namespace Ridics.Authentication.HttpClient.Client.Auth
             return m_authorizationServiceHttpClient.SendRequestAsync(HttpMethod.Put, fullPath, data);
         }
 
-        public Task<IList<int>> GetRoleIdsByPermission(int permissionId)
+        public Task<IList<int>> GetRoleIdsByPermissionAsync(int permissionId)
         {
             var fullPath = $"{BasePath}{permissionId}/role-id";
             return m_authorizationServiceHttpClient.SendRequestAsync<IList<int>>(HttpMethod.Get, fullPath);
