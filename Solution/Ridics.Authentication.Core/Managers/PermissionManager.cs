@@ -30,6 +30,8 @@ namespace Ridics.Authentication.Core.Managers
             try
             {
                 var permission = m_permissionUoW.FindPermissionById(id, fetchRoles);
+                if (!fetchRoles) UpdateNotFetchedEntity(permission);
+
                 var viewModel = m_mapper.Map<PermissionModel>(permission);
                 return Success(viewModel);
             }
@@ -51,6 +53,11 @@ namespace Ridics.Authentication.Core.Managers
             try
             {
                 var permissions = m_permissionUoW.GetPermissions(start, GetItemsOnPageCount(count), searchByName, fetchRoles);
+                if (!fetchRoles)
+                {
+                    UpdateNotFetchedEntities(permissions);
+                }
+
                 var viewModelList = m_mapper.Map<List<PermissionModel>>(permissions);
                 return Success(viewModelList);
             }
@@ -160,6 +167,8 @@ namespace Ridics.Authentication.Core.Managers
             try
             {
                 var permissions = m_permissionUoW.GetAllPermissions(false, search);
+                UpdateNotFetchedEntities(permissions);
+
                 var viewModelList = m_mapper.Map<List<PermissionModel>>(permissions);
                 return Success(viewModelList);
             }
@@ -220,6 +229,19 @@ namespace Ridics.Authentication.Core.Managers
                 m_logger.LogWarning(e);
                 return Error<IList<int>>(e.Message);
             }
+        }
+
+        private void UpdateNotFetchedEntities(IEnumerable<PermissionEntity> permissions)
+        {
+            foreach (var permissionEntity in permissions)
+            {
+                UpdateNotFetchedEntity(permissionEntity);
+            }
+        }
+
+        private void UpdateNotFetchedEntity(PermissionEntity permissionEntity)
+        {
+            permissionEntity.Roles = null;
         }
     }
 }

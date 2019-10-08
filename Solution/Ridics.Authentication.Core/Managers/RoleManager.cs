@@ -29,6 +29,11 @@ namespace Ridics.Authentication.Core.Managers
             try
             {
                 var role = m_roleUoW.FindRoleById(id, fetchPermissions);
+
+                if (!fetchPermissions)
+                {
+                    UpdateNotFetchedEntity(role);
+                }
                 var viewModel = m_mapper.Map<RoleModel>(role);
 
                 return Success(viewModel);
@@ -50,6 +55,11 @@ namespace Ridics.Authentication.Core.Managers
             try
             {
                 var role = m_roleUoW.FindRoleByName(name, fetchPermissions);
+
+                if (!fetchPermissions)
+                {
+                    UpdateNotFetchedEntity(role);
+                }
                 var viewModel = m_mapper.Map<RoleModel>(role);
 
                 return Success(viewModel);
@@ -75,6 +85,7 @@ namespace Ridics.Authentication.Core.Managers
                 return Error<List<RoleModel>>();
             }
 
+            UpdateNotFetchedEntities(roles);
             var viewModelList = m_mapper.Map<List<RoleModel>>(roles);
 
             return Success(viewModelList);
@@ -89,6 +100,7 @@ namespace Ridics.Authentication.Core.Managers
                 return Error<List<RoleModel>>();
             }
 
+            UpdateNotFetchedEntities(roles);
             var viewModelList = m_mapper.Map<List<RoleModel>>(roles);
 
             return Success(viewModelList);
@@ -99,6 +111,11 @@ namespace Ridics.Authentication.Core.Managers
             try
             {
                 var roles = m_roleUoW.GetRoles(start, GetItemsOnPageCount(count), searchByName, fetchPermissions);
+
+                if (!fetchPermissions)
+                {
+                    UpdateNotFetchedEntities(roles);
+                }
                 var viewModelList = m_mapper.Map<List<RoleModel>>(roles);
 
                 return Success(viewModelList);
@@ -131,7 +148,13 @@ namespace Ridics.Authentication.Core.Managers
             try
             {
                 var roles = m_roleUoW.GetNonAuthenticationServiceRoles(start, GetItemsOnPageCount(count), searchByName, fetchPermissions);
+
+                if (!fetchPermissions)
+                {
+                    UpdateNotFetchedEntities(roles);
+                }
                 var viewModelList = m_mapper.Map<List<RoleModel>>(roles);
+
                 return Success(viewModelList);
             }
             catch (DatabaseException e)
@@ -288,6 +311,21 @@ namespace Ridics.Authentication.Core.Managers
                 m_logger.LogWarning(e);
                 return Error<bool>(e.Message);
             }
+        }
+
+        private void UpdateNotFetchedEntities(IEnumerable<RoleEntity> roles)
+        {
+            foreach (var roleEntity in roles)
+            {
+                UpdateNotFetchedEntity(roleEntity);
+            }
+        }
+
+        private void UpdateNotFetchedEntity(RoleEntity roleEntity)
+        {
+            roleEntity.Permissions = null;
+            roleEntity.ResourcePermissions = null;
+            roleEntity.ResourcePermissionTypeActions = null;
         }
     }
 }
