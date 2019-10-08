@@ -1,5 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 using Ridics.Authentication.Core.Models.DataResult;
 using Ridics.Authentication.DataContracts;
 
@@ -19,6 +21,12 @@ namespace Ridics.Authentication.Service.Attributes
         public override void OnException(ExceptionContext context)
         {
             base.OnException(context);
+
+            var logger = context.HttpContext.RequestServices.GetService<ILogger<ApiExceptionFilterAttribute>>();
+            if (logger.IsEnabled(LogLevel.Error))
+            {
+                logger.LogError(context.Exception, "Unhandled exception");
+            }
 
             var contractException = new ContractException
             {
