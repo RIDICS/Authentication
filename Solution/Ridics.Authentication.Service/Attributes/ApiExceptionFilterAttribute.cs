@@ -4,6 +4,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Ridics.Authentication.Core.Models.DataResult;
 using Ridics.Authentication.DataContracts;
+using Scalesoft.Localization.AspNetCore;
 
 namespace Ridics.Authentication.Service.Attributes
 {
@@ -23,6 +24,8 @@ namespace Ridics.Authentication.Service.Attributes
             base.OnException(context);
 
             var logger = context.HttpContext.RequestServices.GetService<ILogger<ApiExceptionFilterAttribute>>();
+            var localization = context.HttpContext.RequestServices.GetService<ILocalizationService>();
+
             if (logger.IsEnabled(LogLevel.Error))
             {
                 logger.LogError(context.Exception, "Unhandled exception");
@@ -31,7 +34,8 @@ namespace Ridics.Authentication.Service.Attributes
             var contractException = new ContractException
             {
                 Code = DataResultErrorCode.GenericError,
-                Description = context.Exception.Message,
+                //Description = context.Exception.Message, // Don't use internal technical message
+                Description = localization.Translate("unknown-error-msg", "error"),
             };
 
             context.Result = new ObjectResult(contractException) { StatusCode = 500};
