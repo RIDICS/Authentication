@@ -28,11 +28,11 @@ namespace Ridics.Authentication.Service.MapperProfiles.Contracts
                 .ForMember(dest => dest.Name, opt => opt.MapFrom(src => src.Name))
                 .ForMember(dest => dest.Description, opt => opt.MapFrom(src => src.Description));
 
-            CreateMap<PermissionContract, PermissionInfoModel>()
+            CreateMap<PermissionContractBase, PermissionModel>()
                 .IncludeBase<PermissionContractBase, PermissionInfoModel>();
 
             CreateMap<PermissionContract, PermissionModel>()
-                .IncludeBase<PermissionContract, PermissionInfoModel>()
+                .IncludeBase<PermissionContractBase, PermissionModel>()
                 .ForMember(dest => dest.Roles, opt => opt.MapFrom(src => src.Roles))
                 .AfterMap((src, dest) => { dest.Roles = roleSorter.SortRoles(dest.Roles); });
 

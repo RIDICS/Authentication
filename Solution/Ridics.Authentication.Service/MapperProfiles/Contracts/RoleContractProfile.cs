@@ -27,14 +27,17 @@ namespace Ridics.Authentication.Service.MapperProfiles.Contracts
                 .AfterMap((src, dest) => { dest.Permissions = permissionSorter.SortPermissions(dest.Permissions); });
 
 
-            CreateMap<RoleContract, RoleInfoModel >()
+            CreateMap<RoleContractBase, RoleInfoModel>()
                 .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.Id))
                 .ForMember(dest => dest.Name, opt => opt.MapFrom(src => src.Name))
                 .ForMember(dest => dest.AuthenticationServiceOnly, opt => opt.Ignore())
                 .ForMember(dest => dest.Description, opt => opt.MapFrom(src => src.Description));
 
+            CreateMap<RoleContractBase, RoleModel>()
+                .IncludeBase<RoleContractBase, RoleInfoModel>();
+
             CreateMap<RoleContract, RoleModel>()
-                .IncludeBase<RoleContract, RoleInfoModel>()
+                .IncludeBase<RoleContractBase, RoleModel>()
                 .ForMember(dest => dest.Permissions, opt => opt.MapFrom(src => src.Permissions))
                 .AfterMap((src, dest) => { dest.Permissions = permissionSorter.SortPermissions(dest.Permissions); });
         }
