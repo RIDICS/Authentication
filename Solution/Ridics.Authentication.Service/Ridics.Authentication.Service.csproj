@@ -28,7 +28,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Content Remove="ExternalLogin\EIdentity\certs\NIA.SAML2.staging.pfx" />
     <Content Remove="Scripts\tslint.json" />
     <Content Remove="Scripts\tsconfig.json" />
     <Content Remove="wwwroot\yarn-error.log" />
@@ -107,7 +106,7 @@
     <Content Include="appsettings.json5">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-	<Content Include="appsettings.*.json5">
+    <Content Include="appsettings.*.json5">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
@@ -134,7 +133,7 @@
   <ItemGroup>
     <TsFiles Include="$(ProjectDir)Scripts\**\*.ts" />
     <SassFiles Include="$(ProjectDir)Styles\**\*.scss" />
-    <ViewsFiles Include="$(ProjectDir)Views\**\*.cshtml" />
+    <!--<ViewsFiles Include="$(ProjectDir)Views\**\*.cshtml" />-->
     <LocalizationFiles Include="$(ProjectDir)Localization\**\*.json" />
     <BundleConfigFile Include="$(ProjectDir)bundleconfig.json" />
 
@@ -142,7 +141,7 @@
 
     <FrontEndConcatedFile Include="$(ProjectDir)obj\front-end-cache" />
 
-    <CustomAdditionalCompileInputs Include="@(FrontEndSourceFiles);@(ViewsFiles);@(LocalizationFiles)" />
+    <CustomAdditionalCompileInputs Include="@(FrontEndSourceFiles);@(LocalizationFiles)" />
   </ItemGroup>
 
   <Target Name="Gulp" Inputs="@(FrontEndSourceFiles)" Outputs="@(FrontEndConcatedFile)">
