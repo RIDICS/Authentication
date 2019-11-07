@@ -10,6 +10,7 @@ namespace Ridics.Authentication.Core.MapperProfiles
         {
             CreateMap<UserEntity, UserBasicInfoModel>()
                 .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.Id))
+                .ForMember(dest => dest.Username, opt => opt.MapFrom(src => src.Username))
                 .ForMember(dest => dest.UserData, opt => opt.MapFrom(src => src.UserData))
                 .ForMember(dest => dest.UserContacts, opt => opt.MapFrom(src => src.UserContacts));
 

@@ -144,6 +144,13 @@ namespace Ridics.Authentication.Service.Controllers.API
                     }
                     userResult = m_usersManager.GetBasicUserInfoByDataType(UserDataTypes.MasterUserId, id);
                     break;
+                case UserIdentifierTypeContract.DatabaseId:
+                    if (!int.TryParse(id, out var userId))
+                    {
+                        return Error("Invalid format of database User ID");
+                    }
+                    userResult = m_usersManager.GetBasicUserInfoById(userId);
+                    break;
                 default:
                     return BadRequest();
             }

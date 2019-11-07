@@ -50,6 +50,7 @@ namespace Ridics.Authentication.Service.MapperProfiles.Contracts
 
             CreateMap<UserBasicInfoModel, BasicUserInfoContract>()
                 .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.Id))
+                .ForMember(dest => dest.Username, opt => opt.MapFrom(src => src.Username))
                 .ForMember(dest => dest.UserData, opt => opt.MapFrom(new DictionaryUserDataBasicInfoResolver<BasicUserInfoContract>()));
 
             CreateMap<UserContractBase, UserModel>() //TODO decide which properties must be transferred to web hub from auth service

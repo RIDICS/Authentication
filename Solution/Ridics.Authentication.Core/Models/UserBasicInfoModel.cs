@@ -7,6 +7,8 @@ namespace Ridics.Authentication.Core.Models
     {
         public int Id { get; set; }
 
+        public string Username { get; set; }
+
         public IList<UserDataBasicInfoModel> UserData { get; set; }
 
         public IList<UserContactBasicInfoModel> UserContacts { get; set; }
