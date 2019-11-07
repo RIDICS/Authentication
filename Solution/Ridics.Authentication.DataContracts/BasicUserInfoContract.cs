@@ -7,5 +7,6 @@ namespace Ridics.Authentication.DataContracts
         public int Id { get; set; }
         public string Username { get; set; }
         public Dictionary<string, string> UserData { get; set; }
+        public Dictionary<string, string> UserContact { get; set; }
     }
 }

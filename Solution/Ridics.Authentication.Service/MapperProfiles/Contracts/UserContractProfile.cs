@@ -1,4 +1,5 @@
-﻿using AutoMapper;
+﻿using System.Linq;
+using AutoMapper;
 using Ridics.Authentication.Core.Models;
 using Ridics.Authentication.Core.Models.Enum;
 using Ridics.Authentication.Core.UserData;
@@ -51,7 +52,9 @@ namespace Ridics.Authentication.Service.MapperProfiles.Contracts
             CreateMap<UserBasicInfoModel, BasicUserInfoContract>()
                 .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.Id))
                 .ForMember(dest => dest.Username, opt => opt.MapFrom(src => src.Username))
-                .ForMember(dest => dest.UserData, opt => opt.MapFrom(new DictionaryUserDataBasicInfoResolver<BasicUserInfoContract>()));
+                .ForMember(dest => dest.UserData, opt => opt.MapFrom(new DictionaryUserDataBasicInfoResolver<BasicUserInfoContract>()))
+                .ForMember(dest => dest.UserContact,
+                    opt => opt.MapFrom(src => src.UserContacts.ToDictionary(k => k.ContactType.ToString(), v => v.Value)));
 
             CreateMap<UserContractBase, UserModel>() //TODO decide which properties must be transferred to web hub from auth service
                 .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.Id))
