@@ -25,6 +25,16 @@ namespace Ridics.Authentication.HttpClient.Client.Auth
             return m_authorizationServiceHttpClient.GetListAsync<RoleContract>(start, count, search, parameters);
         }
 
+        public Task<IList<RoleContractBase>> GetRolesAutocompleteAsync(int count, string search)
+        {
+            var parameters = m_authorizationServiceHttpClient.CreateQueryCollection();
+            parameters.Add("count", count.ToString());
+            parameters.Add("search", search);
+
+            var fullPath = $"{BasePath}autocomplete?{parameters}";
+            return m_authorizationServiceHttpClient.SendRequestAsync<IList<RoleContractBase>>(HttpMethod.Get, fullPath);
+        }
+
         public Task<RoleContract> GetRoleAsync(int id, bool fetchPermissions = false)
         {
             var parameters = m_authorizationServiceHttpClient.CreateQueryCollection();

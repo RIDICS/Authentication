@@ -67,6 +67,26 @@ namespace Ridics.Authentication.Service.Controllers.API
             return Json(contractList);
         }
 
+        [HttpGet("autocomplete")]
+        [JwtAuthorize]
+        [ProducesResponseType(typeof(IList<RoleContractBase>), StatusCodes.Status200OK)]
+        public IActionResult RolesAutocomplete(int count = DefaultListCount, [FromQuery] string search = null)
+        {
+            if (count > MaxListCount)
+            {
+                count = MaxListCount;
+            }
+
+            var rolesResult = m_rolesManager.GetNonAuthenticationServiceRoles(0, count, search, false);
+            if (rolesResult.HasError)
+            {
+                return Error(rolesResult.Error);
+            }
+            
+            var roleContracts = Mapper.Map<IList<RoleContractBase>>(rolesResult.Result);
+            return Json(roleContracts);
+        }
+
         [HttpGet("allroles")]
         [JwtAuthorize]
         [ProducesResponseType(typeof(IList<RoleContractBase>), StatusCodes.Status200OK)]
