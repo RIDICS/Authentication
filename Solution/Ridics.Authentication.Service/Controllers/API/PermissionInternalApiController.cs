@@ -29,7 +29,7 @@ namespace Ridics.Authentication.Service.Controllers.API
         }
 
         [HttpGet("list")]
-        [JwtAuthorize(Policy = PermissionNames.ManageUserPermissions)]
+        [JwtAuthorize(Policy = PermissionNames.ManageUserPermissions + "," + PermissionNames.AssignPermissionsToRoles)]
         [ProducesResponseType(typeof(ListContract<PermissionContract>), StatusCodes.Status200OK)]
         public ActionResult ListPermissions([FromQuery] int start = 0, [FromQuery] int count = DefaultListCount, [FromQuery] string search = null, [FromQuery] bool fetchRoles = false)
         {
