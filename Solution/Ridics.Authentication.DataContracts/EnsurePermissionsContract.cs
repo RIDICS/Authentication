@@ -6,6 +6,6 @@ namespace Ridics.Authentication.DataContracts
     {
         public IList<PermissionContractBase> Permissions { get; set; }
 
-        public string NewAssignToRoleName { get; set; }
+        public IList<string> NewAssignToRoleNames { get; set; }
     }
 }

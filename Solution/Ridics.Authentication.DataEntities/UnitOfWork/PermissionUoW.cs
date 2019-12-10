@@ -138,21 +138,23 @@ namespace Ridics.Authentication.DataEntities.UnitOfWork
         }
 
         [Transaction]
-        public virtual void EnsurePermissionsExist(IEnumerable<PermissionEntity> permissions, string newAssignToRoleName)
+        public virtual void EnsurePermissionsExist(IEnumerable<PermissionEntity> permissions, IList<string> newAssignToRoleNames)
         {
-            var roleEntity = !string.IsNullOrEmpty(newAssignToRoleName) ? m_roleRepository.GetRoleByName(newAssignToRoleName) : null;
-
             foreach (var permission in permissions)
             {
                 var permissionEntity = m_permissionRepository.GetPermissionByName(permission.Name);
+
                 if (permissionEntity == null)
                 {
-                    if (roleEntity != null)
+                    permission.Roles = new HashSet<RoleEntity>();
+
+                    if (newAssignToRoleNames != null)
                     {
-                        permission.Roles = new HashSet<RoleEntity>
+                        foreach (var newAssignToRoleName in newAssignToRoleNames)
                         {
-                            roleEntity
-                        };
+                            var roleEntity = m_roleRepository.GetRoleByName(newAssignToRoleName);
+                            permission.Roles.Add(roleEntity);
+                        }
                     }
                     
                     m_permissionRepository.Create(permission);

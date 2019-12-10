@@ -198,7 +198,7 @@ namespace Ridics.Authentication.Core.Managers
             }
         }
 
-        public DataResult<bool> EnsurePermissionsExist(IList<PermissionInfoModel> permissions, string newAssignToRoleName)
+        public DataResult<bool> EnsurePermissionsExist(IList<PermissionInfoModel> permissions, IList<string> newAssignToRoleNames)
         {
             try
             {
@@ -207,7 +207,7 @@ namespace Ridics.Authentication.Core.Managers
                     Name = x.Name,
                     Description = x.Description,
                 });
-                m_permissionUoW.EnsurePermissionsExist(permissionEntities, newAssignToRoleName);
+                m_permissionUoW.EnsurePermissionsExist(permissionEntities, newAssignToRoleNames);
                 return Success(true);
             }
             catch (DatabaseException e)

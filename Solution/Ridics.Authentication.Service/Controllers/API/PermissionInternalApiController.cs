@@ -196,7 +196,7 @@ namespace Ridics.Authentication.Service.Controllers.API
         public IActionResult EnsurePermissionsExist([Required] [FromBody] EnsurePermissionsContract data)
         {
             var permissionsModel = Mapper.Map<IList<PermissionInfoModel>>(data.Permissions);
-            var result = m_permissionManager.EnsurePermissionsExist(permissionsModel, data.NewAssignToRoleName);
+            var result = m_permissionManager.EnsurePermissionsExist(permissionsModel, data.NewAssignToRoleNames);
 
             if (result.HasError)
             {
