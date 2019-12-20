@@ -78,6 +78,7 @@ Default deployment script assumes that the Authentication Service will be placed
 * Run `DeleteObjBinFolders.ps1` script to allow perform a clean build (optional but recommended step).
 * Build solution with command line script `BuildSolution.ps1 {ENVIRONMENT_NAME}`. Environment names are Development, Production, etc.
 * Copy build artifacts from `build\Publish-{ENVIRONMENT_NAME}` to target server.
+  * Don't rename the Publish folder.
 * Run database migration using `Ridics.Authentication.Database.Migrator\Migrate.ps1 {ENVIRONMENT_NAME}` to update database.
 * Deploy Authentication service as **Admin** using `Deploy.AuthService.cmd`.
 
