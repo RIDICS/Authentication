@@ -130,6 +130,7 @@
     "permission-roles-heading": "Select roles for permissions",
     "permission-users-heading": "Select users for permissions",
     "home-page-heading": "Authentication service",
+    "home-page-text": "Welcome to the Authentication Service administration page. This user interface is primarily used for advanced authentication service configuration, such as a list of client applications that can use this authentication service. Common tasks such as user and permission management can be done in the target application using the API of the service.",
     "logout-heading": "Successfully logged out",
     "dynamic-module-heading": "Dynamic module management",
     "create-dynamic-module-heading": "Create dynamic module",
