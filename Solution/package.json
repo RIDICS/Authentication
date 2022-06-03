@@ -108,7 +108,7 @@
     "jquery.easing": "1.4.1",
     "jquery-ui-datepicker-with-i18n": "1.10.4",
     "jquery-ui-dist": "1.12.1",
-    "jquery-validation": "1.19.0",
+    "jquery-validation": "1.19.4",
     "jquery-validation-unobtrusive": "3.2.11",
     "nestedSortable": "https://github.com/Scalesoft/nestedSortable.git#5c1984e29bc2b90d954fe6955336f9ea3910c42a",
     "nprogress": "0.2.0",
